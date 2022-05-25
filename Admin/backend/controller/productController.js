@@ -1,11 +1,11 @@
-const { product, User } = require("../models");
+const { product, user } = require("../models");
 const { getVerification } = require("../helpers/jwtFile");
 
 class productController {
   static async getProduct(req, res) {
     try {
       let getproduct = await product.findAll({
-        include: [User],
+        include: [user],
       });
 
       res.status(200).json(getproduct);
@@ -16,23 +16,46 @@ class productController {
 
   static async createProduct(req, res) {
     try {
-      const { image, title, caption } = req.body;
+      const {
+        prod_name,
+        prod_desc,
+        prod_price,
+        prod_stock,
+        prod_expire,
+        prod_weight,
+        prod_category,
+        prod_brand,
+        prod_condition,
+        prod_total_sold,
+        prod_rating,
+        prod_views,
+      } = req.body;
       // // console.log(req.body);
 
       // // console.log(req.file.path);
 
-      const UserId = +req.userData.id;
-      // console.log(req.userData.id);
+      const userId = +req.userData.id;
+      console.log(req.userData.id);
 
       let createproduct = await product.create({
-        image,
-        title,
-        caption,
-        UserId,
+        prod_name,
+        prod_desc,
+        prod_price,
+        prod_stock,
+        prod_expire,
+        prod_weight,
+        prod_category,
+        prod_brand,
+        prod_condition,
+        prod_total_sold,
+        prod_rating,
+        prod_views,
+        userId,
       });
 
       res.status(201).json(createproduct);
     } catch (error) {
+      // console.log(error);
       res.status(500).json(error);
     }
   }
@@ -40,13 +63,38 @@ class productController {
   static async updateProduct(req, res) {
     try {
       const id = +req.params.id;
-      const { image, title, caption } = req.body;
+      console.log(req.params.id);
+      const userId = +req.userData.id;
+      const {
+        prod_name,
+        prod_desc,
+        prod_price,
+        prod_stock,
+        prod_expire,
+        prod_weight,
+        prod_category,
+        prod_brand,
+        prod_condition,
+        prod_total_sold,
+        prod_rating,
+        prod_views,
+      } = req.body;
 
       let updateproduct = await product.update(
         {
-          image,
-          title,
-          caption,
+          prod_name,
+          prod_desc,
+          prod_price,
+          prod_stock,
+          prod_expire,
+          prod_weight,
+          prod_category,
+          prod_brand,
+          prod_condition,
+          prod_total_sold,
+          prod_rating,
+          prod_views,
+          userId,
         },
         {
           where: { id },
@@ -61,7 +109,8 @@ class productController {
             message: "not succes",
           });
     } catch (error) {
-      res.status(500).json(error);
+      console.log(error);
+      // res.status(500).json(error);
     }
   }
 

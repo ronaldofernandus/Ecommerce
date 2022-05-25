@@ -4,7 +4,7 @@ const secretCode = process.env.SECRET_CODE || "test";
 
 const getJwt = (data) => {
   const {
-    user_id,
+    id,
     user_name,
     user_email,
 
@@ -16,7 +16,7 @@ const getJwt = (data) => {
   } = data;
   return jwt.sign(
     {
-      user_id,
+      id,
       user_name,
       user_email,
 

@@ -12,6 +12,5 @@ indexRoute.use("/user", userRoute);
 
 module.exports = indexRoute;
 
-// npx sequelize-cli model:generate --name users --attributes user_name,user_email,user_password,
 
-//
+

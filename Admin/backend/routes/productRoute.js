@@ -1,13 +1,13 @@
 const productRoute = require("express").Router();
 const productController = require("../controller/productController");
 
-// const authentication = require("../middleware/tokenMiddleWare");
+const authentication = require("../middleware/tokenMiddleWare");
 // const upload = require("../middleware/multer");
 
 productRoute.get("/", productController.getProduct);
 productRoute.post(
   "/add",
-  // authentication,
+  authentication,
 
   productController.createProduct
 );

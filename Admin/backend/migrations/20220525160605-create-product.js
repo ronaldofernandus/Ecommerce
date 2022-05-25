@@ -1,63 +1,63 @@
-"use strict";
+'use strict';
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable("products", {
+    await queryInterface.createTable('products', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER,
+        type: Sequelize.INTEGER
       },
       prod_name: {
-        type: Sequelize.STRING,
+        type: Sequelize.STRING
       },
       prod_desc: {
-        type: Sequelize.STRING,
+        type: Sequelize.STRING
       },
       prod_price: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.INTEGER
       },
       prod_stock: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.INTEGER
       },
       prod_expire: {
-        type: Sequelize.DATE,
+        type: Sequelize.DATE
       },
       prod_weight: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.INTEGER
       },
       prod_category: {
-        type: Sequelize.STRING,
+        type: Sequelize.STRING
       },
       prod_brand: {
-        type: Sequelize.STRING,
+        type: Sequelize.STRING
       },
       prod_condition: {
-        type: Sequelize.STRING,
+        type: Sequelize.STRING
       },
       prod_total_sold: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.INTEGER
       },
       prod_rating: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.INTEGER
       },
       prod_views: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.INTEGER
       },
-      prod_user_id: {
-        type: Sequelize.INTEGER,
+      userId: {
+        type: Sequelize.INTEGER
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE,
+        type: Sequelize.DATE
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE,
-      },
+        type: Sequelize.DATE
+      }
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable("products");
-  },
+    await queryInterface.dropTable('products');
+  }
 };
