@@ -35,7 +35,6 @@ class productController {
       // // console.log(req.file.path);
 
       const userId = +req.userData.id;
-      console.log(req.userData.id);
 
       let createproduct = await product.create({
         prod_name,
@@ -63,8 +62,9 @@ class productController {
   static async updateProduct(req, res) {
     try {
       const id = +req.params.id;
-      console.log(req.params.id);
+
       const userId = +req.userData.id;
+      console.log(userId);
       const {
         prod_name,
         prod_desc,
