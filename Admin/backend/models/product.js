@@ -1,7 +1,5 @@
-'use strict';
-const {
-  Model
-} = require('sequelize');
+"use strict";
+const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class product extends Model {
     /**
@@ -10,26 +8,31 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      product.hasMany(models.product_image);
+      product.belongsTo(models.user);
+      product.hasMany(models.line_item);
     }
   }
-  product.init({
-    prod_name: DataTypes.STRING,
-    prod_desc: DataTypes.STRING,
-    prod_price: DataTypes.INTEGER,
-    prod_stock: DataTypes.INTEGER,
-    prod_expire: DataTypes.DATE,
-    prod_weight: DataTypes.INTEGER,
-    prod_category: DataTypes.STRING,
-    prod_brand: DataTypes.STRING,
-    prod_condition: DataTypes.STRING,
-    prod_total_sold: DataTypes.INTEGER,
-    prod_rating: DataTypes.INTEGER,
-    prod_views: DataTypes.INTEGER,
-    prod_user_id: DataTypes.INTEGER
-  }, {
-    sequelize,
-    modelName: 'product',
-  });
+  product.init(
+    {
+      prod_name: DataTypes.STRING,
+      prod_desc: DataTypes.STRING,
+      prod_price: DataTypes.INTEGER,
+      prod_stock: DataTypes.INTEGER,
+      prod_expire: DataTypes.DATE,
+      prod_weight: DataTypes.INTEGER,
+      prod_category: DataTypes.STRING,
+      prod_brand: DataTypes.STRING,
+      prod_condition: DataTypes.STRING,
+      prod_total_sold: DataTypes.INTEGER,
+      prod_rating: DataTypes.INTEGER,
+      prod_views: DataTypes.INTEGER,
+      prod_user_id: DataTypes.INTEGER,
+    },
+    {
+      sequelize,
+      modelName: "product",
+    }
+  );
   return product;
 };
