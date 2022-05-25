@@ -1,11 +1,11 @@
-const { User, Posting } = require("../models");
+const { user, Product } = require("../models");
 const { encrypt, decrypt } = require("../helpers/bcrypt");
 
 const { getJwt, getVerification } = require("../helpers/jwtFile");
 class userController {
   static async getUsers(req, res) {
     try {
-      let getUsers = await User.findAll({});
+      let getUsers = await user.findAll({});
       res.status(200).json(getUsers);
     } catch (error) {
       res.status(500).json(error);
@@ -13,15 +13,28 @@ class userController {
   }
   static async register(req, res) {
     try {
-      const { profile, nama, email, username, password } = req.body;
+      const {
+        user_name,
+        user_email,
+        user_password,
+        user_salt,
+        user_birthdate,
+        user_gender,
+        user_avatar,
+        user_type,
+      } = req.body;
       // const profile = req.file.path;
-      let register = await User.create({
-        profile,
-        nama,
-        email,
-        username,
-        password,
+      let register = await user.create({
+        user_name,
+        user_email,
+        user_password,
+        user_salt,
+        user_birthdate,
+        user_gender,
+        user_avatar,
+        user_type,
       });
+
       res.status(201).json(register);
     } catch (error) {
       res.status(500).json(error);
@@ -30,15 +43,15 @@ class userController {
 
   static async login(req, res) {
     try {
-      const { username, password } = req.body;
-      let login = await User.findOne({
+      const { user_email, user_password } = req.body;
+      let login = await user.findOne({
         where: {
-          username,
+          user_email,
         },
       });
       // console.log(login);
       if (login) {
-        if (decrypt(password, login.password)) {
+        if (decrypt(user_password, login.user_password)) {
           let get_token = getJwt(login);
           res.status(200).json({
             get_token,
@@ -61,20 +74,30 @@ class userController {
   static async updateUser(req, res) {
     try {
       const id = req.params.id;
-      const { nama, email, username, password } = req.body;
-      const profile = req.file.path;
+      const {
+        user_name,
+        user_email,
+        user_password,
+        user_salt,
+        user_birthdate,
+        user_gender,
+        user_avatar,
+        user_type,
+      } = req.body;
 
-      let updateUser = await User.update(
+      let updateUser = await user.update(
         {
-          profile,
-          nama,
-          email,
-          username,
-          password: encrypt(password),
-          nama,
+          user_name,
+          user_email,
+          user_password,
+          user_salt,
+          user_birthdate,
+          user_gender,
+          user_avatar,
+          user_type,
         },
         {
-          where: { id },
+          where: { user_id },
         }
       );
 
@@ -93,7 +116,7 @@ class userController {
   static async getUsersById(req, res) {
     try {
       const id = +req.params.id;
-      let getUsersById = await User.findByPk(id);
+      let getUsersById = await user.findByPk(id);
 
       res.status(200).json(getUsersById);
     } catch (error) {

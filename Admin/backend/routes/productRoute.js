@@ -4,16 +4,16 @@ const productController = require("../controller/productController");
 // const authentication = require("../middleware/tokenMiddleWare");
 // const upload = require("../middleware/multer");
 
-productRoute.get("/", productController.getPosting);
+productRoute.get("/", productController.getProduct);
 productRoute.post(
   "/add",
   // authentication,
 
-  productController.createPosting
+  productController.createProduct
 );
-productRoute.put("/:id", productController.updatePosting);
-productRoute.delete("/:id", productController.deletePosting);
-productRoute.get("/:id", productController.getPostingById);
+productRoute.put("/:id", productController.updateProduct);
+productRoute.delete("/:id", productController.deleteProduct);
+productRoute.get("/:id", productController.getProductById);
 
 module.exports = productRoute;
 

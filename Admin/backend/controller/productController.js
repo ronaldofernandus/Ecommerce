@@ -1,20 +1,20 @@
-const { Posting, User } = require("../models");
+const { product, User } = require("../models");
 const { getVerification } = require("../helpers/jwtFile");
 
-class postingController {
-  static async getPosting(req, res) {
+class productController {
+  static async getProduct(req, res) {
     try {
-      let getPosting = await Posting.findAll({
+      let getproduct = await product.findAll({
         include: [User],
       });
 
-      res.status(200).json(getPosting);
+      res.status(200).json(getproduct);
     } catch (error) {
       res.status(500).json(error);
     }
   }
 
-  static async createPosting(req, res) {
+  static async createProduct(req, res) {
     try {
       const { image, title, caption } = req.body;
       // // console.log(req.body);
@@ -24,25 +24,25 @@ class postingController {
       const UserId = +req.userData.id;
       // console.log(req.userData.id);
 
-      let createPosting = await Posting.create({
+      let createproduct = await product.create({
         image,
         title,
         caption,
         UserId,
       });
 
-      res.status(201).json(createPosting);
+      res.status(201).json(createproduct);
     } catch (error) {
       res.status(500).json(error);
     }
   }
 
-  static async updatePosting(req, res) {
+  static async updateProduct(req, res) {
     try {
       const id = +req.params.id;
       const { image, title, caption } = req.body;
 
-      let updatePosting = await Posting.update(
+      let updateproduct = await product.update(
         {
           image,
           title,
@@ -53,9 +53,9 @@ class postingController {
         }
       );
 
-      updatePosting[0] === 1
+      updateproduct[0] === 1
         ? res.status(201).json({
-            message: "Posting updated successfully",
+            message: "product updated successfully",
           })
         : res.status(403).json({
             message: "not succes",
@@ -65,16 +65,16 @@ class postingController {
     }
   }
 
-  static async deletePosting(req, res) {
+  static async deleteProduct(req, res) {
     try {
       const id = req.params.id;
-      let deletePosting = await Posting.destroy({
+      let deleteproduct = await product.destroy({
         where: { id },
       });
 
-      deletePosting === 1
+      deleteproduct === 1
         ? res.status(200).json({
-            message: "Posting deleted successfully",
+            message: "product deleted successfully",
           })
         : res.status(403).json({
             message: "delete fail",
@@ -84,14 +84,14 @@ class postingController {
     }
   }
 
-  static async getPostingById(req, res) {
+  static async getProductById(req, res) {
     try {
       const id = +req.params.id;
-      let getPostingById = await Posting.findByPk(id);
-      res.status(200).json(getPostingById);
+      let getproductById = await product.findByPk(id);
+      res.status(200).json(getproductById);
     } catch (error) {
       res.status(500).json(error);
     }
   }
 }
-module.exports = postingController;
+module.exports = productController;

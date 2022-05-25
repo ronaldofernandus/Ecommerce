@@ -7,8 +7,8 @@ indexRoute.get("/", (req, res) => {
 const productRoute = require("./productRoute");
 indexRoute.use("/product", productRoute);
 
-// const userRoute = require("./userRoute");
-// indexRoute.use("/user", userRoute);
+const userRoute = require("./userRoute");
+indexRoute.use("/user", userRoute);
 
 module.exports = indexRoute;
 
