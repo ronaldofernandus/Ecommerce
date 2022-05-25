@@ -13,3 +13,6 @@ indexRoute.get("/", (req, res) => {
 // indexRoute.use("/user", userRoute);
 
 module.exports = indexRoute;
+
+
+// npx sequelize-cli db
