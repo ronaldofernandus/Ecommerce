@@ -16,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
     {
       shop_created_on: DataTypes.DATE,
       shop_status: DataTypes.STRING,
-      shop_user_id: DataTypes.INTEGER,
+      userId: DataTypes.INTEGER,
     },
     {
       sequelize,

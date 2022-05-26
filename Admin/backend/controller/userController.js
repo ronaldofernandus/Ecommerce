@@ -97,7 +97,7 @@ class userController {
           user_type,
         },
         {
-          where: { user_id },
+          where: { id },
         }
       );
 

@@ -13,10 +13,7 @@ module.exports = (sequelize, DataTypes) => {
   }
   product_image.init(
     {
-      prim_filename: DataTypes.STRING,
-      prim_filesize: DataTypes.STRING,
-      prim_filetype: DataTypes.STRING,
-      prim_primary: DataTypes.BOOLEAN,
+      image: DataTypes.STRING,
       prodId: DataTypes.STRING,
     },
     {
