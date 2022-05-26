@@ -64,7 +64,7 @@ class productController {
       const id = +req.params.id;
 
       const userId = +req.userData.id;
-      console.log(userId);
+      // console.log(userId);
       const {
         prod_name,
         prod_desc,
