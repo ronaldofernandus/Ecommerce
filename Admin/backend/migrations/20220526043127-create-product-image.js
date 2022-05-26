@@ -20,7 +20,7 @@ module.exports = {
       prim_primary: {
         type: Sequelize.BOOLEAN
       },
-      prim_prod_id: {
+      prodId: {
         type: Sequelize.STRING
       },
       createdAt: {

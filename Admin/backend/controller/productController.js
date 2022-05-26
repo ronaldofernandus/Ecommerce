@@ -117,8 +117,12 @@ class productController {
   static async deleteProduct(req, res) {
     try {
       const id = req.params.id;
+      const userId = +req.userData.id;
       let deleteproduct = await product.destroy({
-        where: { id },
+        where: {
+          id,
+          userId,
+        },
       });
 
       deleteproduct === 1
@@ -129,7 +133,8 @@ class productController {
             message: "delete fail",
           });
     } catch (error) {
-      res.status(500).json(error);
+      console.log(error);
+      // res.status(500).json(error);
     }
   }
 

@@ -17,7 +17,7 @@ module.exports = (sequelize, DataTypes) => {
       prim_filesize: DataTypes.STRING,
       prim_filetype: DataTypes.STRING,
       prim_primary: DataTypes.BOOLEAN,
-      prim_prod_id: DataTypes.STRING,
+      prodId: DataTypes.STRING,
     },
     {
       sequelize,

@@ -10,7 +10,10 @@ indexRoute.use("/product", productRoute);
 const userRoute = require("./userRoute");
 indexRoute.use("/user", userRoute);
 
+const imageRoute = require("./productImage");
+indexRoute.use("/images", imageRoute);
+
+const orderRoute = require("./orderRoute");
+indexRoute.use("/order", orderRoute);
+
 module.exports = indexRoute;
-
-
-
