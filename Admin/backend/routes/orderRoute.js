@@ -16,5 +16,3 @@ orderRoute.delete("/:id", authentication, orderController.deleteOrder);
 orderRoute.get("/:id", authentication, orderController.getOrderById);
 
 module.exports = orderRoute;
-
-

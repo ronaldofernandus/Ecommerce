@@ -16,15 +16,24 @@ class imageController {
 
   static async postImage(req, res) {
     try {
-      const { image, productId } = req.body;
+      // const { image, productId } = req.body;
       // // console.log(req.body);
-      const userId = +req.userData.id;
+      // const userId = +req.userData.id;
       // // console.log(req.file.path);
+      const {
+        prim_filename,
+        prim_filesize,
+        prim_filetype,
+        prim_primary,
+        productId,
+      } = req.body;
 
       let postImage = await product_image.create({
-        image,
+        prim_filename,
+        prim_filesize,
+        prim_filetype,
+        prim_primary,
         productId,
-        userId,
       });
 
       res.status(201).json(postImage);
@@ -40,16 +49,23 @@ class imageController {
 
       const userId = +req.userData.id;
       // console.log(userId);
-      const { image, productId } = req.body;
+      const {
+        prim_filename,
+        prim_filesize,
+        prim_filetype,
+        prim_primary,
+        productId,
+      } = req.body;
 
       let updateImage = await product_image.update(
         {
-          image,
-          productId,
-          userId,
+          prim_filename,
+          prim_filesize,
+          prim_filetype,
+          prim_primary,
         },
         {
-          where: { id },
+          where: { id, productId },
         }
       );
 

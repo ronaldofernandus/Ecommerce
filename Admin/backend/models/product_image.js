@@ -13,14 +13,17 @@ module.exports = (sequelize, DataTypes) => {
   }
   product_image.init(
     {
-      image: DataTypes.STRING,
-      productId: DataTypes.STRING,
+      prim_filename: DataTypes.STRING,
+      prim_filesize: DataTypes.STRING,
+      prim_filetype: DataTypes.STRING,
+      prim_primary: DataTypes.BOOLEAN,
+      productId: DataTypes.INTEGER,
     },
     {
       hooks: {
         beforeCreate: function (product_image, options) {
-          product_image.image =
-            product_image.image || "https://via.placeholder.com/150";
+          product_image.user_avatar =
+            product_image.user_avatar || "https://via.placeholder.com/150";
         },
       },
       sequelize,
