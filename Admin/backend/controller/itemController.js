@@ -1,56 +1,44 @@
-const { order, user, line_item } = require("../models");
+const { line_item, product, shopping_cart, order } = require("../models");
 
-class orderController {
-  static async getOrder(req, res) {
+class itemController {
+  static async getItem(req, res) {
     try {
-      let getOrder = await order.findAll({
-        include: [user],
+      let getItem = await line_item.findAll({
+        include: [product, shopping_cart, order],
       });
-      res.status(200).json(getOrder);
+      res.status(200).json(getItem);
     } catch (error) {
       res.status(500).json(error);
     }
   }
 
-  static async createOrder(req, res) {
+  static async createItem(req, res) {
     try {
       const {
-        order_created_on,
-        order_subtotal,
-        order_discount,
-        order_tax,
-        order_total_due,
-        order_total_qty,
-        order_payt_trx_number,
-        order_city,
-        order_addres,
-        order_status,
-        //open or cancelled or paid or shipping or closed
+        line_qty,
+        line_status,
+        //cart or checkout or ordered
+        productId,
+        shopId,
+        orderId,
       } = req.body;
 
       const userId = +req.userData.id;
-      let createOrder = await order.create({
-        order_created_on,
-        order_subtotal,
-        order_discount,
-        order_tax,
-        order_total_due,
-        order_total_qty,
-        order_payt_trx_number,
-        order_city,
-        order_addres,
-        order_status,
+      let createItem = await line_item.create({
+        line_qty,
+        line_status,
+        productId,
+        shopId,
+        orderId,
         userId,
       });
-      res.status(200).json({
-        message: "Has been Created",
-      });
+      res.status(200).json(createItem);
     } catch (error) {
       res.status(500).json({ error });
     }
   }
 
-  static async updateOrder(req, res) {
+  static async updateItem(req, res) {
     try {
       const id = +req.params.id;
 
@@ -69,7 +57,7 @@ class orderController {
         order_status,
       } = req.body;
 
-      let updateOrder = await order.update(
+      let updateItem = await line_item.update(
         {
           order_created_on,
           order_subtotal,
@@ -90,7 +78,7 @@ class orderController {
         }
       );
 
-      updateOrder[0] === 1
+      updateItem[0] === 1
         ? res.status(201).json({
             message: "Order updated successfully",
           })
@@ -102,7 +90,7 @@ class orderController {
       // res.status(500).json(error);
     }
   }
-  static async deleteOrder(req, res) {
+  static async deleteItem(req, res) {
     try {
       const id = req.params.id;
       const userId = +req.userData.id;
@@ -125,20 +113,20 @@ class orderController {
       // res.status(500).json(error);
     }
   }
-  static async getOrderById(req, res) {
+  static async getItemById(req, res) {
     try {
       const id = +req.params.id;
       const userId = +req.userData.id;
-      let getOrderById = await order.findAll({
+      let getItemById = await order.findAll({
         where: {
           id,
           userId,
         },
       });
-      res.status(200).json(getOrderById);
+      res.status(200).json(getItemById);
     } catch (error) {
       res.status(500).json(error);
     }
   }
 }
-module.exports = orderController;
+module.exports = itemController;

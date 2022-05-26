@@ -1,4 +1,4 @@
-const { user, Product } = require("../models");
+const { user, product } = require("../models");
 const { encrypt, decrypt } = require("../helpers/bcrypt");
 
 const { getJwt, getVerification } = require("../helpers/jwtFile");

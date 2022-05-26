@@ -1,51 +1,55 @@
-const { product_image, product } = require("../models");
+const { shopping_cart, user, line_item } = require("../models");
+const { getVerification } = require("../helpers/jwtFile");
 
-class imageController {
-  static async getImage(req, res) {
+class shopController {
+  static async getShop(req, res) {
     try {
-      let getImage = await product_image.findAll({
-        include: [product],
+      let getShop = await shopping_cart.findAll({
+        include: [user],
       });
 
-      res.status(200).json(getImage);
+      res.status(200).json(getShop);
     } catch (error) {
-      // console.log(error);
       res.status(500).json(error);
     }
   }
 
-  static async postImage(req, res) {
+  static async createShop(req, res) {
     try {
-      const { image, productId } = req.body;
+      const { shop_created_on, shop_status } = req.body;
       // // console.log(req.body);
-      const userId = +req.userData.id;
+
       // // console.log(req.file.path);
 
-      let postImage = await product_image.create({
-        image,
-        productId,
+      const userId = +req.userData.id;
+
+      let createShop = await shopping_cart.create({
+        shop_created_on,
+        shop_status,
+        //open or closed
         userId,
       });
 
-      res.status(201).json(postImage);
+      res.status(201).json(createShop);
     } catch (error) {
       // console.log(error);
       res.status(500).json(error);
     }
   }
 
-  static async updateImage(req, res) {
+  static async updateShop(req, res) {
     try {
       const id = +req.params.id;
 
       const userId = +req.userData.id;
       // console.log(userId);
-      const { image, productId } = req.body;
+      const { shop_created_on, shop_status } = req.body;
 
-      let updateImage = await product_image.update(
+      let updateShop = await shopping_cart.update(
         {
-          image,
-          productId,
+          shop_created_on,
+          shop_status,
+
           userId,
         },
         {
@@ -53,9 +57,9 @@ class imageController {
         }
       );
 
-      updateImage[0] === 1
+      updateShop[0] === 1
         ? res.status(201).json({
-            message: "image updated successfully",
+            message: "cart updated successfully",
           })
         : res.status(403).json({
             message: "not succes",
@@ -66,18 +70,18 @@ class imageController {
     }
   }
 
-  static async deleteImage(req, res) {
+  static async deleteShop(req, res) {
     try {
       const id = req.params.id;
       const userId = +req.userData.id;
-      let deleteImage = await product.destroy({
+      let deleteShop = await shopping_cart.destroy({
         where: {
           id,
           userId,
         },
       });
 
-      deleteImage === 1
+      deleteShop === 1
         ? res.status(200).json({
             message: "product deleted successfully",
           })
@@ -90,14 +94,14 @@ class imageController {
     }
   }
 
-  static async getImageById(req, res) {
+  static async getShopById(req, res) {
     try {
       const id = +req.params.id;
       const userId = +req.userData.id;
-      let getImageById = await product_image.findAll({
+      let getShopById = await shopping_cart.findAll({
         where: { id, userId },
       });
-      res.status(200).json(getImageById);
+      res.status(200).json(getShopById);
     } catch (error) {
       // console.log(error);
       res.status(500).json({
@@ -106,5 +110,4 @@ class imageController {
     }
   }
 }
-
-module.exports = imageController;
+module.exports = shopController;

@@ -14,9 +14,15 @@ module.exports = (sequelize, DataTypes) => {
   product_image.init(
     {
       image: DataTypes.STRING,
-      prodId: DataTypes.STRING,
+      productId: DataTypes.STRING,
     },
     {
+      hooks: {
+        beforeCreate: function (product_image, options) {
+          product_image.image =
+            product_image.image || "https://via.placeholder.com/150";
+        },
+      },
       sequelize,
       modelName: "product_image",
     }

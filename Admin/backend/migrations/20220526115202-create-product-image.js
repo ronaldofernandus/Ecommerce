@@ -11,7 +11,7 @@ module.exports = {
       image: {
         type: Sequelize.STRING
       },
-      prodId: {
+      productId: {
         type: Sequelize.STRING
       },
       createdAt: {

@@ -1,4 +1,4 @@
-const { product, user } = require("../models");
+const { product, user, product_image } = require("../models");
 const { getVerification } = require("../helpers/jwtFile");
 
 class productController {
