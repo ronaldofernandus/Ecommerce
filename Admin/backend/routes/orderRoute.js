@@ -12,7 +12,7 @@ orderRoute.post(
   orderController.createOrder
 );
 orderRoute.put("/:id", authentication, orderController.updateOrder);
-orderRoute.delete("/:id",authentication, orderController.deleteOrder);
+orderRoute.delete("/:id", authentication, orderController.deleteOrder);
 orderRoute.get("/:id", authentication, orderController.getOrderById);
 
 module.exports = orderRoute;
