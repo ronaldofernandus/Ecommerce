@@ -8,11 +8,12 @@ imageRoute.get("/", imageController.getImage);
 imageRoute.post(
   "/add",
   authentication,
-  // upload.single("image"),
-  // (req, res) => {
-  //   console.log(req.file);
-  //   res.send("succes");
-  // },
+  upload.single("image"),
+  (req, res) => {
+    let finalImageUrl =
+      req.protocol + "://" + req.get("host") + "/image/" + req.file.filename;
+    res.json({ status: "succes", image: finalImageUrl });
+  },
 
   imageController.postImage
 );

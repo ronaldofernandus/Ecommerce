@@ -23,14 +23,12 @@ class itemController {
         orderId,
       } = req.body;
 
-      const userId = +req.userData.id;
       let createItem = await line_item.create({
         line_qty,
         line_status,
         productId,
         shopId,
         orderId,
-        userId,
       });
       res.status(200).json(createItem);
     } catch (error) {

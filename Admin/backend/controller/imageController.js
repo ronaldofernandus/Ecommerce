@@ -20,19 +20,18 @@ class imageController {
       // // console.log(req.body);
       // const userId = +req.userData.id;
       // // console.log(req.file.path);
-      const {
-        prim_filename,
-        prim_filesize,
-        prim_filetype,
-        prim_primary,
-        productId,
-      } = req.body;
+
+      const image = req.file;
+      console.log(req.file);
+      const { fieldname, originalname, mimetype, filename, size } = image;
+
+      const productId = req.body;
 
       let postImage = await product_image.create({
-        prim_filename,
-        prim_filesize,
-        prim_filetype,
-        prim_primary,
+        prim_filename: filename,
+        prim_filesize: size,
+        prim_filetype: mimetype,
+        prim_primary: true,
         productId,
       });
 
