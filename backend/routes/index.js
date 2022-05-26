@@ -13,16 +13,16 @@ const productRoutes = require('./product');
 route.use('/products', productRoutes);
 
 const LineItemRoutes = require('./line_item');
-route.use('/line_items', LineItemRoutes);
+route.use('/items', LineItemRoutes);
 
 const orderRoutes = require('./order');
 route.use('/orders', orderRoutes);
 
 const productImageRoutes = require('./product_image');
-route.use('/product_images', productImageRoutes);
+route.use('/images', productImageRoutes);
 
 const shoppingCartRoutes = require('./shopping_cart');
-route.use('/shopping_carts', shoppingCartRoutes);
+route.use('/carts', shoppingCartRoutes);
 
 
 module.exports = route;

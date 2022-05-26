@@ -44,7 +44,7 @@ module.exports = {
       prod_views: {
         type: Sequelize.INTEGER
       },
-      prod_user_id: {
+      userId: {
         type: Sequelize.INTEGER
       },
       createdAt: {

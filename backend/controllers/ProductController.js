@@ -7,6 +7,7 @@ class ProductController {
             let result = await product.findAll({
                 include: [user]
             })
+
             res.status(200).json(result)
         } catch(err) {
             res.status(404).json({
@@ -15,42 +16,59 @@ class ProductController {
         }
     }
 
-    static async addProduct(req, res) {
+    static async getPU(req, res) {
         try {
-            const { 
-                prod_name, 
-                prod_desc, 
-                prod_price, 
-                prod_stock, 
-                prod_expire, 
-                prod_weight, 
-                prod_category, 
-                prod_brand, 
-                prod_condition, 
-                prod_total_sold, 
-                prod_rating, 
-                prod_views, 
-                // prod_user_id
-            } = req.body;
-            const prod_user_id = +req.userData.id;
+            let id = +req.userData.id;
 
-            let result = await product.create({ 
-                prod_name, 
-                prod_desc, 
-                prod_price, 
-                prod_stock, 
-                prod_expire, 
-                prod_weight, 
-                prod_category, 
-                prod_brand, 
-                prod_condition, 
-                prod_total_sold, 
-                prod_rating, 
-                prod_views, 
-                // prod_user_id
-             })
+            let result = await product.findAll({
+                where: { userId: id},
+                include: [user]
+            })
             res.status(200).json(result)
         } catch(err) {
+            res.status(404).json({
+                message: `404: User Product not found`
+            })
+        }
+    }
+
+    static async addProduct(req, res) {
+        try {
+            const {
+                prod_name,
+                prod_desc,
+                prod_price,
+                prod_stock,
+                prod_expire,
+                prod_weight,
+                prod_category,
+                prod_brand,
+                prod_condition,
+                prod_total_sold,
+                prod_rating,
+                prod_views,
+                userId
+              } = req.body;
+            // const userId = +req.userData.id;
+
+            let result = await product.create({ 
+                prod_name,
+                prod_desc,
+                prod_price,
+                prod_stock,
+                prod_expire,
+                prod_weight,
+                prod_category,
+                prod_brand,
+                prod_condition,
+                prod_total_sold,
+                prod_rating,
+                prod_views,
+                userId,
+            })
+            res.status(200).json(result)
+        } catch(err) {
+            console.log(err);
             res.status(400).json({
                 message: `400: Syntax Error`
             })
@@ -60,7 +78,7 @@ class ProductController {
     static async editProduct(req, res) {
         try{
             const id = +req.params.id;
-            const prod_user_id = +req.params.id;
+            const userId = +req.params.id;
             const { 
                 prod_name, 
                 prod_desc, 
@@ -73,8 +91,7 @@ class ProductController {
                 prod_condition, 
                 prod_total_sold, 
                 prod_rating, 
-                prod_views, 
-                // prod_user_id
+                prod_views
              } = req.body;
 
             let result = await product.update({
@@ -90,21 +107,11 @@ class ProductController {
                 prod_total_sold, 
                 prod_rating, 
                 prod_views, 
-                // prod_user_id
+                userId
             }, {
-                where: {
-                    id, prod_user_id
-                }
+                where: { id }
             })
-
-            result[0] === 1 ?
-                res.status(200).json({
-                    message: `id: ${id} has been updated...`
-                })
-                :
-                res.status(500).json({
-                    message: `id: ${id} cannot updated...`
-                })
+            res.status(200).json(result)
         } catch(err) {
             res.status(400).json({
                 message: `400: Syntax Error`
@@ -115,11 +122,11 @@ class ProductController {
     static async deleteProduct(req, res) {
         try {
             const id = +req.params.id;
-            const prod_user_id = +req.userData.id;
+            const userId = +req.userData.id;
 
             let result = await product.destroy({
                 where: {
-                    id, prod_user_id
+                    id, userId
                 }
             })
 
@@ -140,10 +147,10 @@ class ProductController {
 
     static async getProductById(req, res) {
         try {
-            const prod_user_id = +req.params.id;
+            const userId = +req.params.id;
             
             let result = await product.findById({
-                where: {prod_user_id: prod_user_id}
+                where: {userId: userId}
             })
             res.status(200).json(result)
         } catch(err) {

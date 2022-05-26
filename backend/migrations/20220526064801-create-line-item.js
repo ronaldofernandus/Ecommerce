@@ -14,14 +14,14 @@ module.exports = {
       line_status: {
         type: Sequelize.STRING
       },
-      line_prop_id: {
+      productId: {
         type: Sequelize.INTEGER
       },
-      line_shop_id: {
+      shopping_cartId: {
         type: Sequelize.INTEGER
       },
-      line_order_name: {
-        type: Sequelize.STRING
+      orderId: {
+        type: Sequelize.INTEGER
       },
       createdAt: {
         allowNull: false,

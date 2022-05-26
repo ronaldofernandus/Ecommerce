@@ -16,10 +16,10 @@ class ShoppingCartController {
 
     static async addCart(req, res) {
         try {
-            const { shop_created_on, shop_status } = req.body;
-            const shop_user_id = +req.userData.id;
+            const { shop_created_on, shop_status, userId } = req.body;
+            // const userId = +req.userData.id;
 
-            let result = await shopping_cart.create({ shop_created_on, shop_status, shop_user_id })
+            let result = await shopping_cart.create({ shop_created_on, shop_status, userId })
             res.status(200).json(result)
         } catch(err) {
             res.status(400).json({
@@ -31,14 +31,14 @@ class ShoppingCartController {
     static async editCart(req, res) {
         try{
             const id = +req.params.id;
-            const shop_user_id = +req.params.id;
-            const { shop_created_on, shop_status } = req.body;
+            // const userId = +req.params.id;
+            const { shop_created_on, shop_status, userId } = req.body;
 
             let result = await shopping_cart.update({
-                shop_created_on, shop_status, shop_user_id
+                shop_created_on, shop_status, userId
             }, {
                 where: {
-                    id, shop_user_id
+                    id, userId
                 }
             })
 
@@ -60,11 +60,11 @@ class ShoppingCartController {
     static async deleteCart(req, res) {
         try {
             const id = +req.params.id;
-            const shop_user_id = +req.userData.id;
+            const userId = +req.userData.id;
 
             let result = await shopping_cart.destroy({
                 where: {
-                    id, shop_user_id
+                    id, userId
                 }
             })
 
@@ -85,10 +85,10 @@ class ShoppingCartController {
 
     static async getCartById(req, res) {
         try {
-            const shop_user_id = +req.params.id;
+            const userId = +req.params.id;
             
             let result = await shopping_cart.findById({
-                where: {shop_user_id: shop_user_id}
+                where: {userId: userId}
             })
             res.status(200).json(result)
         } catch(err) {

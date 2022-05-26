@@ -1,5 +1,6 @@
 const { product_image, product } = require('../models');
 
+
 class ProductImageController {
     static async getPI(req, res) {
         try {
@@ -20,16 +21,17 @@ class ProductImageController {
                 prim_filename, 
                 prim_filesize, 
                 prim_filetype, 
-                prim_primary
+                prim_primary,
+                productId
              } = req.body;
-            const prim_prod_id = +req.userData.id;
+            // const productId = +req.userData.id;
 
             let result = await product_image.create({ 
                 prim_filename, 
                 prim_filesize, 
                 prim_filetype, 
                 prim_primary,
-                prim_prod_id
+                productId
             })
             res.status(200).json(result)
         } catch(err) {
@@ -42,7 +44,7 @@ class ProductImageController {
     static async editPI(req, res) {
         try{
             const id = +req.params.id;
-            const prim_prod_id = +req.userData.id;
+            const productId = +req.userData.id;
             // const userId = +req.params.id;
             const { 
                 prim_filename, 
@@ -55,10 +57,10 @@ class ProductImageController {
                 prim_filesize, 
                 prim_filetype, 
                 prim_primary,
-                // prim_prod_id
+                // productId
             }, {
                 where: {
-                    id, prim_prod_id
+                    id, productId
                 }
             })
 
@@ -80,11 +82,11 @@ class ProductImageController {
     static async deletePI(req, res) {
         try {
             const id = +req.params.id;
-            const prim_prod_id = +req.userData.id;
+            const productId = +req.userData.id;
 
             let result = await product_image.destroy({
                 where: {
-                    id, prim_prod_id
+                    id, productId
                 }
             })
 
@@ -105,10 +107,10 @@ class ProductImageController {
 
     static async getPIById(req, res) {
         try {
-            const prim_prod_id = +req.params.id;
+            const productId = +req.params.id;
             
             let result = await product_image.findById({
-                where: {prim_prod_id: prim_prod_id}
+                where: {productId: productId}
             })
             res.status(200).json(result)
         } catch(err) {

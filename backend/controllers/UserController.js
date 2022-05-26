@@ -49,12 +49,12 @@ class UserController {
     
     static async login(req, res) {
         try {
-            const {user_name, user_password} = req.body;
+            const {user_email, user_password} = req.body;
             let emailFound = await user.findOne({
                 where: {user_email}
             })
             if (emailFound) {
-                if(decryptPass(password, emailFound.password)) {
+                if(decryptPass(user_password, emailFound.user_password)) {
                     let access_token = tokenGenerator(emailFound);
                     res.status(200).json( {access_token} );
 
@@ -79,6 +79,7 @@ class UserController {
 
     static async updateUser(req, res) {
         const id = +req.userData.id;
+
         const { 
             user_name, 
             user_email, 
@@ -92,14 +93,14 @@ class UserController {
 
         try {
             let result = await user.update( {
-                user_name, 
-                user_email, 
-                user_password: encryptPass(password), 
-                user_salt, 
-                user_birthdate, 
-                user_gender, 
-                user_avatar, 
-                user_type
+                user_name: user_name, 
+                user_email: user_email, 
+                user_password: user_password, 
+                user_salt: user_salt, 
+                user_birthdate: user_birthdate, 
+                user_gender: user_gender, 
+                user_avatar: user_avatar, 
+                user_type: user_type
             }, {
                 where: { id }
             });

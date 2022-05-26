@@ -9,7 +9,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       order.belongsTo(models.user);
-      order.hasMany(models.line_item)
+      order.hasMany(models.line_item);
     }
   }
   order.init(
@@ -24,7 +24,7 @@ module.exports = (sequelize, DataTypes) => {
       order_city: DataTypes.STRING,
       order_addres: DataTypes.STRING,
       order_status: DataTypes.STRING,
-      order_user_id: DataTypes.INTEGER,
+      userId: DataTypes.INTEGER,
     },
     {
       sequelize,

@@ -1,7 +1,7 @@
 "use strict";
-
-const { encryptPass } = require('../helpers/bcrypt');
+const { encryptPass } = require("../helpers/bcrypt");
 const { Model } = require("sequelize");
+
 module.exports = (sequelize, DataTypes) => {
   class user extends Model {
     /**
@@ -11,19 +11,20 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       user.hasMany(models.product);
-      user.hasMany(models.order)
-      user.hasMany(models.shopping_cart)
+      user.hasMany(models.order);
+      user.hasMany(models.shopping_cart);
     }
   }
   user.init(
     {
-      user_name: {
-        allowNull: false,
-        type: DataTypes.STRING
-      },
+      user_name: DataTypes.STRING,
       user_email: {
-        allowNull: false,
-        type: DataTypes.STRING
+        type: DataTypes.STRING,
+        validate: {
+          notEmpty: {
+            message: "Username tidak boleh kosong",
+          },
+        },
       },
       user_password: {
         allowNull: false,
@@ -33,28 +34,37 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         type: DataTypes.STRING
       },
-      user_birthdate: DataTypes.DATE,
+      user_birthdate: {
+        allowNull: true,
+        type: DataTypes.DATE
+      },
       user_gender: {
         allowNull: false,
         type: DataTypes.STRING
       },
       user_avatar: {
-        allowNull: true,
+        allowNull: false,
         type: DataTypes.STRING
       },
       user_type: {
         allowNull: false,
         type: DataTypes.STRING
       },
-    }, {
+    },
+
+    {
       hooks: {
-        beforeCreate: (user) => {
+        beforeCreate: (user, options) => {
           user.user_password = encryptPass(user.user_password);
+          user.user_avatar =
+            user.user_avatar || "https://via.placeholder.com/150";
         },
-        beforeUpdate: (user) => {
+        beforeUpdate: (user, options) => {
           user.user_password = encryptPass(user.user_password);
+          user.user_avatar =
+            user.user_avatar || "https://via.placeholder.com/150";
         }
-      }, 
+      },
       sequelize,
       modelName: "user",
     }

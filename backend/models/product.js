@@ -8,8 +8,8 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      product.belongsTo(models.user);
       product.hasMany(models.product_image);
+      product.belongsTo(models.user);
       product.hasMany(models.line_item);
     }
   }
@@ -27,7 +27,7 @@ module.exports = (sequelize, DataTypes) => {
       prod_total_sold: DataTypes.INTEGER,
       prod_rating: DataTypes.INTEGER,
       prod_views: DataTypes.INTEGER,
-      prod_user_id: DataTypes.INTEGER,
+      userId: DataTypes.INTEGER,
     },
     {
       sequelize,
