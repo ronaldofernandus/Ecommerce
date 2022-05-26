@@ -79,10 +79,9 @@ class orderController {
           order_payt_trx_number,
           order_city,
           order_addres,
-          order_status
+          order_status,
           //open or cancelled or paid or shipping or closed
-          
-          ,
+
           userId,
         },
         {
@@ -128,7 +127,13 @@ class orderController {
   static async getOrderById(req, res) {
     try {
       const id = +req.params.id;
-      let getOrderById = await order.findByPk(id);
+      const userId = +req.userData.id;
+      let getOrderById = await order.findAll({
+        where: {
+          id,
+          userId,
+        },
+      });
       res.status(200).json(getOrderById);
     } catch (error) {
       res.status(500).json(error);

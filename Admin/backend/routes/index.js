@@ -10,7 +10,7 @@ indexRoute.use("/product", productRoute);
 const userRoute = require("./userRoute");
 indexRoute.use("/user", userRoute);
 
-const imageRoute = require("./productImage");
+const imageRoute = require("./imageRoute");
 indexRoute.use("/images", imageRoute);
 
 const orderRoute = require("./orderRoute");
