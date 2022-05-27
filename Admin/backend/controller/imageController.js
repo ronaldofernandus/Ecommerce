@@ -16,16 +16,11 @@ class imageController {
 
   static async postImage(req, res) {
     try {
-      // const { image, productId } = req.body;
-      // // console.log(req.body);
-      // const userId = +req.userData.id;
-      // // console.log(req.file.path);
-
       const image = req.file;
       console.log(req.file);
       const { fieldname, originalname, mimetype, filename, size } = image;
 
-      const productId = req.body;
+      const { productId } = req.body;
 
       let postImage = await product_image.create({
         prim_filename: filename,
@@ -37,8 +32,8 @@ class imageController {
 
       res.status(201).json(postImage);
     } catch (error) {
-      // console.log(error);
-      res.status(500).json(error);
+      console.log(error);
+      // res.status(500).json(error);
     }
   }
 

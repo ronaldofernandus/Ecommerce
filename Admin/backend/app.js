@@ -13,7 +13,7 @@ app.use(express.json());
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// app.use("/images", express.static(path.join(__dirname, "images")));
+app.use("/images", express.static(path.join(__dirname, "images")));
 // app.post("/images", upload.single("image"), (req, res) => {
 //   let finalImageUrl =
 //     req.protocol + "://" + req.get("host") + "/image/" + req.file.filename;
