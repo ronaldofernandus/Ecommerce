@@ -1,5 +1,7 @@
 'use strict';
-const { Model } = require('sequelize');
+const {
+  Model
+} = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class line_item extends Model {
     /**
@@ -7,7 +9,7 @@ module.exports = (sequelize, DataTypes) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
-    static associate(models) {
+     static associate(models) {
       line_item.belongsTo(models.product);
       line_item.belongsTo(models.shopping_cart);
       line_item.belongsTo(models.order);
@@ -15,22 +17,10 @@ module.exports = (sequelize, DataTypes) => {
   }
   line_item.init({
     line_qty: DataTypes.INTEGER,
-    line_status: {
-      allowNull: false,
-      type: DataTypes.STRING
-    },
-    productId: {
-      allowNull: false,
-      type: DataTypes.INTEGER
-    },
-    shopping_cartId: {
-      allowNull: false,
-      type: DataTypes.INTEGER
-    },
-    orderId: {
-      allowNull: false,
-      type: DataTypes.INTEGER
-    }
+    line_status: DataTypes.STRING,
+    productId: DataTypes.INTEGER,
+    shoppingCartId: DataTypes.INTEGER,
+    orderId: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'line_item',

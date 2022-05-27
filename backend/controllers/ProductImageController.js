@@ -22,9 +22,9 @@ class ProductImageController {
                 prim_filesize, 
                 prim_filetype, 
                 prim_primary,
-                productId
+                // productId
              } = req.body;
-            // const productId = +req.userData.id;
+            const productId = +req.userData.id;
 
             let result = await product_image.create({ 
                 prim_filename, 
@@ -45,22 +45,23 @@ class ProductImageController {
         try{
             const id = +req.params.id;
             const productId = +req.userData.id;
-            // const userId = +req.params.id;
+
             const { 
                 prim_filename, 
                 prim_filesize, 
                 prim_filetype, 
-                prim_primary } = req.body;
+                prim_primary 
+            } = req.body;
 
             let result = await product_image.update({
                 prim_filename, 
                 prim_filesize, 
                 prim_filetype, 
                 prim_primary,
-                // productId
+                productId
             }, {
                 where: {
-                    id, productId
+                    id
                 }
             })
 
@@ -107,10 +108,11 @@ class ProductImageController {
 
     static async getPIById(req, res) {
         try {
-            const productId = +req.params.id;
+            const id = +req.params.id;
+            const productId = +req.userData.id;
             
-            let result = await product_image.findById({
-                where: {productId: productId}
+            let result = await product_image.findAll({
+                where: {id, productId}
             })
             res.status(200).json(result)
         } catch(err) {

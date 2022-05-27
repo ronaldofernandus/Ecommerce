@@ -11,7 +11,7 @@ class LineItemController {
             res.status(200).json(result)
         } catch(err) {
             console.log(err);
-            res.status(404).json(err)
+            res.status(404).json('err')
         }
     }
 
@@ -20,19 +20,16 @@ class LineItemController {
             const { 
                 line_qty, 
                 line_status, 
-                productId, 
-                shopping_cartId, 
-                orderId
              } = req.body;
-            // const productId = +req.userData.id;
-            // const shopping_cartId = +req.userData.id;
-            // const orderId = +req.userData.id;
+            const productId = +req.userData.id;
+            const shoppingCartId = +req.userData.id;
+            const orderId = +req.userData.id;
 
             let result = await line_item.create({ 
                 line_qty, 
                 line_status, 
                 productId, 
-                shopping_cartId, 
+                shoppingCartId, 
                 orderId
              })
             res.status(200).json(result)
@@ -46,9 +43,9 @@ class LineItemController {
     static async editLineItem(req, res) {
         try{
             const id = +req.params.id;
-            const productId = +req.params.id;
-            const shopping_cartId = +req.params.id;
-            const orderId = +req.params.id;
+            const productId = +req.userData.id;
+            const shoppingCartId = +req.userData.id;
+            const orderId = +req.userData.id;
             const { 
                 line_qty, 
                 line_status, 
@@ -56,11 +53,12 @@ class LineItemController {
 
             let result = await line_item.update({
                 line_qty, 
-                line_status
+                line_status,
+                productId,
+                shoppingCartId,
+                orderId
             }, {
-                where: {
-                    id, productId, shopping_cartId, orderId
-                }
+                where: { id }
             })
 
             result[0] === 1 ?
@@ -81,13 +79,13 @@ class LineItemController {
     static async deleteLineItem(req, res) {
         try {
             const id = +req.params.id;
-            const productId = +req.params.id;
-            const shopping_cartId = +req.params.id;
-            const orderId = +req.params.id;
+            const productId = +req.userData.id;
+            const shoppingCartId = +req.userData.id;
+            const orderId = +req.userData.id;
 
             let result = await line_item.destroy({
                 where: {
-                    id, productId, shopping_cartId, orderId
+                    id, productId, shoppingCartId, orderId
                 }
             })
 
@@ -108,15 +106,14 @@ class LineItemController {
 
     static async getLineItemById(req, res) {
         try {
-            const productId = +req.params.id;
-            const shopping_cartId = +req.params.id;
-            const orderId = +req.params.id;
+            const id = +req.params.id;
+            const productId = +req.userData.id;
+            const shoppingCartId = +req.userData.id;
+            const orderId = +req.userData.id;
             
             let result = await line_item.findById({
                 where: {
-                    productId: productId,
-                    shopping_cartId: shopping_cartId, 
-                    orderId: orderId
+                    id, productId, shoppingCartId, orderId
                 }
             })
             res.status(200).json(result)

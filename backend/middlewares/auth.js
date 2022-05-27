@@ -2,11 +2,12 @@ const { tokenVerifier } = require('../helpers/jsonwebtoken');
 
 const authentication = (req, res, next) => {
     const access_token = req.headers.access_token;
+    console.log(req.headers);
 
     if(access_token) {
         try {
-            let userData = tokenVerifier(access_token);
-            req.userData = userData;
+            let verifyToken = tokenVerifier(access_token);
+            req.userData = verifyToken;
             next();
         } catch(err) {
             console.log(err)

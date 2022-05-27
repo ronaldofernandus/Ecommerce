@@ -16,22 +16,6 @@ class ProductController {
         }
     }
 
-    static async getPU(req, res) {
-        try {
-            let id = +req.userData.id;
-
-            let result = await product.findAll({
-                where: { userId: id},
-                include: [user]
-            })
-            res.status(200).json(result)
-        } catch(err) {
-            res.status(404).json({
-                message: `404: User Product not found`
-            })
-        }
-    }
-
     static async addProduct(req, res) {
         try {
             const {
@@ -46,10 +30,9 @@ class ProductController {
                 prod_condition,
                 prod_total_sold,
                 prod_rating,
-                prod_views,
-                userId
+                prod_views
               } = req.body;
-            // const userId = +req.userData.id;
+            const userId = req.userData.id;
 
             let result = await product.create({ 
                 prod_name,
@@ -78,7 +61,7 @@ class ProductController {
     static async editProduct(req, res) {
         try{
             const id = +req.params.id;
-            const userId = +req.params.id;
+            const userId = +req.userData.id;
             const { 
                 prod_name, 
                 prod_desc, 
@@ -121,7 +104,7 @@ class ProductController {
 
     static async deleteProduct(req, res) {
         try {
-            const id = +req.params.id;
+            const id = req.params.id;
             const userId = +req.userData.id;
 
             let result = await product.destroy({
@@ -147,10 +130,11 @@ class ProductController {
 
     static async getProductById(req, res) {
         try {
-            const userId = +req.params.id;
+            const id = req.params.id;
+            const userId = +req.userData.id;
             
-            let result = await product.findById({
-                where: {userId: userId}
+            let result = await product.findAll({
+                where: {id, userId}
             })
             res.status(200).json(result)
         } catch(err) {

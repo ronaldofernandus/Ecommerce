@@ -28,10 +28,9 @@ class OrderController {
                 order_payt_trx_number,  
                 order_city,
                 order_addres,
-                order_status,
-                userId
+                order_status
             } = req.body;
-            // const userId = req.userData.id;
+            const userId = req.userData.id;
 
             let result = await order.create({ 
                 order_created_on, 
@@ -57,7 +56,7 @@ class OrderController {
     static async editOrder(req, res) {
         try{
             const id = +req.params.id;
-            const userId = +req.params.id;
+            const userId = +req.userData.id;
             const { 
                 order_created_on, 
                 order_subtotal, 
@@ -85,7 +84,7 @@ class OrderController {
                 userId
             }, {
                 where: {
-                    id, userId
+                    id
                 }
             })
 
@@ -132,10 +131,11 @@ class OrderController {
 
     static async getOrderById(req, res) {
         try {
-            const userId = +req.params.id;
+            const id = +req.params.id;
+            const userId = +req.userData.id;
             
-            let result = await order.findById({
-                where: {userId: userId}
+            let result = await order.findAll({
+                where: {id, userId}
             })
             res.status(200).json(result)
         } catch(err) {

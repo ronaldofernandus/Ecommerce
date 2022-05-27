@@ -1,5 +1,6 @@
 const { shopping_cart, user } = require('../models');
 
+
 class ShoppingCartController {
     static async getCart(req, res) {
         try {
@@ -16,8 +17,8 @@ class ShoppingCartController {
 
     static async addCart(req, res) {
         try {
-            const { shop_created_on, shop_status, userId } = req.body;
-            // const userId = +req.userData.id;
+            const { shop_created_on, shop_status } = req.body;
+            const userId = +req.userData.id;
 
             let result = await shopping_cart.create({ shop_created_on, shop_status, userId })
             res.status(200).json(result)
@@ -31,14 +32,14 @@ class ShoppingCartController {
     static async editCart(req, res) {
         try{
             const id = +req.params.id;
-            // const userId = +req.params.id;
-            const { shop_created_on, shop_status, userId } = req.body;
+            const userId = +req.userData.id;
+            const { shop_created_on, shop_status } = req.body;
 
             let result = await shopping_cart.update({
                 shop_created_on, shop_status, userId
             }, {
                 where: {
-                    id, userId
+                    id
                 }
             })
 
@@ -85,10 +86,11 @@ class ShoppingCartController {
 
     static async getCartById(req, res) {
         try {
-            const userId = +req.params.id;
+            const id = +req.params.id;
+            const userId = +req.userData.id;
             
             let result = await shopping_cart.findById({
-                where: {userId: userId}
+                where: {id, userId}
             })
             res.status(200).json(result)
         } catch(err) {

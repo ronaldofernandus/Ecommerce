@@ -1,6 +1,6 @@
 const { user } = require('../models');
-const { encryptPass, decryptPass } = require('../helpers/bcrypt');
-const { tokenGenerator, tokenVerifier } = require('../helpers/jsonwebtoken');
+const { decryptPass } = require('../helpers/bcrypt');
+const { tokenGenerator } = require('../helpers/jsonwebtoken');
 
 
 class UserController {
@@ -52,14 +52,15 @@ class UserController {
             const {user_email, user_password} = req.body;
             let emailFound = await user.findOne({
                 where: {user_email}
-            })
+            });
+
             if (emailFound) {
                 if(decryptPass(user_password, emailFound.user_password)) {
                     let access_token = tokenGenerator(emailFound);
                     res.status(200).json( {access_token} );
 
-                    let verToken = tokenVerifier(access_token);
-                    console.log(verToken);
+                    // let verToken = tokenVerifier(access_token);
+                    // console.log(verToken);
                 } else {
                     res.status(500).json({
                         message: `Wrong Data!`
@@ -78,7 +79,7 @@ class UserController {
     }
 
     static async updateUser(req, res) {
-        const id = +req.userData.id;
+        const id = req.params.id;
 
         const { 
             user_name, 
@@ -93,14 +94,14 @@ class UserController {
 
         try {
             let result = await user.update( {
-                user_name: user_name, 
-                user_email: user_email, 
-                user_password: user_password, 
-                user_salt: user_salt, 
-                user_birthdate: user_birthdate, 
-                user_gender: user_gender, 
-                user_avatar: user_avatar, 
-                user_type: user_type
+                user_name, 
+                user_email, 
+                user_password, 
+                user_salt, 
+                user_birthdate, 
+                user_gender, 
+                user_avatar, 
+                user_type
             }, {
                 where: { id }
             });
@@ -143,15 +144,10 @@ class UserController {
 
     static async getUserbyId(req, res) {
         try {
-            const id = +req.userData.id;
+            const id = +req.params.id;
             let result = await user.findByPk(id);
 
-            result !== null ?
-                res.status(200).json(result)
-                :
-                res.status(404).json({
-                    message: `User not Found`
-                })
+            res.status(200).json(result);
         } catch (err) {
             res.status(404).json({
                 message: `Failed!`
