@@ -1,7 +1,9 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "./style.css";
 
 function HomePagebeforelogin() {
+  
   return (
     <>
       <nav className="bg-image">
@@ -26,14 +28,14 @@ function HomePagebeforelogin() {
             </div>
             <div class="col-3 offset-md-2">
               <div className=" input-group flex-nowrap submit-btn input-align">
-                <button className="btn text-add">Login</button>
+              <Link to ="/login"><button className="btn text-add">Login</button></Link>
               </div>
               <br></br>
             <br></br>
             </div>
             <div class="col-3 offset-md-2">
               <div className=" input-group flex-nowrap submit-btn input-align">
-                <button className="btn text-add">Register</button>
+              <Link to ="/register"><button className="btn text-add">Register</button></Link>
               </div>
               <br></br>
             <br></br>
