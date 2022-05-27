@@ -19,7 +19,7 @@ class itemController {
         line_status,
         //cart or checkout or ordered
         productId,
-        shopId,
+        shopping_cartId,
         orderId,
       } = req.body;
 
@@ -27,11 +27,13 @@ class itemController {
         line_qty,
         line_status,
         productId,
-        shopId,
+        shopping_cartId,
         orderId,
       });
       res.status(200).json(createItem);
     } catch (error) {
+      // console.log(error);
+
       res.status(500).json(error);
     }
   }

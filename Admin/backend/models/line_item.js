@@ -18,7 +18,7 @@ module.exports = (sequelize, DataTypes) => {
       line_qty: DataTypes.INTEGER,
       line_status: DataTypes.STRING,
       productId: DataTypes.INTEGER,
-      shopId: DataTypes.INTEGER,
+      shopping_cartId: DataTypes.INTEGER,
       orderId: DataTypes.INTEGER,
     },
     {
