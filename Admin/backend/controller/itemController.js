@@ -19,7 +19,7 @@ class itemController {
         line_status,
         //cart or checkout or ordered
         productId,
-        shopping_cartId,
+        shoppingCartId,
         orderId,
       } = req.body;
 
@@ -27,10 +27,12 @@ class itemController {
         line_qty,
         line_status,
         productId,
-        shopping_cartId,
+        shoppingCartId,
         orderId,
       });
-      res.status(200).json(createItem);
+      res.status(200).json({
+        message: "has been created",
+      });
     } catch (error) {
       // console.log(error);
 
@@ -41,36 +43,25 @@ class itemController {
   static async updateItem(req, res) {
     try {
       const id = +req.params.id;
-
       const userId = +req.userData.id;
-      // console.log(userId);
+
       const {
-        order_created_on,
-        order_subtotal,
-        order_discount,
-        order_tax,
-        order_total_due,
-        order_total_qty,
-        order_payt_trx_number,
-        order_city,
-        order_addres,
-        order_status,
+        line_qty,
+        line_status,
+        //cart or checkout or ordered
+        productId,
+        shoppingCartId,
+        orderId,
       } = req.body;
 
       let updateItem = await line_item.update(
         {
-          order_created_on,
-          order_subtotal,
-          order_discount,
-          order_tax,
-          order_total_due,
-          order_total_qty,
-          order_payt_trx_number,
-          order_city,
-          order_addres,
-          order_status,
-          //open or cancelled or paid or shipping or closed
-
+          line_qty,
+          line_status,
+          //cart or checkout or ordered
+          productId,
+          shoppingCartId,
+          orderId,
           userId,
         },
         {
@@ -80,7 +71,7 @@ class itemController {
 
       updateItem[0] === 1
         ? res.status(201).json({
-            message: "Order updated successfully",
+            message: "Item updated successfully",
           })
         : res.status(403).json({
             message: "not succes",
@@ -94,16 +85,16 @@ class itemController {
     try {
       const id = req.params.id;
       const userId = +req.userData.id;
-      let deleteOrder = await order.destroy({
+
+      let deleteItem = await line_item.destroy({
         where: {
           id,
-          userId,
         },
       });
 
-      deleteOrder === 1
+      deleteItem === 1
         ? res.status(200).json({
-            message: "product deleted successfully",
+            message: "Item deleted successfully",
           })
         : res.status(403).json({
             message: "delete fail",
@@ -116,11 +107,10 @@ class itemController {
   static async getItemById(req, res) {
     try {
       const id = +req.params.id;
-      const userId = +req.userData.id;
-      let getItemById = await order.findAll({
+
+      let getItemById = await line_item.findAll({
         where: {
           id,
-          userId,
         },
       });
       res.status(200).json(getItemById);
