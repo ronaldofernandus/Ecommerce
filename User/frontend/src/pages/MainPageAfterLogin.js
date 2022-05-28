@@ -15,7 +15,9 @@ function MainPageAfterLogin() {
       <Routes>
         <Route path="home">
           <Route path="" element={<Product></Product>}></Route>
-          <Route path="detail"element={<DetailProduct></DetailProduct>}></Route>
+          <Route path="detail">
+            <Route path=":id" element={<DetailProduct></DetailProduct>}></Route>
+          </Route>
         </Route>
         <Route path="/profile" element={<Profile></Profile>}></Route>
         <Route path="/order" element={<Order></Order>}></Route>
