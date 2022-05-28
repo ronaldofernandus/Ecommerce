@@ -1,6 +1,6 @@
 const indexRoute = require("express").Router();
 
-indexRoute.get("/home", (req, res) => {
+indexRoute.get("/", (req, res) => {
   res.json("Home Page");
 });
 
@@ -8,7 +8,7 @@ const productRoute = require("./productRoute");
 indexRoute.use("/product", productRoute);
 
 const userRoute = require("./userRoute");
-indexRoute.use("/", userRoute);
+indexRoute.use("/user", userRoute);
 
 const imageRoute = require("./imageRoute");
 indexRoute.use("/images", imageRoute);
