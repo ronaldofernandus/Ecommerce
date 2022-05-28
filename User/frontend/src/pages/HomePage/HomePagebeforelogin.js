@@ -1,9 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./style.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faRightToBracket,faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 
 function HomePagebeforelogin() {
-  
   return (
     <>
       <nav className="bg-image">
@@ -28,20 +29,38 @@ function HomePagebeforelogin() {
             </div>
             <div class="col-3 offset-md-2">
               <div className=" input-group flex-nowrap submit-btn input-align">
-              <Link to ="/login"><button className="btn text-add">Login</button></Link>
+                <Link to="/login">
+                  <button className="btn text-add">
+                    <span>
+                      <FontAwesomeIcon
+                        icon={faRightToBracket}
+                      ></FontAwesomeIcon>
+                    </span>{" "}
+                    Login
+                  </button>
+                </Link>
               </div>
               <br></br>
-            <br></br>
+              <br></br>
             </div>
             <div class="col-3 offset-md-2">
               <div className=" input-group flex-nowrap submit-btn input-align">
-              <Link to ="/register"><button className="btn text-add">Register</button></Link>
+                <Link to="/register">
+                  <button className="btn text-add">
+                    <span>
+                      <FontAwesomeIcon
+                        icon={faPenToSquare}
+                      ></FontAwesomeIcon>
+                    </span>{" "}
+                    Register
+                  </button>
+                </Link>
               </div>
               <br></br>
-            <br></br>
-            <br></br>
-            <br></br>
-            <br></br>
+              <br></br>
+              <br></br>
+              <br></br>
+              <br></br>
             </div>
           </div>
         </div>
