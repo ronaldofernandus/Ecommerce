@@ -13,7 +13,7 @@ productRoute.post(
 );
 productRoute.put("/:id", authentication, productController.updateProduct);
 productRoute.delete("/:id", authentication, productController.deleteProduct);
-productRoute.get("/:id",authentication ,productController.getProductById);
+productRoute.get("/:id", authentication, productController.getProductById);
 
 module.exports = productRoute;
 

@@ -2,19 +2,32 @@ import React, { useState, useEffect } from "react";
 import { MdDeleteForever } from "react-icons/md";
 import { AiFillFileAdd } from "react-icons/ai";
 import { AiFillEdit } from "react-icons/ai";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
+import Swal from "sweetalert2";
 
-import { getProduct } from "../../Axios/productAxios";
+import { deleteProductReducer, getProduct } from "../../Axios/productAxios";
 
 const ListProduct = () => {
   const { getListProductResult, getListProductLoading, getListProductError } =
     useSelector((state) => state.productReducers);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   useEffect(() => {
     dispatch(getProduct());
   }, [dispatch]);
+
+  const deleteHandler = (id) => {
+    dispatch(deleteProductReducer());
+    Swal.fire({
+      icon: "success",
+      title: "Delete Success!",
+      text: `You've successfully delete an post!`,
+    });
+    navigate("/product");
+  };
+
   return (
     <>
       <table className="table table-bordered">
@@ -65,9 +78,13 @@ const ListProduct = () => {
                         </button>
                       </div>
                       <div className="col">
-                        <button type="button" className="btn btn-primary">
+                        <button
+                          onClick={() => deleteHandler(product.id)}
+                          type="button"
+                          className="btn btn-primary"
+                        >
                           <MdDeleteForever></MdDeleteForever>
-                          <Link to="/Jadwal/" className="delete">
+                          <Link to="/product" className="delete">
                             Delete
                           </Link>
                         </button>

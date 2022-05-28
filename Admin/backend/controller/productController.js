@@ -116,25 +116,26 @@ class productController {
 
   static async deleteProduct(req, res) {
     try {
-      const id = req.params.id;
+      const id = +req.params.id;
       const userId = +req.userData.id;
+
+      console.log(userId);
       let deleteproduct = await product.destroy({
-        where: {
-          id,
-          userId,
-        },
+        where: { id: id, userId: userId },
       });
 
       deleteproduct === 1
         ? res.status(200).json({
             message: "product deleted successfully",
           })
-        : res.status(403).json({
-            message: "delete fail",
+        : res.status(404).json({
+            message: "Product not found",
           });
+
+      // console.log(deleteproduct);
     } catch (error) {
-      console.log(error);
-      // res.status(500).json(error);
+      // console.log(error);
+      res.status(500).json(error);
     }
   }
 

@@ -1,6 +1,7 @@
 import axios from "axios";
 export const getListProduct = "getListProduct";
 export const addProductReducer = "addProductReducer";
+export const deleteProductReducer = "deleteProductReducer";
 
 export const getProduct = () => {
   const get_token = localStorage.getItem("get_token");
@@ -46,7 +47,7 @@ export const getProduct = () => {
 };
 
 export const addProduct = (data) => {
-  console.log("2.Masuk");
+  // console.log("2.Masuk");
   const get_token = localStorage.getItem("get_token");
   return (dispatch) => {
     dispatch({
@@ -68,7 +69,7 @@ export const addProduct = (data) => {
       },
     })
       .then((response) => {
-        console.log("3.Berhasi", response);
+        // console.log("3.Berhasi", response);
         dispatch({
           type: "addProductReducer",
           payload: {
@@ -79,9 +80,55 @@ export const addProduct = (data) => {
         });
       })
       .catch((error) => {
-        console.log("3. Gagal", error);
+        // console.log("3. Gagal", error);
         dispatch({
           type: "addProductReducer",
+          payload: {
+            loading: false,
+            data: false,
+            errorMessage: error.message,
+          },
+        });
+      });
+  };
+};
+
+export const deleteProduct = (id) => {
+  console.log("2.Masuk");
+  const get_token = localStorage.getItem("get_token");
+  return (dispatch) => {
+    dispatch({
+      type: "deleteProductReducer",
+      payload: {
+        loading: false,
+        data: false,
+        errorMessage: false,
+      },
+    });
+    axios({
+      method: "DELETE",
+      url: "http://localhost:3000/product/" + id,
+      timeout: 120000,
+
+      headers: {
+        get_token: get_token,
+      },
+    })
+      .then((response) => {
+        console.log("3.Berhasi", response);
+        dispatch({
+          type: "deleteProductReducer",
+          payload: {
+            loading: false,
+            data: response.data,
+            errorMessage: false,
+          },
+        });
+      })
+      .catch((error) => {
+        console.log("3. Gagal", error);
+        dispatch({
+          type: "deleteProductReducer",
           payload: {
             loading: false,
             data: false,
