@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getProduct, addProduct } from "../../Axios/productAxios";
+import {
+  getProduct,
+  addProduct,
+  updateProduct,
+} from "../../Axios/productAxios";
 
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 
-const AddProduct = () => {
+const EditProduct = () => {
   const [prod_name, setProd_name] = useState("");
   const [prod_desc, setProd_desc] = useState("");
   const [prod_price, setProd_price] = useState("");
@@ -21,34 +25,53 @@ const AddProduct = () => {
 
   const [id, setId] = useState("");
 
-  const { addProductResult, getDetailProduct } = useSelector(
-    (state) => state.productReducers
-  );
+  const { addProductResult, getDetailProduct, updateProductReducer } =
+    useSelector((state) => state.productReducers);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const addHandler = (event) => {
-    // console.log("1. Mulai");
-    dispatch(
-      addProduct({
-        prod_name: prod_name,
-        prod_desc: prod_desc,
-        prod_price: prod_price,
-        prod_stock: prod_stock,
-        prod_expire: prod_expire,
-        prod_weight: prod_weight,
-        prod_category: prod_category,
-        prod_brand: prod_brand,
-        prod_condition: prod_condition,
-        prod_total_sold: prod_total_sold,
-        prod_rating: prod_rating,
-        prod_views: prod_views,
-      })
-    );
+  const editHandler = (event) => {
+    if (id) {
+      dispatch(
+        updateProduct({
+          id: id,
+          prod_name: prod_name,
+          prod_desc: prod_desc,
+          prod_price: prod_price,
+          prod_stock: prod_stock,
+          prod_expire: prod_expire,
+          prod_weight: prod_weight,
+          prod_category: prod_category,
+          prod_brand: prod_brand,
+          prod_condition: prod_condition,
+          prod_total_sold: prod_total_sold,
+          prod_rating: prod_rating,
+          prod_views: prod_views,
+        })
+      );
+    } else {
+      dispatch(
+        addProduct({
+          prod_name: prod_name,
+          prod_desc: prod_desc,
+          prod_price: prod_price,
+          prod_stock: prod_stock,
+          prod_expire: prod_expire,
+          prod_weight: prod_weight,
+          prod_category: prod_category,
+          prod_brand: prod_brand,
+          prod_condition: prod_condition,
+          prod_total_sold: prod_total_sold,
+          prod_rating: prod_rating,
+          prod_views: prod_views,
+        })
+      );
+    }
+
     Swal.fire({
       icon: "success",
-      title: "Add Post Success!",
-      text: `You've successfully created an post!`,
+      title: "Edit Post Success!",
+      text: `You've successfully Edit an post!`,
     });
     navigate("/product");
   };
@@ -59,6 +82,13 @@ const AddProduct = () => {
       dispatch(getProduct());
     }
   }, [addProductResult, dispatch]);
+
+  useEffect(() => {
+    if (updateProductReducer) {
+      // console.log("5. Masukk Component did update");
+      dispatch(getProduct());
+    }
+  }, [updateProductReducer, dispatch]);
 
   useEffect(() => {
     if (getDetailProduct) {
@@ -83,9 +113,6 @@ const AddProduct = () => {
   return (
     <>
       <div className="row ">
-        <div className="col-12 text-center">
-          <h5>Tambah Data Product</h5>
-        </div>
         <div className="col-12 my-2">
           <div className="mb-3">
             <label className="form-label" for="customFile">
@@ -245,7 +272,7 @@ const AddProduct = () => {
           </div>
 
           <button
-            onClick={() => addHandler()}
+            onClick={() => editHandler()}
             type="submit"
             className="btn btn-primary"
           >
@@ -257,4 +284,4 @@ const AddProduct = () => {
   );
 };
 
-export default AddProduct;
+export default EditProduct;

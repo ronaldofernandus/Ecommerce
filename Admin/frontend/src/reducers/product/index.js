@@ -2,6 +2,8 @@ import {
   getListProduct,
   addProductReducer,
   deleteProductReducer,
+  getDetailProduct,
+  updateProductReducer,
 } from "../../Axios/productAxios";
 const initialState = {
   getListProductResult: false,
@@ -15,6 +17,12 @@ const initialState = {
   deleteProductResult: false,
   deleteProductLoading: false,
   deleteProductError: false,
+
+  getDetailProduct: false,
+
+  updateProductResult: false,
+  updateProductLoading: false,
+  updateProductError: false,
 };
 
 const product = (state = initialState, action) => {
@@ -27,7 +35,6 @@ const product = (state = initialState, action) => {
         getListProductError: action.payload.errorMessage,
       };
     case addProductReducer:
-      console.log("4.Masuk Reducer:", action);
       return {
         ...state,
         addProductResult: action.payload.data,
@@ -35,12 +42,25 @@ const product = (state = initialState, action) => {
         addProductError: action.payload.errorMessage,
       };
     case deleteProductReducer:
-      console.log("4.Masuk Reducer:", action);
       return {
         ...state,
         deleteProductResult: action.payload.data,
         deleteProductLoading: action.payload.loading,
         deleteProductError: action.payload.errorMessage,
+      };
+
+    case getDetailProduct:
+      return {
+        ...state,
+        getDetailProduct: action.payload.data,
+      };
+
+    case updateProductReducer:
+      return {
+        ...state,
+        updateProductResult: action.payload.data,
+        updateProductLoading: action.payload.loading,
+        updateProductError: action.payload.errorMessage,
       };
 
     default:

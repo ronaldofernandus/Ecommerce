@@ -2,6 +2,8 @@ import axios from "axios";
 export const getListProduct = "getListProduct";
 export const addProductReducer = "addProductReducer";
 export const deleteProductReducer = "deleteProductReducer";
+export const getDetailProduct = "getDetailProduct";
+export const updateProductReducer = "updateProductReducer";
 
 export const getProduct = () => {
   const get_token = localStorage.getItem("get_token");
@@ -129,6 +131,68 @@ export const deleteProduct = (id) => {
         console.log("3. Gagal", error);
         dispatch({
           type: "deleteProductReducer",
+          payload: {
+            loading: false,
+            data: false,
+            errorMessage: error.message,
+          },
+        });
+      });
+  };
+};
+
+export const detailProduct = (data) => {
+  const get_token = localStorage.getItem("get_token");
+  return (dispatch) => {
+    dispatch({
+      type: "getDetailProduct",
+      payload: {
+        data: data,
+        headers: {
+          get_token: get_token,
+        },
+      },
+    });
+  };
+};
+
+export const updateProduct = (data) => {
+  // console.log("2.Masuk");
+  const get_token = localStorage.getItem("get_token");
+  return (dispatch) => {
+    dispatch({
+      type: "updateProductReducer",
+      payload: {
+        loading: false,
+        data: false,
+        errorMessage: false,
+      },
+    });
+    axios({
+      method: "PUT",
+      url: "http://localhost:3000/product/edit" + data.id,
+      timeout: 120000,
+      data: data,
+
+      headers: {
+        get_token: get_token,
+      },
+    })
+      .then((response) => {
+        // console.log("3.Berhasi", response);
+        dispatch({
+          type: "updateProductReducer",
+          payload: {
+            loading: false,
+            data: response.data,
+            errorMessage: false,
+          },
+        });
+      })
+      .catch((error) => {
+        // console.log("3. Gagal", error);
+        dispatch({
+          type: "updateProductReducer",
           payload: {
             loading: false,
             data: false,
