@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import Login from "./pages/Login";
+import Login from "./components/Login/index";
+// import Login from "./pages/Login";
 import Navbar from "./components/Navbar/index";
 import MainContent from "./components/MainContent/index";
 

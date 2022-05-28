@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { RegisterBg } from "../../assets";
+import register from "../../assets/images/register.jpg";
 import { Button, Gap, Input } from "../../components/addOns";
 import "./register.css";
 import { useNavigate } from "react-router-dom";
 
 import { Link } from "react-router-dom";
-import { registrasiUser } from "../../Axios/userAxios";
+// import { registrasiUser } from "../../Axios/userAxios";
 
 const Register = () => {
   const [input, setInput] = useState({
@@ -18,13 +18,13 @@ const Register = () => {
   const navigate = useNavigate();
 
   const registrasiHandler = () => {
-    registrasiUser(input);
+    // registrasiUser(input);
     // navigate("/login");
   };
   return (
     <div className="main-page">
       <div className="left">
-        <img src={RegisterBg} className="bg-image" alt="imageBg" />
+        <img src={register} className="bg-image" alt="imageBg" />
       </div>
       <div className="right">
         <p className="title"> Register</p>

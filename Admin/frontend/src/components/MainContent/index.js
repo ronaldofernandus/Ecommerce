@@ -1,8 +1,10 @@
 import React from "react";
 import Navbar from "../Navbar";
-import {Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import Home from "../../pages/Home";
 import Product from "../../pages/Product/index";
+import ListProduct from "../../pages/Product/listProduct";
+import AddProduct from "../../pages/Product/addProduct";
 import Order from "../../pages/Order/index";
 import Cart from "../../pages/Cart/index";
 import ProductImage from "../../pages/productImages/index";
@@ -22,8 +24,11 @@ const MainContent = (props) => {
         </div>
         <div className="container-fluid">
           <Routes>
-            <Route path="/home" element={<Home></Home>}></Route>
-            <Route path="/product" element={<Product></Product>}></Route>
+            <Route path="/" element={<Home></Home>}></Route>
+            <Route path="/product" element={<Product></Product>}>
+              <Route path="" element={<ListProduct></ListProduct>}></Route>
+              <Route path="add" element={<AddProduct></AddProduct>}></Route>
+            </Route>
             <Route path="/order" element={<Order></Order>}></Route>
             <Route path="/cart" element={<Cart></Cart>}></Route>
             <Route

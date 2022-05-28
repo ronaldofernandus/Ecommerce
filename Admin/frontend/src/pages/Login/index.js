@@ -18,13 +18,13 @@ const Login = (props) => {
     try {
       let login = await axios({
         method: "POST",
-        url: "http://localhost:3000/login",
+        url: "http://localhost:3000/user/login",
         data: form,
       });
       const get_token = login.data.get_token;
       localStorage.setItem("get_token", get_token);
       loginCbHandler(true);
-      // navigate("/home");
+      navigate("/home");
       // console.log(login.data);
     } catch (error) {
       console.log(error);
