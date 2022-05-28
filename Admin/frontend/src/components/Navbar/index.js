@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Navbar = (props) => {
   const { loginStatus, loginCbHandler } = props;
-
+  const navigate = useNavigate();
   const loginButton = () => {
     loginCbHandler(true);
   };
@@ -12,12 +12,13 @@ const Navbar = (props) => {
   const logoutButton = () => {
     localStorage.clear();
     loginCbHandler(false);
+    navigate("/");
   };
   return (
     <>
       <nav className="navbar navbar-expand-lg bg-dark">
         <div className="container-fluid">
-          <Link className="navbar-brand" to="#">
+          <Link className="navbar-brand" to="/">
             Admin
           </Link>
           <button

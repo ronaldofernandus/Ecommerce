@@ -25,7 +25,7 @@ const Product = () => {
             Add
           </Link>
         </button>
-       <Outlet></Outlet>
+        <Outlet></Outlet>
       </div>
     </>
   );
