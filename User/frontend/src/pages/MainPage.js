@@ -1,5 +1,6 @@
 import React from 'react'
 import { Routes,Route } from 'react-router-dom'
+import Navbar from '../components/Navbar'
 import HomePagebeforelogin from './HomePage/HomePagebeforelogin'
 import Login from './Login/login'
 import Register from './Register/register'
@@ -7,11 +8,14 @@ import Register from './Register/register'
 
 function MainPage() {
   return (
+    <>
+    <Navbar></Navbar>
     <Routes>
         <Route path ="/" element={<HomePagebeforelogin></HomePagebeforelogin>}></Route>
         <Route path="/login" element={<Login></Login>}></Route>
         <Route path ="/register" element={<Register></Register>}></Route>
     </Routes>
+    </>
   )
 }
 

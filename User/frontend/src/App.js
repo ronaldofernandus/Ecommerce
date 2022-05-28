@@ -1,18 +1,13 @@
 import React from 'react'
-import Navbar from './components/Navbar';
-import NavbarAfterLogin from './components/NavbarAfterLogin';
-import HomePagebeforelogin from './pages/HomePage/HomePagebeforelogin';
 import MainPage from './pages/MainPage';
-import Product from './pages/Product/product';
+import MainPageAfterLogin from './pages/MainPageAfterLogin';
 
 
 function App() {
   return (
     <>
-    <Navbar></Navbar> 
-    <MainPage></MainPage>
-    
-    
+     <MainPage></MainPage> {/*Sebelum Login */}
+    {/* <MainPageAfterLogin></MainPageAfterLogin>  Setelah Login*/ }
     </>
   );
 }
