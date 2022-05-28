@@ -119,7 +119,6 @@ class productController {
       const id = +req.params.id;
       const userId = +req.userData.id;
 
-      console.log(userId);
       let deleteproduct = await product.destroy({
         where: { id: id, userId: userId },
       });
