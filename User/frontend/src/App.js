@@ -9,10 +9,9 @@ import Product from './pages/Product/product';
 function App() {
   return (
     <>
-    {/* <Navbar></Navbar> */}
-    {/* <MainPage></MainPage> */}
-    <NavbarAfterLogin></NavbarAfterLogin>
-    <Product></Product>
+    <Navbar></Navbar> 
+    <MainPage></MainPage>
+    
     
     </>
   );

@@ -18,7 +18,7 @@ function Login() {
             <h1>Welcome</h1>
             <h4>Sign in to Your Account</h4>
            
-              <div className="input-group flex-nowrap input-align">
+              <div className="input-group flex-nowrap input-align-login">
                 <span className="input-group-text">
                   <FontAwesomeIcon icon={faEnvelope}></FontAwesomeIcon>
                 </span>
@@ -30,7 +30,7 @@ function Login() {
                 />
               </div>
 
-              <div className="input-group flex-nowrap input-align">
+              <div className="input-group flex-nowrap input-align-login">
                 <span className="input-group-text">
                   <FontAwesomeIcon icon={faLock}></FontAwesomeIcon>
                 </span>
@@ -42,7 +42,7 @@ function Login() {
                 />
               </div>
 
-              <div className=" justify-content-center input-group flex-nowrap submit-btn input-align">
+              <div className=" justify-content-center input-group flex-nowrap submit-btn input-align-login">
                 <button
                   
                   className="btn text-add">
