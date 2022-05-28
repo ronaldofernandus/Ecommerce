@@ -1,9 +1,18 @@
-import './App.css';
+import React from 'react'
+import Navbar from './components/Navbar';
+import NavbarAfterLogin from './components/NavbarAfterLogin';
+import HomePagebeforelogin from './pages/HomePage/HomePagebeforelogin';
+import MainPage from './pages/MainPage';
+import Product from './pages/Product/product';
+
 
 function App() {
   return (
     <>
-      <p>app</p>
+    <Navbar></Navbar> 
+    <MainPage></MainPage>
+    
+    
     </>
   );
 }
