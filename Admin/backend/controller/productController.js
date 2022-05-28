@@ -21,7 +21,7 @@ class productController {
         prod_desc,
         prod_price,
         prod_stock,
-        prod_expire,
+
         prod_weight,
         prod_category,
         prod_brand,
@@ -35,6 +35,7 @@ class productController {
       // // console.log(req.file.path);
 
       const userId = +req.userData.id;
+      const prod_expire = new Date();
 
       let createproduct = await product.create({
         prod_name,
@@ -118,7 +119,6 @@ class productController {
     try {
       const id = +req.params.id;
       const userId = +req.userData.id;
-
       let deleteproduct = await product.destroy({
         where: { id: id, userId: userId },
       });

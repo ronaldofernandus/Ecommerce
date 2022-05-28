@@ -166,19 +166,19 @@ const EditProduct = () => {
               name="hariTayang"
             />
           </div>
-          <div className="mb-3">
+          {/* <div className="mb-3">
             <label className="form-label" for="customFile">
               Expire
             </label>
             <input
               value={prod_expire}
               onChange={(event) => setProd_expire(event.target.value)}
-              type="date"
+              type="datetime-local"
               className="form-control"
               id="customFile"
               name="hariTayang"
             />
-          </div>
+          </div> */}
           <div className="mb-3">
             <label className="form-label" for="customFile">
               Berat Product
