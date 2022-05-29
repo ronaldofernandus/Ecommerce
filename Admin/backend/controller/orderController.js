@@ -1,4 +1,5 @@
 const { order, user, line_item } = require("../models");
+const crypto = require("crypto");
 
 class orderController {
   static async getOrder(req, res) {
@@ -20,7 +21,6 @@ class orderController {
         order_tax,
         order_total_due,
         order_total_qty,
-        order_payt_trx_number,
         order_city,
         order_addres,
         order_status,
@@ -29,6 +29,7 @@ class orderController {
 
       const userId = +req.userData.id;
       const order_created_on = new Date();
+      const order_payt_trx_number = crypto.randomBytes(16).toString("hex");
       let createOrder = await order.create({
         order_created_on,
         order_subtotal,

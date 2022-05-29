@@ -1,49 +1,44 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getOrder, addOrder } from "../../Axios/OrderAxios";
+import { getOrder, addOrder } from "../../Axios/orderAxios";
 
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 
 const AddOrder = () => {
-  const [prod_name, setProd_name] = useState("");
-  const [prod_desc, setProd_desc] = useState("");
-  const [prod_price, setProd_price] = useState("");
-  const [prod_stock, setProd_stock] = useState("");
-  const [prod_expire, setProd_expire] = useState("");
-  const [prod_weight, setProd_weight] = useState("");
-  const [prod_category, setProd_category] = useState("");
-  const [prod_brand, setProd_brand] = useState("");
-  const [prod_condition, setProd_condition] = useState("");
-  const [prod_total_sold, setProd_total_sold] = useState("");
-  const [prod_rating, setProd_rating] = useState("");
-  const [prod_views, setProd_views] = useState("");
+  const [order_subtotal, setOrder_subtotal] = useState("");
+  const [order_discount, setOrder_discount] = useState("");
+  const [order_tax, setOrder_tax] = useState("");
+  const [order_total_due, setOrder_total_due] = useState("");
+  const [order_total_qty, setOrder_total_qty] = useState("");
+  const [order_city, setOrder_city] = useState("");
+  const [order_addres, setOrder_addres] = useState("");
+  const [order_status, setOrder_status] = useState("");
 
-  const { addOrderResult } = useSelector((state) => state.OrderReducers);
+  const { addOrderResult } = useSelector((state) => state.orderReducers);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const addHandler = (event) => {
-    // console.log("1. Mulai");
+    console.log("1. Mulai");
     dispatch(
       addOrder({
-        prod_name: prod_name,
-        prod_desc: prod_desc,
-        prod_price: prod_price,
-        prod_stock: prod_stock,
-        prod_expire: prod_expire,
-        prod_weight: prod_weight,
-        prod_category: prod_category,
-        prod_brand: prod_brand,
-        prod_condition: prod_condition,
+        order_subtotal: order_subtotal,
+        order_discount: order_discount,
+        order_tax: order_tax,
+        order_total_due: order_total_due,
+        order_total_qty: order_total_qty,
+        order_city: order_city,
+        order_addres: order_addres,
+        order_status: order_status,
       })
     );
     Swal.fire({
       icon: "success",
-      title: "Add Post Success!",
+      title: "Add Order Success!",
       text: `You've successfully created an post!`,
     });
-    navigate("/Order");
+    navigate("/order");
   };
 
   useEffect(() => {
@@ -62,11 +57,76 @@ const AddOrder = () => {
         <div className="col-12 my-2">
           <div className="mb-3">
             <label className="form-label" for="customFile">
-              Nama Order
+              Total Sub Total
             </label>
             <input
-              value={prod_name}
-              onChange={(event) => setProd_name(event.target.value)}
+              value={order_subtotal}
+              onChange={(event) => setOrder_subtotal(event.target.value)}
+              type="number"
+              className="form-control"
+              id="customFile"
+              name="order_subtotal"
+            />
+          </div>
+          <div className="mb-3">
+            <label className="form-label" for="customFile">
+              Diskon Barang
+            </label>
+            <input
+              value={order_discount}
+              onChange={(event) => setOrder_discount(event.target.value)}
+              type="number"
+              className="form-control"
+              id="customFile"
+              name="order_discount"
+            />
+          </div>
+          <div className="mb-3">
+            <label className="form-label" for="customFile">
+              Pajak
+            </label>
+            <input
+              value={order_tax}
+              onChange={(event) => setOrder_tax(event.target.value)}
+              type="number"
+              className="form-control"
+              id="customFile"
+              name="order_tax"
+            />
+          </div>
+          <div className="mb-3">
+            <label className="form-label" for="customFile">
+              Total Due
+            </label>
+            <input
+              value={order_total_due}
+              onChange={(event) => setOrder_total_due(event.target.value)}
+              type="number"
+              className="form-control"
+              id="customFile"
+              name="order_total_due"
+            />
+          </div>
+          <div className="mb-3">
+            <label className="form-label" for="customFile">
+              Quantity
+            </label>
+            <input
+              value={order_total_qty}
+              onChange={(event) => setOrder_total_qty(event.target.value)}
+              type="number"
+              className="form-control"
+              id="customFile"
+              name="order_expire"
+            />
+          </div>
+          <div className="mb-3">
+            <label className="form-label" for="customFile">
+              Asal Kota
+            </label>
+            <input
+              value={order_city}
+              onChange={(event) => setOrder_city(event.target.value)}
               type="text"
               className="form-control"
               id="customFile"
@@ -75,11 +135,11 @@ const AddOrder = () => {
           </div>
           <div className="mb-3">
             <label className="form-label" for="customFile">
-              Deskripsi Order
+              Alamat
             </label>
             <input
-              value={prod_desc}
-              onChange={(event) => setProd_desc(event.target.value)}
+              value={order_addres}
+              onChange={(event) => setOrder_addres(event.target.value)}
               type="text"
               className="form-control"
               id="customFile"
@@ -88,135 +148,17 @@ const AddOrder = () => {
           </div>
           <div className="mb-3">
             <label className="form-label" for="customFile">
-              Harga Barang
+              Status Order
             </label>
             <input
-              value={prod_price}
-              onChange={(event) => setProd_price(event.target.value)}
+              value={order_status}
+              onChange={(event) => setOrder_status(event.target.value)}
               type="text"
               className="form-control"
               id="customFile"
               name="hariTayang"
             />
           </div>
-          <div className="mb-3">
-            <label className="form-label" for="customFile">
-              Stok Barang
-            </label>
-            <input
-              value={prod_stock}
-              onChange={(event) => setProd_stock(event.target.value)}
-              type="text"
-              className="form-control"
-              id="customFile"
-              name="hariTayang"
-            />
-          </div>
-          <div className="mb-3">
-            <label className="form-label" for="customFile">
-              Expire
-            </label>
-            <input
-              value={prod_expire}
-              onChange={(event) => setProd_expire(event.target.value)}
-              type="date"
-              className="form-control"
-              id="customFile"
-              name="prod_expire"
-            />
-          </div>
-          <div className="mb-3">
-            <label className="form-label" for="customFile">
-              Berat Order
-            </label>
-            <input
-              value={prod_weight}
-              onChange={(event) => setProd_weight(event.target.value)}
-              type="text"
-              className="form-control"
-              id="customFile"
-              name="hariTayang"
-            />
-          </div>
-          <div className="mb-3">
-            <label className="form-label" for="customFile">
-              Kategori Order
-            </label>
-            <input
-              value={prod_category}
-              onChange={(event) => setProd_category(event.target.value)}
-              type="text"
-              className="form-control"
-              id="customFile"
-              name="hariTayang"
-            />
-          </div>
-          <div className="mb-3">
-            <label className="form-label" for="customFile">
-              Nama Brand
-            </label>
-            <input
-              value={prod_brand}
-              onChange={(event) => setProd_brand(event.target.value)}
-              type="text"
-              className="form-control"
-              id="customFile"
-              name="hariTayang"
-            />
-          </div>
-          <div className="mb-3">
-            <label className="form-label" for="customFile">
-              Kondisi Order
-            </label>
-            <input
-              value={prod_condition}
-              onChange={(event) => setProd_condition(event.target.value)}
-              type="text"
-              className="form-control"
-              id="customFile"
-              name="hariTayang"
-            />
-          </div>
-          <div className="mb-3">
-            <label className="form-label" for="customFile">
-              Total Terjual
-            </label>
-            <input
-              value={prod_total_sold}
-              onChange={(event) => setProd_total_sold(event.target.value)}
-              type="text"
-              className="form-control"
-              id="customFile"
-              name="hariTayang"
-            />
-          </div>
-          <div className="mb-3">
-            <label className="form-label" for="customFile">
-              Rating
-            </label>
-            <input
-              value={prod_rating}
-              onChange={(event) => setProd_rating(event.target.value)}
-              type="text"
-              className="form-control"
-              id="customFile"
-              name="hariTayang"
-            />
-          </div>
-          <div className="mb-3">
-            <label className="form-label" for="customFile">
-              Views
-            </label>
-            <input
-              value={prod_views}
-              onChange={(event) => setProd_views(event.target.value)}
-              type="text"
-              className="form-control"
-              id="customFile"
-              name="hariTayang"
-            />
-          </div>
-
           <button
             onClick={() => addHandler()}
             type="submit"

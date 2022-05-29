@@ -21,7 +21,7 @@ const Order = () => {
       <div className="col-12 my-2">
         <button type="button" className="btn btn-secondary">
           <AiFillFileAdd></AiFillFileAdd>
-          <Link to="/product/add" className="add">
+          <Link to="/order/add" className="add">
             Add
           </Link>
         </button>

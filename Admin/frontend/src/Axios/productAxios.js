@@ -170,7 +170,7 @@ export const updateProduct = (data) => {
     });
     axios({
       method: "PUT",
-      url: "http://localhost:3000/product/edit" + data.id,
+      url: "http://localhost:3000/product/" + data.id,
       timeout: 120000,
       data: data,
 

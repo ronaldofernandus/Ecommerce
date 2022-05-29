@@ -56,6 +56,7 @@ const Order = (state = initialState, action) => {
       };
 
     case updateOrderReducer:
+      console.log("4.Action");
       return {
         ...state,
         updateOrderResult: action.payload.data,

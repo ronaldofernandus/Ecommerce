@@ -53,7 +53,7 @@ const ListProduct = () => {
       <div className="row">
         <div className="col-md-12">
           <div className="table-wrap">
-            <table className="table table-striped">
+            <table className="table table-striped table-rensponsive">
               <thead>
                 <tr>
                   <th>No</th>

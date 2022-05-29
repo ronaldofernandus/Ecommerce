@@ -11,7 +11,12 @@ import Order from "../../pages/Order/index";
 import OrderList from "../../pages/Order/orderList";
 import AddOrder from "../../pages/Order/addOrder";
 import EditOrder from "../../pages/Order/editOrder";
+
 import Cart from "../../pages/Cart/index";
+import CartList from "../../pages/Cart/cartList";
+import AddCart from "../../pages/Cart/addCart";
+import EditCart from "../../pages/Cart/editCart";
+
 import ProductImage from "../../pages/productImages/index";
 import LineItem from "../../pages/lineItem/index";
 
@@ -44,7 +49,13 @@ const MainContent = (props) => {
                 <Route path=":id" element={<EditOrder></EditOrder>}></Route>
               </Route>
             </Route>
-            <Route path="cart" element={<Cart></Cart>}></Route>
+            <Route path="cart" element={<Cart></Cart>}>
+              <Route path="" element={<CartList></CartList>}></Route>
+              <Route path="add" element={<AddCart></AddCart>}></Route>
+              <Route path="edit">
+                <Route path=":id" element={<EditCart></EditCart>}></Route>
+              </Route>
+            </Route>
             <Route
               path="productImage"
               element={<ProductImage></ProductImage>}

@@ -8,243 +8,206 @@ import {
 
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
+import { updateOrder, getOrder, addOrder } from "../../Axios/orderAxios";
 
 const EditProduct = () => {
-  const [prod_name, setProd_name] = useState("");
-  const [prod_desc, setProd_desc] = useState("");
-  const [prod_price, setProd_price] = useState("");
-  const [prod_stock, setProd_stock] = useState("");
-  const [prod_expire, setProd_expire] = useState("");
-  const [prod_weight, setProd_weight] = useState("");
-  const [prod_category, setProd_category] = useState("");
-  const [prod_brand, setProd_brand] = useState("");
-  const [prod_condition, setProd_condition] = useState("");
-  const [prod_total_sold, setProd_total_sold] = useState("");
-  const [prod_rating, setProd_rating] = useState("");
-  const [prod_views, setProd_views] = useState("");
+  const [order_subtotal, setOrder_subtotal] = useState("");
+  const [order_discount, setOrder_discount] = useState("");
+  const [order_tax, setOrder_tax] = useState("");
+  const [order_total_due, setOrder_total_due] = useState("");
+  const [order_total_qty, setOrder_total_qty] = useState("");
+  const [order_city, setOrder_city] = useState("");
+  const [order_addres, setOrder_addres] = useState("");
+  const [order_status, setOrder_status] = useState("");
 
   const [id, setId] = useState("");
 
-  const { addProductResult, getDetailProduct, updateProductReducer } =
-    useSelector((state) => state.productReducers);
+  const { addOrderResult, getDetailOrder, updateOrderReducer } = useSelector(
+    (state) => state.orderReducers
+  );
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const editHandler = (event) => {
-    dispatch(
-      updateProduct({
-        id: id,
-        prod_name: prod_name,
-        prod_desc: prod_desc,
-        prod_price: prod_price,
-        prod_stock: prod_stock,
-        prod_expire: prod_expire,
-        prod_weight: prod_weight,
-        prod_category: prod_category,
-        prod_brand: prod_brand,
-        prod_condition: prod_condition,
-        prod_total_sold: prod_total_sold,
-        prod_rating: prod_rating,
-        prod_views: prod_views,
-      })
-    );
+    console.log("1. masuk");
+    if (id) {
+      dispatch(
+        updateOrder({
+          id: id,
+          order_subtotal: order_subtotal,
+          order_discount: order_discount,
+          order_tax: order_tax,
+          order_total_due: order_total_due,
+          order_total_qty: order_total_qty,
+          order_city: order_city,
+          order_addres: order_addres,
+          order_status: order_status,
+        })
+      );
 
-    Swal.fire({
-      icon: "success",
-      title: "Edit Post Success!",
-      text: `You've successfully Edit an post!`,
-    });
-    navigate("/product");
+      Swal.fire({
+        icon: "success",
+        title: "Edit Post Success!",
+        text: `You've successfully Edit an post!`,
+      });
+      navigate("/order");
+    } else {
+      dispatch(
+        addOrder({
+          order_subtotal: order_subtotal,
+          order_discount: order_discount,
+          order_tax: order_tax,
+          order_total_due: order_total_due,
+          order_total_qty: order_total_qty,
+          order_city: order_city,
+          order_addres: order_addres,
+          order_status: order_status,
+        })
+      );
+      Swal.fire({
+        icon: "success",
+        title: "Add Order Success!",
+        text: `You've successfully created an post!`,
+      });
+      navigate("/order");
+    }
   };
 
   useEffect(() => {
-    if (getDetailProduct) {
-      setProd_name(getDetailProduct.prod_name);
-      setProd_desc(getDetailProduct.prod_desc);
-      setProd_price(getDetailProduct.prod_price);
-      setProd_stock(getDetailProduct.prod_stock);
-      setProd_expire(getDetailProduct.prod_expire);
-      setProd_weight(getDetailProduct.prod_weight);
-      setProd_category(getDetailProduct.prod_category);
-      setProd_brand(getDetailProduct.prod_brand);
-      setProd_condition(getDetailProduct.prod_condition);
-      setProd_total_sold(getDetailProduct.prod_total_sold);
-      setProd_rating(getDetailProduct.prod_rating);
-      setProd_views(getDetailProduct.prod_views);
-      setId(getDetailProduct.id);
+    if (getDetailOrder) {
+      setOrder_subtotal(getDetailOrder.order_subtotal);
+      setOrder_discount(getDetailOrder.order_discount);
+      setOrder_tax(getDetailOrder.order_tax);
+      setOrder_total_due(getDetailOrder.order_total_due);
+      setOrder_total_qty(getDetailOrder.order_total_qty);
+      setOrder_city(getDetailOrder.order_city);
+      setOrder_addres(getDetailOrder.order_addres);
+      setOrder_status(getDetailOrder.order_status);
 
-      dispatch(getProduct());
+      setId(getDetailOrder.id);
+
+      dispatch(getOrder());
     }
-  }, [getDetailProduct, dispatch]);
+  }, [getDetailOrder, dispatch]);
 
   useEffect(() => {
-    if (updateProductReducer) {
+    if (updateOrderReducer) {
       // console.log("5. Masukk Component did update");
-      dispatch(getProduct());
+      dispatch(getOrder());
     }
-  }, [updateProductReducer, dispatch]);
+  }, [updateOrderReducer, dispatch]);
 
   return (
     <>
       <div className="row ">
+        <div className="col-12 text-center">
+          <h5>Edit Data Order</h5>
+        </div>
         <div className="col-12 my-2">
           <div className="mb-3">
             <label className="form-label" for="customFile">
-              Nama Product
+              Total Sub Total
             </label>
             <input
-              value={prod_name}
-              onChange={(event) => setProd_name(event.target.value)}
-              type="text"
+              value={order_subtotal}
+              onChange={(event) => setOrder_subtotal(event.target.value)}
+              type="number"
               className="form-control"
               id="customFile"
-              name="prod_name"
+              name="order_subtotal"
             />
           </div>
           <div className="mb-3">
             <label className="form-label" for="customFile">
-              Deskripsi Product
+              Diskon Barang
             </label>
             <input
-              value={prod_desc}
-              onChange={(event) => setProd_desc(event.target.value)}
-              type="text"
+              value={order_discount}
+              onChange={(event) => setOrder_discount(event.target.value)}
+              type="number"
               className="form-control"
               id="customFile"
-              name="prod_desc"
+              name="order_discount"
             />
           </div>
           <div className="mb-3">
             <label className="form-label" for="customFile">
-              Harga Barang
+              Pajak
             </label>
             <input
-              value={prod_price}
-              onChange={(event) => setProd_price(event.target.value)}
-              type="text"
+              value={order_tax}
+              onChange={(event) => setOrder_tax(event.target.value)}
+              type="number"
               className="form-control"
               id="customFile"
-              name="prod_price"
+              name="order_tax"
             />
           </div>
           <div className="mb-3">
             <label className="form-label" for="customFile">
-              Stok Barang
+              Total Due
             </label>
             <input
-              value={prod_stock}
-              onChange={(event) => setProd_stock(event.target.value)}
-              type="text"
+              value={order_total_due}
+              onChange={(event) => setOrder_total_due(event.target.value)}
+              type="number"
               className="form-control"
               id="customFile"
-              name="prod_stock"
+              name="order_total_due"
             />
           </div>
           <div className="mb-3">
             <label className="form-label" for="customFile">
-              Expire
+              Quantity
             </label>
             <input
-              value={prod_expire}
-              onChange={(event) => setProd_expire(event.target.value)}
-              type="date"
+              value={order_total_qty}
+              onChange={(event) => setOrder_total_qty(event.target.value)}
+              type="number"
               className="form-control"
               id="customFile"
-              name="prod_expire"
+              name="order_expire"
             />
           </div>
           <div className="mb-3">
             <label className="form-label" for="customFile">
-              Berat Product
+              Asal Kota
             </label>
             <input
-              value={prod_weight}
-              onChange={(event) => setProd_weight(event.target.value)}
+              value={order_city}
+              onChange={(event) => setOrder_city(event.target.value)}
               type="text"
               className="form-control"
               id="customFile"
-              name="prod_weight"
+              name="hariTayang"
             />
           </div>
           <div className="mb-3">
             <label className="form-label" for="customFile">
-              Kategori Product
+              Alamat
             </label>
             <input
-              value={prod_category}
-              onChange={(event) => setProd_category(event.target.value)}
+              value={order_addres}
+              onChange={(event) => setOrder_addres(event.target.value)}
               type="text"
               className="form-control"
               id="customFile"
-              name="prod_category"
+              name="hariTayang"
             />
           </div>
           <div className="mb-3">
             <label className="form-label" for="customFile">
-              Nama Brand
+              Status Order
             </label>
             <input
-              value={prod_brand}
-              onChange={(event) => setProd_brand(event.target.value)}
+              value={order_status}
+              onChange={(event) => setOrder_status(event.target.value)}
               type="text"
               className="form-control"
               id="customFile"
-              name="prod_brand"
+              name="hariTayang"
             />
           </div>
-          <div className="mb-3">
-            <label className="form-label" for="customFile">
-              Kondisi Product
-            </label>
-            <input
-              value={prod_condition}
-              onChange={(event) => setProd_condition(event.target.value)}
-              type="text"
-              className="form-control"
-              id="customFile"
-              name="prod_condition"
-            />
-          </div>
-          <div className="mb-3">
-            <label className="form-label" for="customFile">
-              Total Terjual
-            </label>
-            <input
-              value={prod_total_sold}
-              onChange={(event) => setProd_total_sold(event.target.value)}
-              type="text"
-              className="form-control"
-              id="customFile"
-              name="prod_total_sold"
-            />
-          </div>
-          <div className="mb-3">
-            <label className="form-label" for="customFile">
-              Rating
-            </label>
-            <input
-              value={prod_rating}
-              onChange={(event) => setProd_rating(event.target.value)}
-              type="text"
-              className="form-control"
-              id="customFile"
-              name="prod_rating"
-            />
-          </div>
-          <div className="mb-3">
-            <label className="form-label" for="customFile">
-              Views
-            </label>
-            <input
-              value={prod_views}
-              onChange={(event) => setProd_views(event.target.value)}
-              type="text"
-              className="form-control"
-              id="customFile"
-              name="prod_views"
-            />
-          </div>
-
           <button
             onClick={() => editHandler()}
             type="submit"

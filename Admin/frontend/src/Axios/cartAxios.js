@@ -1,15 +1,15 @@
 import axios from "axios";
-export const getListOrder = "getListOrder";
-export const addOrderReducer = "addOrderReducer";
-export const deleteOrderReducer = "deleteOrderReducer";
-export const getDetailOrder = "getDetailOrder";
-export const updateOrderReducer = "updateOrderReducer";
+export const getListCart = "getListCart";
+export const addCartReducer = "addCartReducer";
+export const deleteCartReducer = "deleteCartReducer";
+export const getDetailCart = "getDetailCart";
+export const updateCartReducer = "updateCartReducer";
 
-export const getOrder = () => {
+export const getCart = () => {
   const get_token = localStorage.getItem("get_token");
   return (dispatch) => {
     dispatch({
-      type: "getListOrder",
+      type: "getListCart",
       payload: {
         loading: false,
         data: false,
@@ -18,7 +18,7 @@ export const getOrder = () => {
     });
     axios({
       method: "GET",
-      url: "http://localhost:3000/order",
+      url: "http://localhost:3000/shop",
       timeout: 120000,
 
       headers: {
@@ -27,7 +27,7 @@ export const getOrder = () => {
     })
       .then((response) => {
         dispatch({
-          type: "getListOrder",
+          type: "getListCart",
           payload: {
             loading: false,
             data: response.data,
@@ -37,7 +37,7 @@ export const getOrder = () => {
       })
       .catch((error) => {
         dispatch({
-          type: "getListOrder",
+          type: "getListCart",
           payload: {
             loading: false,
             data: false,
@@ -48,11 +48,12 @@ export const getOrder = () => {
   };
 };
 
-export const addOrder = (data) => {
+export const addCart = (data) => {
+  console.log("2 Masuk");
   const get_token = localStorage.getItem("get_token");
   return (dispatch) => {
     dispatch({
-      type: "addOrderReducer",
+      type: "addCartReducer",
       payload: {
         loading: false,
         data: false,
@@ -61,111 +62,7 @@ export const addOrder = (data) => {
     });
     axios({
       method: "POST",
-      url: "http://localhost:3000/order/add",
-      timeout: 120000,
-      data: data,
-
-      headers: {
-        get_token: get_token,
-      },
-    })
-      .then((response) => {
-        dispatch({
-          type: "addOrderReducer",
-          payload: {
-            loading: false,
-            data: response.data,
-            errorMessage: false,
-          },
-        });
-      })
-      .catch((error) => {
-        dispatch({
-          type: "addOrderReducer",
-          payload: {
-            loading: false,
-            data: false,
-            errorMessage: error.message,
-          },
-        });
-      });
-  };
-};
-
-export const deleteOrder = (id) => {
-  const get_token = localStorage.getItem("get_token");
-  return (dispatch) => {
-    dispatch({
-      type: "deleteProductReducer",
-      payload: {
-        loading: false,
-        data: false,
-        errorMessage: false,
-      },
-    });
-    axios({
-      method: "DELETE",
-      url: "http://localhost:3000/order/" + id,
-      timeout: 120000,
-
-      headers: {
-        get_token: get_token,
-      },
-    })
-      .then((response) => {
-        console.log("3.Berhasi", response);
-        dispatch({
-          type: "deleteProductReducer",
-          payload: {
-            loading: false,
-            data: response.data,
-            errorMessage: false,
-          },
-        });
-      })
-      .catch((error) => {
-        dispatch({
-          type: "deleteProductReducer",
-          payload: {
-            loading: false,
-            data: false,
-            errorMessage: error.message,
-          },
-        });
-      });
-  };
-};
-
-export const detailOrder = (data) => {
-  const get_token = localStorage.getItem("get_token");
-  return (dispatch) => {
-    dispatch({
-      type: "getDetailOrder",
-      payload: {
-        data: data,
-        headers: {
-          get_token: get_token,
-        },
-      },
-    });
-  };
-};
-
-export const updateOrder = (data) => {
-  console.log("2.Masuk");
-  const get_token = localStorage.getItem("get_token");
-  return (dispatch) => {
-    dispatch({
-      type: "updateOrderReducer",
-      payload: {
-        loading: false,
-        data: false,
-        errorMessage: false,
-      },
-    });
-    axios({
-      method: "PUT",
-      url: "http://localhost:3000/order/" + data.id,
+      url: "http://localhost:3000/shop/add",
       timeout: 120000,
       data: data,
 
@@ -176,7 +73,7 @@ export const updateOrder = (data) => {
       .then((response) => {
         console.log("3.Berhasil", response);
         dispatch({
-          type: "updateOrderReducer",
+          type: "addCartReducer",
           payload: {
             loading: false,
             data: response.data,
@@ -187,7 +84,113 @@ export const updateOrder = (data) => {
       .catch((error) => {
         console.log("3. Gagal", error);
         dispatch({
-          type: "updateOrderReducer",
+          type: "addCartReducer",
+          payload: {
+            loading: false,
+            data: false,
+            errorMessage: error.message,
+          },
+        });
+      });
+  };
+};
+
+export const deleteCart = (id) => {
+  const get_token = localStorage.getItem("get_token");
+  return (dispatch) => {
+    dispatch({
+      type: "deleteCartReducer",
+      payload: {
+        loading: false,
+        data: false,
+        errorMessage: false,
+      },
+    });
+    axios({
+      method: "DELETE",
+      url: "http://localhost:3000/shop/" + id,
+      timeout: 120000,
+
+      headers: {
+        get_token: get_token,
+      },
+    })
+      .then((response) => {
+        console.log("3.Berhasi", response);
+        dispatch({
+          type: "deleteCartReducer",
+          payload: {
+            loading: false,
+            data: response.data,
+            errorMessage: false,
+          },
+        });
+      })
+      .catch((error) => {
+        dispatch({
+          type: "deleteCartReducer",
+          payload: {
+            loading: false,
+            data: false,
+            errorMessage: error.message,
+          },
+        });
+      });
+  };
+};
+
+export const detailCart = (data) => {
+  const get_token = localStorage.getItem("get_token");
+  return (dispatch) => {
+    dispatch({
+      type: "getDetailCart",
+      payload: {
+        data: data,
+        headers: {
+          get_token: get_token,
+        },
+      },
+    });
+  };
+};
+
+export const updateCart = (data) => {
+  console.log("2.Masuk");
+  const get_token = localStorage.getItem("get_token");
+  return (dispatch) => {
+    dispatch({
+      type: "updateCartReducer",
+      payload: {
+        loading: false,
+        data: false,
+        errorMessage: false,
+      },
+    });
+    axios({
+      method: "PUT",
+      url: "http://localhost:3000/shop/" + data.id,
+      timeout: 120000,
+      data: data,
+
+      headers: {
+        get_token: get_token,
+      },
+    })
+      .then((response) => {
+        console.log("3.Berhasil", response);
+        dispatch({
+          type: "updateCartReducer",
+          payload: {
+            loading: false,
+            data: response.data,
+            errorMessage: false,
+          },
+        });
+      })
+      .catch((error) => {
+        console.log("3. Gagal", error);
+        dispatch({
+          type: "updateCartReducer",
           payload: {
             loading: false,
             data: false,

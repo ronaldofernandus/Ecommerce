@@ -11,38 +11,38 @@ import "./tabel.css";
 import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
 
-import { deleteOrder, detailOrder, getOrder } from "../../Axios/orderAxios";
+import { deleteCart, detailCart, getCart } from "../../Axios/cartAxios";
 
-const OrderList = () => {
+const CartList = () => {
   const {
-    getListOrderResult,
-    getListOrderLoading,
-    getListOrderError,
-    deleteOrderReducer,
-  } = useSelector((state) => state.orderReducers);
+    getListCartResult,
+    getListCartLoading,
+    getListCartError,
+    deleteCartReducer,
+  } = useSelector((state) => state.cartListReducers);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   useEffect(() => {
-    dispatch(getOrder());
+    dispatch(getCart());
   }, [dispatch]);
 
   const deleteHandler = (id) => {
     // console.log("1. Mulai");
-    dispatch(deleteOrder(id));
+    dispatch(deleteCart(id));
     Swal.fire({
       icon: "success",
       title: "Delete Success!",
       text: `You've successfully Delete an post!`,
     });
-    navigate("/order");
+    navigate("/cart");
   };
 
   useEffect(() => {
-    if (deleteOrderReducer) {
+    if (deleteCartReducer) {
       // console.log("5. Masukk Component did update");
-      dispatch(getOrder());
+      dispatch(getCart());
     }
-  }, [deleteOrderReducer, dispatch]);
+  }, [deleteCartReducer, dispatch]);
   return (
     <div className="row">
       <div className="col-md-12">
@@ -51,54 +51,35 @@ const OrderList = () => {
             <thead>
               <tr>
                 <th>No</th>
-                <th>Tanggal Order Masuk</th>
-                <th>Total Order</th>
-                <th>Diskon</th>
-                <th>Tax</th>
-                <th>Total Order</th>
-                <th>Total Quantity</th>
-                <th>Payment Transaction Number</th>
-                <th>Asal Kota</th>
-                <th>Alamat</th>
-                <th>Status Pesanan</th>
+                <th>Tanggal Di buat</th>
+                <th>Status</th>
               </tr>
             </thead>
             <tbody>
-              {getListOrderResult ? (
-                getListOrderResult.map((order, index) => {
+              {getListCartResult ? (
+                getListCartResult.map((cart, index) => {
                   return (
                     <>
-                      <tr key={order.id}>
+                      <tr key={cart.id}>
                         <th scope="row">{index + 1}</th>
-                        <td>{order.order_created_on}</td>
-                        <td>{order.order_subtotal}</td>
-                        <td>{order.order_discount}</td>
-                        <td>{order.order_tax}</td>
-                        <td>{order.order_total_due}</td>
-                        <td>{order.order_total_qty}</td>
-                        <td>{order.order_payt_trx_number}</td>
-                        <td>{order.order_city}</td>
-                        <td>{order.order_addres}</td>
-                        <td>{order.order_status}</td>
+                        <td>{cart.shop_created_on}</td>
+                        <td>{cart.shop_status}</td>
                         <td>
                           <button
-                            onClick={() => dispatch(detailOrder(order))}
+                            onClick={() => dispatch(detailCart(cart))}
                             type="button"
                             className="btn btn-success"
                           >
                             <AiFillEdit></AiFillEdit>
-                            <Link
-                              to={`/order/edit/${order.id}`}
-                              className="edit"
-                            >
+                            <Link to={`/cart/edit/${cart.id}`} className="edit">
                               Edit
                             </Link>
                           </button>
                         </td>
                         <td>
                           <button
-                            href="/Order"
-                            onClick={() => deleteHandler(order.id)}
+                            href="/cart"
+                            onClick={() => deleteHandler(cart.id)}
                             type="button"
                             className="btn btn-success"
                           >
@@ -109,10 +90,10 @@ const OrderList = () => {
                     </>
                   );
                 })
-              ) : getListOrderLoading ? (
+              ) : getListCartLoading ? (
                 <p>Loading...</p>
               ) : (
-                <p>{getListOrderError ? getListOrderError : "Data Kosong"}</p>
+                <p>{getListCartError ? getListCartError : "Data Kosong"}</p>
               )}
             </tbody>
           </table>
@@ -122,4 +103,4 @@ const OrderList = () => {
   );
 };
 
-export default OrderList;
+export default CartList;
