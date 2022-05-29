@@ -21,7 +21,7 @@ class productController {
         prod_desc,
         prod_price,
         prod_stock,
-
+        prod_expire,
         prod_weight,
         prod_category,
         prod_brand,
@@ -35,8 +35,6 @@ class productController {
       // // console.log(req.file.path);
 
       const userId = +req.userData.id;
-      const prod_expire = new Date();
-
       let createproduct = await product.create({
         prod_name,
         prod_desc,

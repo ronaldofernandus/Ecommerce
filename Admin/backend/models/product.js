@@ -19,7 +19,7 @@ module.exports = (sequelize, DataTypes) => {
       prod_desc: DataTypes.STRING,
       prod_price: DataTypes.INTEGER,
       prod_stock: DataTypes.INTEGER,
-      prod_expire: DataTypes.DATE,
+      prod_expire: DataTypes.DATEONLY,
       prod_weight: DataTypes.INTEGER,
       prod_category: DataTypes.STRING,
       prod_brand: DataTypes.STRING,

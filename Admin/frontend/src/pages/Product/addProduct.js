@@ -19,11 +19,7 @@ const AddProduct = () => {
   const [prod_rating, setProd_rating] = useState("");
   const [prod_views, setProd_views] = useState("");
 
-  const [id, setId] = useState("");
-
-  const { addProductResult, getDetailProduct } = useSelector(
-    (state) => state.productReducers
-  );
+  const { addProductResult } = useSelector((state) => state.productReducers);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -59,26 +55,6 @@ const AddProduct = () => {
       dispatch(getProduct());
     }
   }, [addProductResult, dispatch]);
-
-  useEffect(() => {
-    if (getDetailProduct) {
-      setProd_name(getDetailProduct.prod_name);
-      setProd_desc(getDetailProduct.prod_desc);
-      setProd_price(getDetailProduct.prod_price);
-      setProd_stock(getDetailProduct.prod_stock);
-      setProd_expire(getDetailProduct.prod_expire);
-      setProd_weight(getDetailProduct.prod_weight);
-      setProd_category(getDetailProduct.prod_category);
-      setProd_brand(getDetailProduct.prod_brand);
-      setProd_condition(getDetailProduct.prod_condition);
-      setProd_total_sold(getDetailProduct.prod_total_sold);
-      setProd_rating(getDetailProduct.prod_rating);
-      setProd_views(getDetailProduct.prod_views);
-      setId(getDetailProduct.id);
-
-      dispatch(getProduct());
-    }
-  }, [getDetailProduct, dispatch]);
 
   return (
     <>
@@ -139,19 +115,19 @@ const AddProduct = () => {
               name="hariTayang"
             />
           </div>
-          {/* <div className="mb-3">
+          <div className="mb-3">
             <label className="form-label" for="customFile">
               Expire
             </label>
             <input
               value={prod_expire}
               onChange={(event) => setProd_expire(event.target.value)}
-              type="datetime-local"
+              type="date"
               className="form-control"
               id="customFile"
-              name="hariTayang"
+              name="prod_expire"
             />
-          </div> */}
+          </div>
           <div className="mb-3">
             <label className="form-label" for="customFile">
               Berat Product
