@@ -9,20 +9,19 @@ module.exports = {
         type: Sequelize.INTEGER,
       },
       order_created_on: {
-        allowNull: false,
-        type: Sequelize.DATE,
+        type: Sequelize.DATE, 
       },
       order_subtotal: {
         type: Sequelize.INTEGER,
       },
       order_discount: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.FLOAT,
       },
       order_tax: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.FLOAT,
       },
       order_total_due: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.FLOAT,
       },
       order_total_qty: {
         type: Sequelize.INTEGER,

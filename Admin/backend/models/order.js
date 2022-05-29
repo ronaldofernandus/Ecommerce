@@ -16,9 +16,9 @@ module.exports = (sequelize, DataTypes) => {
     {
       order_created_on: DataTypes.DATE,
       order_subtotal: DataTypes.INTEGER,
-      order_discount: DataTypes.INTEGER,
-      order_tax: DataTypes.INTEGER,
-      order_total_due: DataTypes.INTEGER,
+      order_discount: DataTypes.FLOAT,
+      order_tax: DataTypes.FLOAT,
+      order_total_due: DataTypes.FLOAT,
       order_total_qty: DataTypes.INTEGER,
       order_payt_trx_number: DataTypes.STRING,
       order_city: DataTypes.STRING,

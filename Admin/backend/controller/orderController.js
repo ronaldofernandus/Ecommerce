@@ -28,6 +28,7 @@ class orderController {
       } = req.body;
 
       const userId = +req.userData.id;
+      const order_created_on = new Date();
       let createOrder = await order.create({
         order_created_on,
         order_subtotal,
