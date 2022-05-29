@@ -17,9 +17,9 @@ const addUser = (data) => {
             method: "POST",
             url: "http://localhost:3000/users/register",
             timeout: 60000,
-            data:data
+            data: data
         })
-            .then( (response) => {
+            .then((response) => {
                 dispatch({
                     type: "REGISTER_USER",
                     payload: {
@@ -29,7 +29,7 @@ const addUser = (data) => {
                     }
                 })
             })
-            .catch( (err) => [
+            .catch((err) => [
                 dispatch({
                     type: "REGISTER_USER",
                     payload: {
@@ -42,7 +42,7 @@ const addUser = (data) => {
     }
 };
 
-const getUser = ( access_token ) => {
+const getUser = (access_token) => {
     return (dispatch) => {
         dispatch({
             type: "GET_USER",
@@ -60,7 +60,7 @@ const getUser = ( access_token ) => {
                 accesToken: access_token
             }
         })
-            .then( (response) => {
+            .then((response) => {
                 dispatch({
                     type: "GET_USER",
                     payload: {
@@ -70,7 +70,7 @@ const getUser = ( access_token ) => {
                     }
                 })
             })
-            .catch( (err) => {
+            .catch((err) => {
                 dispatch({
                     type: "GET_USER",
                     payload: {

@@ -2,41 +2,41 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
+import image_login from './image-login.jpg';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope, faLock } from "@fortawesome/free-solid-svg-icons";
-import image_login from './image-login.jpg'
 import "bootstrap/dist/css/bootstrap.min.css";
 import './style.css';
 import Swal from 'sweetalert2';
 
 
-const Login = (props) => {
+function Login(props) {
   const navigation = useNavigate();
   const { loginCbHandler } = props;
-
-  const [form, setForm] = useState({
+  
+  const [datalogin, setDatalogin] = useState({
     user_email: "",
     user_password: ""
   });
 
-  const loginUser  = async() => {
-    try{
+  const loginUser = async() => {
+    try {
       let result = await axios({
         method: 'POST',
         url: "http://localhost:3000/users/login",
-        data: form
-      })
+        data: datalogin
+      });
       const access_token = result.data.access_token;
-      localStorage.setItem('access_token', access_token);
+      localStorage.setItem("access_token", access_token)
       loginCbHandler(true);
       Swal.fire(
         'Login',
         'user has succesffuly login',
         'success'
-      )
+        )
       navigation('/');
-    } catch (err) {
-      console.log(err.message)
+    } catch(err) {
+      console.log(err)
     }
   };
 
@@ -66,7 +66,7 @@ const Login = (props) => {
                   type="text"
                   className="form-control"
                   placeholder="Email Address"
-                  onChange={(e) => setForm({ ...form, user_email: e.target.value })}
+                  onChange={(e) => setDatalogin({ ...datalogin, user_email: e.target.value })}
                 />
               </div>
 
@@ -78,12 +78,14 @@ const Login = (props) => {
                   type="password"
                   className="form-control"
                   placeholder="Password"
-                  onChange={(e) => setForm({ ...form, user_password: e.target.value })}
+                  onChange={(e) => setDatalogin({ ...datalogin, user_password: e.target.value })}
                 />
               </div>
 
               <div className=" justify-content-center input-group flex-nowrap submit-btn input-align-login">
-                <button className="btn text-add" onClick={ () => submitHandler() }>
+                <button
+                  
+                  className="btn text-add" onClick={ () => submitHandler() }>
                   Sign in
                 </button>
               </div>
@@ -99,4 +101,4 @@ const Login = (props) => {
   )
 }
 
-export default Login;
+export default Login
