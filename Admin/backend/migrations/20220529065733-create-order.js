@@ -9,6 +9,7 @@ module.exports = {
         type: Sequelize.INTEGER,
       },
       order_created_on: {
+        allowNull: false,
         type: Sequelize.DATE,
       },
       order_subtotal: {

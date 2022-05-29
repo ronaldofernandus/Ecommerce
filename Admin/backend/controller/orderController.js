@@ -15,7 +15,6 @@ class orderController {
   static async createOrder(req, res) {
     try {
       const {
-        order_created_on,
         order_subtotal,
         order_discount,
         order_tax,
@@ -46,6 +45,7 @@ class orderController {
         message: "Has been Created",
       });
     } catch (error) {
+      // console.log(error);
       res.status(500).json({ error });
     }
   }
