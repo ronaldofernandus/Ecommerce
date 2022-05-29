@@ -31,42 +31,23 @@ const EditProduct = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const editHandler = (event) => {
-    if (id) {
-      dispatch(
-        updateProduct({
-          id: id,
-          prod_name: prod_name,
-          prod_desc: prod_desc,
-          prod_price: prod_price,
-          prod_stock: prod_stock,
-          prod_expire: prod_expire,
-          prod_weight: prod_weight,
-          prod_category: prod_category,
-          prod_brand: prod_brand,
-          prod_condition: prod_condition,
-          prod_total_sold: prod_total_sold,
-          prod_rating: prod_rating,
-          prod_views: prod_views,
-        })
-      );
-    } else {
-      dispatch(
-        addProduct({
-          prod_name: prod_name,
-          prod_desc: prod_desc,
-          prod_price: prod_price,
-          prod_stock: prod_stock,
-          prod_expire: prod_expire,
-          prod_weight: prod_weight,
-          prod_category: prod_category,
-          prod_brand: prod_brand,
-          prod_condition: prod_condition,
-          prod_total_sold: prod_total_sold,
-          prod_rating: prod_rating,
-          prod_views: prod_views,
-        })
-      );
-    }
+    dispatch(
+      updateProduct({
+        id: id,
+        prod_name: prod_name,
+        prod_desc: prod_desc,
+        prod_price: prod_price,
+        prod_stock: prod_stock,
+        prod_expire: prod_expire,
+        prod_weight: prod_weight,
+        prod_category: prod_category,
+        prod_brand: prod_brand,
+        prod_condition: prod_condition,
+        prod_total_sold: prod_total_sold,
+        prod_rating: prod_rating,
+        prod_views: prod_views,
+      })
+    );
 
     Swal.fire({
       icon: "success",
@@ -75,20 +56,6 @@ const EditProduct = () => {
     });
     navigate("/product");
   };
-
-  useEffect(() => {
-    if (addProductResult) {
-      // console.log("5. Masukk Component did update");
-      dispatch(getProduct());
-    }
-  }, [addProductResult, dispatch]);
-
-  useEffect(() => {
-    if (updateProductReducer) {
-      // console.log("5. Masukk Component did update");
-      dispatch(getProduct());
-    }
-  }, [updateProductReducer, dispatch]);
 
   useEffect(() => {
     if (getDetailProduct) {
@@ -110,6 +77,13 @@ const EditProduct = () => {
     }
   }, [getDetailProduct, dispatch]);
 
+  useEffect(() => {
+    if (updateProductReducer) {
+      // console.log("5. Masukk Component did update");
+      dispatch(getProduct());
+    }
+  }, [updateProductReducer, dispatch]);
+
   return (
     <>
       <div className="row ">
@@ -124,7 +98,7 @@ const EditProduct = () => {
               type="text"
               className="form-control"
               id="customFile"
-              name="hariTayang"
+              name="prod_name"
             />
           </div>
           <div className="mb-3">
@@ -137,7 +111,7 @@ const EditProduct = () => {
               type="text"
               className="form-control"
               id="customFile"
-              name="hariTayang"
+              name="prod_desc"
             />
           </div>
           <div className="mb-3">
@@ -150,7 +124,7 @@ const EditProduct = () => {
               type="text"
               className="form-control"
               id="customFile"
-              name="hariTayang"
+              name="prod_price"
             />
           </div>
           <div className="mb-3">
@@ -163,22 +137,22 @@ const EditProduct = () => {
               type="text"
               className="form-control"
               id="customFile"
-              name="hariTayang"
+              name="prod_stock"
             />
           </div>
-          {/* <div className="mb-3">
+          <div className="mb-3">
             <label className="form-label" for="customFile">
               Expire
             </label>
             <input
               value={prod_expire}
               onChange={(event) => setProd_expire(event.target.value)}
-              type="datetime-local"
+              type="date"
               className="form-control"
               id="customFile"
-              name="hariTayang"
+              name="prod_expire"
             />
-          </div> */}
+          </div>
           <div className="mb-3">
             <label className="form-label" for="customFile">
               Berat Product
@@ -189,7 +163,7 @@ const EditProduct = () => {
               type="text"
               className="form-control"
               id="customFile"
-              name="hariTayang"
+              name="prod_weight"
             />
           </div>
           <div className="mb-3">
@@ -202,7 +176,7 @@ const EditProduct = () => {
               type="text"
               className="form-control"
               id="customFile"
-              name="hariTayang"
+              name="prod_category"
             />
           </div>
           <div className="mb-3">
@@ -215,7 +189,7 @@ const EditProduct = () => {
               type="text"
               className="form-control"
               id="customFile"
-              name="hariTayang"
+              name="prod_brand"
             />
           </div>
           <div className="mb-3">
@@ -228,7 +202,7 @@ const EditProduct = () => {
               type="text"
               className="form-control"
               id="customFile"
-              name="hariTayang"
+              name="prod_condition"
             />
           </div>
           <div className="mb-3">
@@ -241,7 +215,7 @@ const EditProduct = () => {
               type="text"
               className="form-control"
               id="customFile"
-              name="hariTayang"
+              name="prod_total_sold"
             />
           </div>
           <div className="mb-3">
@@ -254,7 +228,7 @@ const EditProduct = () => {
               type="text"
               className="form-control"
               id="customFile"
-              name="hariTayang"
+              name="prod_rating"
             />
           </div>
           <div className="mb-3">
@@ -267,7 +241,7 @@ const EditProduct = () => {
               type="text"
               className="form-control"
               id="customFile"
-              name="hariTayang"
+              name="prod_views"
             />
           </div>
 
