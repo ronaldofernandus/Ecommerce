@@ -3,22 +3,46 @@ import register from "../../assets/images/register.jpg";
 import { Button, Gap, Input } from "../../components/addOns";
 import "./register.css";
 import { useNavigate } from "react-router-dom";
-
+import axios from "axios";
 import { Link } from "react-router-dom";
-// import { registrasiUser } from "../../Axios/userAxios";
+import Swal from "sweetalert2";
 
 const Register = () => {
   const [input, setInput] = useState({
-    profile: "",
-    nama: "",
-    email: "",
-    username: "",
-    password: "",
+    user_name: "",
+    user_email: "",
+    user_password: "",
+    user_salt: "",
+    user_birthdate: "",
+    user_gender: "",
+    // user_avatar: "",
+    user_type: "",
   });
+
+  const registrasiUser = async () => {
+    try {
+      let registrasiUser = await axios({
+        method: "POST",
+        url: "http://localhost:3000/user/register",
+        data: input,
+      });
+      Swal.fire({
+        icon: "success",
+        title: "Register Success!",
+        text: `You've successfully register an account!`,
+      });
+      navigate("/");
+
+      console.log(registrasiUser.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const navigate = useNavigate();
 
   const registrasiHandler = () => {
-    // registrasiUser(input);
+    registrasiUser();
     // navigate("/login");
   };
   return (
@@ -30,50 +54,63 @@ const Register = () => {
         <p className="title"> Register</p>
 
         <Input
-          type="file"
-          onChange={(e) => setInput({ ...input, profile: e.target.value })}
-          label="Profile"
-          placeholder="Profile"
-          name="profile"
-          className="form-control"
-        />
-        <Input
           type="text"
-          onChange={(e) => setInput({ ...input, nama: e.target.value })}
-          label="Nama"
-          placeholder="Nama"
-          // name="nama"
+          onChange={(e) => setInput({ ...input, user_name: e.target.value })}
+          placeholder="Nama pengguna"
+          name=""
           className="form-control"
         />
         <Input
           type="email"
-          onChange={(e) => setInput({ ...input, email: e.target.value })}
-          label="Email"
+          onChange={(e) => setInput({ ...input, user_email: e.target.value })}
           placeholder="Email"
-          name="email"
+          name="user_email"
           className="form-control"
         />
-        <Gap height={18} />
-        <Input
-          onChange={(e) => setInput({ ...input, username: e.target.value })}
-          type="text"
-          label="Username"
-          placeholder="Username"
-          name="username"
-          className="form-control"
-        />
-        <Gap height={18} />
         <Input
           type="password"
-          onChange={(e) => setInput({ ...input, password: e.target.value })}
-          label="Password"
+          onChange={(e) =>
+            setInput({ ...input, user_password: e.target.value })
+          }
           placeholder="Password"
-          name="password"
+          name="user_password"
           className="form-control"
         />
-        <Gap height={50} />
 
-        <Gap height={50} />
+        <Input
+          type="text"
+          onChange={(e) => setInput({ ...input, user_salt: e.target.value })}
+          placeholder="Salt"
+          name="user_salt"
+          className="form-control"
+        />
+
+        <Input
+          type="date"
+          onChange={(e) =>
+            setInput({ ...input, user_birthdate: e.target.value })
+          }
+          placeholder="Tanggal/Bulan/Tahun"
+          name="user_birthdate"
+          className="form-control"
+        />
+
+        <Input
+          type="text"
+          onChange={(e) => setInput({ ...input, user_gender: e.target.value })}
+          placeholder="Gender"
+          name="user_gender"
+          className="form-control"
+        />
+
+        <Input
+          type="text"
+          onChange={(e) => setInput({ ...input, user_type: e.target.value })}
+          placeholder="Role/Type"
+          name="user_type"
+          className="form-control"
+        />
+
         <Button title="Register" onClick={() => registrasiHandler()} />
         <Gap height={100} />
         <div className="w-100 text-center mt-4 text">
@@ -85,7 +122,7 @@ const Register = () => {
               display: "flex",
               justifyContent: "center",
             }}
-            to="/login"
+            to="/"
           >
             Login
           </Link>
