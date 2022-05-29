@@ -6,8 +6,11 @@ import Product from "../../pages/Product/index";
 import ListProduct from "../../pages/Product/listProduct";
 import AddProduct from "../../pages/Product/addProduct";
 import EditProduct from "../../pages/Product/editProduct";
+
 import Order from "../../pages/Order/index";
 import OrderList from "../../pages/Order/orderList";
+import AddOrder from "../../pages/Order/addOrder";
+import EditOrder from "../../pages/Order/editOrder";
 import Cart from "../../pages/Cart/index";
 import ProductImage from "../../pages/productImages/index";
 import LineItem from "../../pages/lineItem/index";
@@ -36,6 +39,10 @@ const MainContent = (props) => {
             </Route>
             <Route path="order" element={<Order></Order>}>
               <Route path="" element={<OrderList></OrderList>}></Route>
+              <Route path="add" element={<AddOrder></AddOrder>}></Route>
+              <Route path="edit">
+                <Route path=":id" element={<EditOrder></EditOrder>}></Route>
+              </Route>
             </Route>
             <Route path="cart" element={<Cart></Cart>}></Route>
             <Route

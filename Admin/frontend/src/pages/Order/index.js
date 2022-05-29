@@ -6,14 +6,14 @@ import { Link, Outlet } from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
 
-import { getProduct } from "../../Axios/productAxios";
+import { getOrder } from "../../Axios/orderAxios";
 
 const Order = () => {
   const { getListProductResult, getListProductLoading, getListProductError } =
     useSelector((state) => state.productReducers);
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getProduct());
+    dispatch(getOrder());
   }, [dispatch]);
 
   return (
