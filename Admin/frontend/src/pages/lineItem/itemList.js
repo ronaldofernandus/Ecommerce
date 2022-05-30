@@ -56,6 +56,7 @@ const OrderList = () => {
                 <th>Product</th>
                 <th>Shop Cart</th>
                 <th>Order</th>
+                <th>Action</th>
               </tr>
             </thead>
             <tbody>
@@ -67,9 +68,9 @@ const OrderList = () => {
                         <th scope="row">{index + 1}</th>
                         <td>{item.line_qty}</td>
                         <td>{item.line_status}</td>
-                        <td>{item.productId}</td>
-                        <td>{item.shoppingCartId}</td>
-                        <td>{item.orderId}</td>
+                        <td>{item.product.prod_name}</td>
+                        <td>{item.shopping_cart.shop_status}</td>
+                        <td>{item.order.order_subtotal}</td>
 
                         <td>
                           <button

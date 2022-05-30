@@ -4,6 +4,10 @@ import { getItem, addItem } from "../../Axios/itemAxios";
 
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
+import { getProduct } from "../../Axios/productAxios";
+import { getCart } from "../../Axios/cartAxios";
+
+import { getOrder } from "../../Axios/orderAxios";
 
 const AddOrder = () => {
   const [line_qty, setLine_qty] = useState("");
@@ -13,6 +17,14 @@ const AddOrder = () => {
   const [orderId, setOrderId] = useState("");
 
   const { addItemResult } = useSelector((state) => state.itemReducers);
+  const { getListProductResult, getListProductLoading, getListProductError } =
+    useSelector((state) => state.productReducers);
+
+  const { getListCartResult, getListCartLoading, getListCartError } =
+    useSelector((state) => state.cartListReducers);
+
+  const { getListOrderResult, getListOrderLoading, getListOrderError } =
+    useSelector((state) => state.orderReducers);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -32,7 +44,7 @@ const AddOrder = () => {
       title: "Add Item Success!",
       text: `You've successfully created an post!`,
     });
-    navigate("/item");
+    navigate("/lineItem");
   };
 
   useEffect(() => {
@@ -41,6 +53,18 @@ const AddOrder = () => {
       dispatch(getItem());
     }
   }, [addItemResult, dispatch]);
+
+  useEffect(() => {
+    dispatch(getProduct());
+  }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(getCart());
+  }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(getOrder());
+  }, [dispatch]);
 
   return (
     <>
@@ -69,7 +93,7 @@ const AddOrder = () => {
             <input
               value={line_status}
               onChange={(event) => setLine_status(event.target.value)}
-              type="number"
+              type="text"
               className="form-control"
               id="customFile"
               name="order_discount"
@@ -89,16 +113,20 @@ const AddOrder = () => {
               aria-label="Default select example"
             >
               <option selected>Silahkan pilih product</option>
-              <option value="1">One</option>
+              {getListProductResult ? (
+                getListProductResult.map((product) => {
+                  return (
+                    <option value={product.id}>{product.prod_name}</option>
+                  );
+                })
+              ) : getListProductLoading ? (
+                <p>Loading...</p>
+              ) : (
+                <p>
+                  {getListProductError ? getListProductError : "Data Kosong"}
+                </p>
+              )}
             </select>
-            {/* <input
-              value={productId}
-              onChange={(event) => setProductId(event.target.value)}
-              type="number"
-              className="form-control"
-              id="customFile"
-              name="productId"
-            /> */}
           </div>
           <div className="mb-3">
             <label className="form-label" for="customFile">
@@ -114,16 +142,16 @@ const AddOrder = () => {
               aria-label="Default select example"
             >
               <option selected>Silahkan pilih Cart</option>
-              <option value="1">One</option>
+              {getListCartResult ? (
+                getListCartResult.map((cart) => {
+                  return <option value={cart.id}>{cart.shop_status}</option>;
+                })
+              ) : getListCartLoading ? (
+                <p>Loading...</p>
+              ) : (
+                <p>{getListCartError ? getListCartError : "Data Kosong"}</p>
+              )}
             </select>
-            {/* <input
-              value={shoppingCartId}
-              onChange={(event) => setShoppingCartId(event.target.value)}
-              type="number"
-              className="form-control"
-              id="customFile"
-              name="shoppingCartId"
-            /> */}
           </div>
           <div className="mb-3">
             <label className="form-label" for="customFile">
@@ -139,16 +167,18 @@ const AddOrder = () => {
               aria-label="Default select example"
             >
               <option selected>Silahkan pilih Order</option>
-              <option value="1">One</option>
+              {getListOrderResult ? (
+                getListOrderResult.map((order) => {
+                  return (
+                    <option value={order.id}>{order.order_subtotal}</option>
+                  );
+                })
+              ) : getListOrderLoading ? (
+                <p>Loadin</p>
+              ) : (
+                <p>{getListOrderError ? getListOrderError : "Data Kosong"}</p>
+              )}
             </select>
-            {/* <input
-              value={orderId}
-              onChange={(event) => setOrderId(event.target.value)}
-              type="number"
-              className="form-control"
-              id="customFile"
-              name="orderId"
-            /> */}
           </div>
 
           <button
