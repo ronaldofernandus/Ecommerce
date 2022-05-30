@@ -67,9 +67,7 @@ const ListProduct = () => {
                           {/* <td>{image.prim_filename}</td> */}
                           <td>
                             <img
-                              src={
-                                "http://localhost:3000/images/054161000_1590216083-VALORANT_1_low_res-1653933380560.jpg"
-                              }
+                              src={`http://localhost:3000/images/${image.prim_filename}`}
                               alt=""
                             />
                           </td>
