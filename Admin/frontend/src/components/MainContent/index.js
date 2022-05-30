@@ -18,7 +18,11 @@ import AddCart from "../../pages/Cart/addCart";
 import EditCart from "../../pages/Cart/editCart";
 
 import ProductImage from "../../pages/productImages/index";
+
 import LineItem from "../../pages/lineItem/index";
+import ItemList from "../../pages/lineItem/itemList";
+import AddItem from "../../pages/lineItem/addItem";
+import EditItem from "../../pages/lineItem/editItem";
 
 const MainContent = (props) => {
   const { loginStatus, loginCbHandler } = props;
@@ -60,7 +64,13 @@ const MainContent = (props) => {
               path="productImage"
               element={<ProductImage></ProductImage>}
             ></Route>
-            <Route path="lineItem" element={<LineItem></LineItem>}></Route>
+            <Route path="lineItem" element={<LineItem></LineItem>}>
+              <Route path="" element={<ItemList></ItemList>}></Route>
+              <Route path="add" element={<AddItem></AddItem>}></Route>
+              <Route path="edit">
+                <Route path=":id" element={<EditItem></EditItem>}></Route>
+              </Route>
+            </Route>
           </Routes>
         </div>
       </div>
