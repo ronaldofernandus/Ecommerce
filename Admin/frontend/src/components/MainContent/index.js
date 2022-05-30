@@ -18,6 +18,10 @@ import AddCart from "../../pages/Cart/addCart";
 import EditCart from "../../pages/Cart/editCart";
 
 import ProductImage from "../../pages/productImages/index";
+import ImageList from "../../pages/productImages/listImages";
+import AddImage from "../../pages/productImages/addImages";
+import EditImage from "../../pages/productImages/editImages";
+
 
 import LineItem from "../../pages/lineItem/index";
 import ItemList from "../../pages/lineItem/itemList";
@@ -60,10 +64,13 @@ const MainContent = (props) => {
                 <Route path=":id" element={<EditCart></EditCart>}></Route>
               </Route>
             </Route>
-            <Route
-              path="productImage"
-              element={<ProductImage></ProductImage>}
-            ></Route>
+            <Route path="productImage" element={<ProductImage></ProductImage>}>
+              <Route path="" element={<ImageList></ImageList>}></Route>
+              <Route path="add" element={<AddImage></AddImage>}></Route>
+              <Route path="edit">
+                <Route path=":id" element={<EditImage></EditImage>}></Route>
+              </Route>
+            </Route>
             <Route path="lineItem" element={<LineItem></LineItem>}>
               <Route path="" element={<ItemList></ItemList>}></Route>
               <Route path="add" element={<AddItem></AddItem>}></Route>

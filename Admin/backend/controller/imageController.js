@@ -43,16 +43,10 @@ class imageController {
       const id = +req.params.id;
 
       const userId = +req.userData.id;
-      // console.log(userId);
-      const {
-        prim_filename,
-        prim_filesize,
-        prim_filetype,
-        prim_primary,
-        productId,
-      } = req.body;
-
-      let updateImage = await product_image.update(
+      req.files.forEach((image) => {
+        const { fieldname, originalname, mimetype, filename, size } = image;
+      });
+      product_image.update(
         {
           prim_filename,
           prim_filesize,
