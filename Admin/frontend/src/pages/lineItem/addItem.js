@@ -101,7 +101,7 @@ const AddOrder = () => {
           </div>
           <div className="mb-3">
             <label className="form-label" for="customFile">
-              Produk
+              Produk yang di pesan
             </label>
             <select
               value={productId}
@@ -112,7 +112,7 @@ const AddOrder = () => {
               name="productId"
               aria-label="Default select example"
             >
-              <option selected>Silahkan pilih product</option>
+              <option selected>Product yang di pesan adalah</option>
               {getListProductResult ? (
                 getListProductResult.map((product) => {
                   return (
@@ -155,7 +155,7 @@ const AddOrder = () => {
           </div>
           <div className="mb-3">
             <label className="form-label" for="customFile">
-              Order
+              Order yang masuk
             </label>
             <select
               value={orderId}
