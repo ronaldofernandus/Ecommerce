@@ -14,9 +14,13 @@ app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use("/images", express.static(path.join(__dirname, "images")));
-// app.post("/images", upload.single("image"), (req, res) => {
+// app.post("/images", upload.array("image", 3), (req, res) => {
+//   console.log(req.files);
+//   res.send("succes");
+// });
+// app.post("/images", upload.array("image", 3), (req, res) => {
 //   let finalImageUrl =
-//     req.protocol + "://" + req.get("host") + "/image/" + req.file.filename;
+//     req.protocol + "://" + req.get("host") + "/image" + req.file.filename;
 //   res.json({ status: "succes", image: finalImageUrl });
 // });
 

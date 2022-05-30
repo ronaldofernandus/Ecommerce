@@ -16,24 +16,25 @@ class imageController {
 
   static async postImage(req, res) {
     try {
-      const image = req.file;
-      console.log(req.file);
-      const { fieldname, originalname, mimetype, filename, size } = image;
-
       const { productId } = req.body;
 
-      let postImage = await product_image.create({
-        prim_filename: filename,
-        prim_filesize: size,
-        prim_filetype: mimetype,
-        prim_primary: true,
-        productId,
+      req.files.forEach((image) => {
+        const { fieldname, originalname, mimetype, filename, size } = image;
+
+        product_image.create({
+          prim_filename: filename,
+          prim_filesize: size,
+          prim_filetype: mimetype,
+          prim_primary: true,
+          productId,
+        });
       });
 
-      res.status(201).json(postImage);
+      res.status(201).json({
+        message: "Success",
+      });
     } catch (error) {
-      console.log(error);
-      // res.status(500).json(error);
+      res.status(500).json(error);
     }
   }
 

@@ -52,10 +52,10 @@ const OrderList = () => {
               <tr>
                 <th>No</th>
                 <th>Tanggal Order Masuk</th>
-                <th>Total Order</th>
+                <th>Sub Total</th>
                 <th>Diskon</th>
                 <th>Tax</th>
-                <th>Total Order</th>
+                <th>Total Due</th>
                 <th>Total Quantity</th>
                 <th>Payment Transaction Number</th>
                 <th>Asal Kota</th>

@@ -5,7 +5,7 @@ class productController {
   static async getProduct(req, res) {
     try {
       let getproduct = await product.findAll({
-        include: [user],
+        include: [user, product_image],
       });
 
       res.status(200).json(getproduct);
