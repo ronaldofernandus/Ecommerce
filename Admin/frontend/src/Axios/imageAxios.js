@@ -49,6 +49,7 @@ export const getImage = () => {
 };
 
 export const addImage = (data) => {
+  console.log(data);
   console.log("2 Masuk");
   const get_token = localStorage.getItem("get_token");
   return (dispatch) => {
@@ -60,12 +61,12 @@ export const addImage = (data) => {
         errorMessage: false,
       },
     });
+    console.log("testing");
     axios({
       method: "POST",
       url: "http://localhost:3000/images/add",
       timeout: 120000,
       data: data,
-
       headers: {
         get_token: get_token,
       },
