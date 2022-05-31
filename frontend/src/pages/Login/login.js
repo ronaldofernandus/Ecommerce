@@ -11,31 +11,31 @@ import Swal from 'sweetalert2';
 
 
 function Login(props) {
-  const navigation = useNavigate();
   const { loginCbHandler } = props;
-  
+  const navigation = useNavigate();
+
   const [datalogin, setDatalogin] = useState({
     user_email: "",
     user_password: ""
   });
 
-  const loginUser = async() => {
+  const loginUser = async () => {
     try {
       let result = await axios({
         method: 'POST',
         url: "http://localhost:3000/users/login",
         data: datalogin
       });
-      const access_token = result.data.access_token;
-      localStorage.setItem("access_token", access_token)
-      loginCbHandler(true);
+      const access_token = result.data;
+      localStorage.setItem('access_token', access_token)
+      loginCbHandler(true)
       Swal.fire(
         'Login',
         'user has succesffuly login',
         'success'
-        )
+      )
       navigation('/');
-    } catch(err) {
+    } catch (err) {
       console.log(err)
     }
   };
@@ -47,17 +47,17 @@ function Login(props) {
 
   return (
     <>
-    <div className="bg-login">
-      <br></br>
-      <div className="container-md">
-        <div className="row justify-content-center bg-row">
-          <div className="col-7 bg-col">
-            <img src={image_login} alt="" align="center" className="img-responsive"/>
-          </div>
-          <div className="col-5 bg-col-1">
-            <h1>Welcome</h1>
-            <h4>Sign in to Your Account</h4>
-           
+      <div className="bg-login">
+        <br></br>
+        <div className="container-md">
+          <div className="row justify-content-center bg-row">
+            <div className="col-7 bg-col">
+              <img src={image_login} alt="" align="center" className="img-responsive" />
+            </div>
+            <div className="col-5 bg-col-1">
+              <h1>Welcome</h1>
+              <h4>Sign in to Your Account</h4>
+
               <div className="input-group flex-nowrap input-align-login">
                 <span className="input-group-text">
                   <FontAwesomeIcon icon={faEnvelope}></FontAwesomeIcon>
@@ -83,20 +83,18 @@ function Login(props) {
               </div>
 
               <div className=" justify-content-center input-group flex-nowrap submit-btn input-align-login">
-                <button
-                  
-                  className="btn text-add" onClick={ () => submitHandler() }>
+                <button className="btn text-add" onClick={() => submitHandler()}>
                   Sign in
                 </button>
               </div>
-           
+
+            </div>
           </div>
         </div>
+        <br></br>
+        <br></br>
+        <br></br>
       </div>
-      <br></br>
-      <br></br>
-      <br></br>
-    </div>
     </>
   )
 }

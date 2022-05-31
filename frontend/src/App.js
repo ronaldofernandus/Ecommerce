@@ -10,21 +10,21 @@ function App() {
     setLoginStatus(result);
   };
 
-  useEffect( () => {
-    if(localStorage.getItem("access_token")) {
+  useEffect(() => {
+    if (localStorage.getItem("access_token")) {
       setLoginStatus(true);
     } else {
       setLoginStatus(false);
     }
-  }, [loginStatus] );
+  }, [loginStatus]);
 
 
   return (
     <>
       {loginStatus ? (
         <MainPageAfterLogin loginStatus={loginStatus} loginCbHandler={loginCbHandler}></MainPageAfterLogin>
-      ) : (
-        <MainPage loginStatus={loginStatus}></MainPage>
+        ) : (
+          <MainPage loginStatus={loginStatus} loginCbHandler={loginCbHandler}></MainPage>
       )}
     </>
   );

@@ -4,9 +4,11 @@ const { authentication } = require('../middlewares/auth');
 
 
 productRoute.get('/', ProductController.getProduct);
+productRoute.get('/product_user', authentication, ProductController.getProductUser);
+productRoute.get('/search_product', authentication, ProductController.findProduct);
 productRoute.get('/info/:id', authentication, ProductController.getProductById);
-productRoute.post('/', authentication, ProductController.addProduct);
-productRoute.put('/:id', authentication, ProductController.editProduct);
-productRoute.delete('/:id', authentication, ProductController.deleteProduct);
+productRoute.post('/add_product', authentication, ProductController.addProduct);
+productRoute.put('/edit_product/:id', authentication, ProductController.editProduct);
+productRoute.delete('/delete_product/:id', authentication, ProductController.deleteProduct);
 
 module.exports = productRoute;

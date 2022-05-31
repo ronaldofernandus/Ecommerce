@@ -1,3 +1,4 @@
+const { Op } = require('sequelize');
 const { product, user } = require('../models');
 
 
@@ -16,7 +17,36 @@ class ProductController {
         }
     }
 
-    static async addProduct(req, res) {
+    static async getProductUser(req, res) {
+        try {
+            let id = +req.userData.id;
+            let result = await product.findAll({
+                where: { userId: id},
+                include: [user]
+            })
+            res.status(200).json(result);
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
+    static async findProduct(req, res) {
+        try {
+            let id = +req.userData.id;
+            let result = await product.findAll({
+                where: {
+                    userId: {
+                        [Op.ne]: id
+                    }},
+                include: [user]
+            })
+            res.status(200).json(result)
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
+    static async addProduct(req, res, next) {
         try {
             const {
                 prod_name,
