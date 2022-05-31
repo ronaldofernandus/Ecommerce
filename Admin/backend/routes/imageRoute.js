@@ -11,8 +11,13 @@ imageRoute.post(
 
   upload.array("image", 3),
   // (req, res) => {
-  //   console.log(req.files);
-  //   res.send("succes");
+  //   let arrayUrl = [];
+  //   let finalImageUrl =
+  //     req.protocol + "://" + req.get("host") + "/image" + req.files.filename;
+
+  //   Array.from(finalImageUrl).forEach((finalImageUrl) => {
+  //     arrayUrl.push({ image: finalImageUrl });
+  //   });
   // },
 
   imageController.postImage
@@ -22,3 +27,9 @@ imageRoute.delete("/:id", authentication, imageController.deleteImage);
 imageRoute.get("/:id", authentication, imageController.getImageById);
 
 module.exports = imageRoute;
+
+// console.log(req.files.filename);
+// console.log(req.files);
+// Array.from(finalImageUrl).forEach((finalImageUrl) => {
+//   res.json({ status: "succes", image: finalImageUrl });
+// });

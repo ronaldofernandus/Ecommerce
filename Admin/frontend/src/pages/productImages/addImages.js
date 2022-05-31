@@ -1,227 +1,128 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getProduct, addProduct } from "../../Axios/productAxios";
-
+import { getImage, addImage } from "../../Axios/imageAxios";
+import { getProduct } from "../../Axios/productAxios";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 
-const AddProduct = () => {
-  const [prod_name, setProd_name] = useState("");
-  const [prod_desc, setProd_desc] = useState("");
-  const [prod_price, setProd_price] = useState("");
-  const [prod_stock, setProd_stock] = useState("");
-  const [prod_expire, setProd_expire] = useState("");
-  const [prod_weight, setProd_weight] = useState("");
-  const [prod_category, setProd_category] = useState("");
-  const [prod_brand, setProd_brand] = useState("");
-  const [prod_condition, setProd_condition] = useState("");
-  const [prod_total_sold, setProd_total_sold] = useState("");
-  const [prod_rating, setProd_rating] = useState("");
-  const [prod_views, setProd_views] = useState("");
+const AddImage = () => {
+  // const [prim_filename, setPrim_filename] = useState("");
+  // const [prim_filesize, setPrim_filesize] = useState("");
+  // const [prim_filetype, setPrim_filetype] = useState("");
+  // const [prim_primary, setPrim_primary] = useState("");
+  const [productId, setProductId] = useState("");
 
-  const { addProductResult } = useSelector((state) => state.productReducers);
+  const [image, setImage] = useState("https://via.placeholder.com/150");
+  const [saveImage, setSaveImage] = useState(null);
+
+  const { addImageResult } = useSelector((state) => state.imageReducers);
+
+  const { getListProductResult, getListProductLoading, getListProductError } =
+    useSelector((state) => state.productReducers);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  // const onChangeHandler = (e) => {
+  //   let uploaded = e.target.files;
+  //   Array.from(uploaded).forEach((upload) => {
+
+  //     setImage(URL.createObjectURL(upload));
+  //   });
+
+  // };
+
+  // const onChangeHandler = (e) => {
+  //   console.log(e.target.files[0]);
+  //   let uploaded = e.target.files[0];
+  //   setImage(URL.createObjectURL(uploaded));
+  //   saveImage(uploaded);
+  // };
   const addHandler = (event) => {
     // console.log("1. Mulai");
-    dispatch(
-      addProduct({
-        prod_name: prod_name,
-        prod_desc: prod_desc,
-        prod_price: prod_price,
-        prod_stock: prod_stock,
-        prod_expire: prod_expire,
-        prod_weight: prod_weight,
-        prod_category: prod_category,
-        prod_brand: prod_brand,
-        prod_condition: prod_condition,
-        prod_total_sold: prod_total_sold,
-        prod_rating: prod_rating,
-        prod_views: prod_views,
-      })
-    );
-    Swal.fire({
-      icon: "success",
-      title: "Add Post Success!",
-      text: `You've successfully created an post!`,
-    });
-    navigate("/product");
+    // dispatch(
+    //   addImage({
+    //     prim_filename: prim_filename,
+    //     prim_filesize: prim_filesize,
+    //     prim_filetype: prim_filetype,
+    //     prim_primary: prim_primary,
+    //     prim_primary: prim_primary,
+    //   })
+    // );
+    // Swal.fire({
+    //   icon: "success",
+    //   title: "Add Post Success!",
+    //   text: `You've successfully created an post!`,
+    // });
+    // navigate("/productImage");
   };
 
   useEffect(() => {
-    if (addProductResult) {
+    if (addImageResult) {
       // console.log("5. Masukk Component did update");
-      dispatch(getProduct());
+      dispatch(getImage());
     }
-  }, [addProductResult, dispatch]);
+  }, [addImageResult, dispatch]);
+  useEffect(() => {
+    dispatch(getProduct());
+  }, [dispatch]);
 
   return (
     <>
       <div className="row ">
         <div className="col-12 text-center">
-          <h5>Tambah Data Product</h5>
+          <h5>Tambah Data Image</h5>
         </div>
         <div className="col-12 my-2">
           <div className="mb-3">
             <label className="form-label" for="customFile">
-              Nama Product
+              Produk yang di pesan
             </label>
-            <input
-              value={prod_name}
-              onChange={(event) => setProd_name(event.target.value)}
-              type="text"
-              className="form-control"
+            <select
+              value={productId}
+              onChange={(event) => setProductId(event.target.value)}
+              type="number"
+              className="form-select"
               id="customFile"
-              name="hariTayang"
-            />
+              name="productId"
+              aria-label="Default select example"
+            >
+              <option selected>Product yang di pesan adalah</option>
+              {getListProductResult ? (
+                getListProductResult.map((product) => {
+                  return (
+                    <option value={product.id}>{product.prod_name}</option>
+                  );
+                })
+              ) : getListProductLoading ? (
+                <p>Loading...</p>
+              ) : (
+                <p>
+                  {getListProductError ? getListProductError : "Data Kosong"}
+                </p>
+              )}
+            </select>
           </div>
           <div className="mb-3">
             <label className="form-label" for="customFile">
-              Deskripsi Product
+              Gambar Product
             </label>
+            <div>
+              <img src={image} className="img-thumbnail" alt="" />
+            </div>
+
             <input
-              value={prod_desc}
-              onChange={(event) => setProd_desc(event.target.value)}
-              type="text"
+              onChange={onChangeHandler}
+              type="file"
               className="form-control"
-              id="customFile"
-              name="hariTayang"
-            />
-          </div>
-          <div className="mb-3">
-            <label className="form-label" for="customFile">
-              Harga Barang
-            </label>
-            <input
-              value={prod_price}
-              onChange={(event) => setProd_price(event.target.value)}
-              type="text"
-              className="form-control"
-              id="customFile"
-              name="hariTayang"
-            />
-          </div>
-          <div className="mb-3">
-            <label className="form-label" for="customFile">
-              Stok Barang
-            </label>
-            <input
-              value={prod_stock}
-              onChange={(event) => setProd_stock(event.target.value)}
-              type="text"
-              className="form-control"
-              id="customFile"
-              name="hariTayang"
-            />
-          </div>
-          <div className="mb-3">
-            <label className="form-label" for="customFile">
-              Expire
-            </label>
-            <input
-              value={prod_expire}
-              onChange={(event) => setProd_expire(event.target.value)}
-              type="date"
-              className="form-control"
-              id="customFile"
-              name="prod_expire"
-            />
-          </div>
-          <div className="mb-3">
-            <label className="form-label" for="customFile">
-              Berat Product
-            </label>
-            <input
-              value={prod_weight}
-              onChange={(event) => setProd_weight(event.target.value)}
-              type="text"
-              className="form-control"
-              id="customFile"
-              name="hariTayang"
-            />
-          </div>
-          <div className="mb-3">
-            <label className="form-label" for="customFile">
-              Kategori Product
-            </label>
-            <input
-              value={prod_category}
-              onChange={(event) => setProd_category(event.target.value)}
-              type="text"
-              className="form-control"
-              id="customFile"
-              name="hariTayang"
-            />
-          </div>
-          <div className="mb-3">
-            <label className="form-label" for="customFile">
-              Nama Brand
-            </label>
-            <input
-              value={prod_brand}
-              onChange={(event) => setProd_brand(event.target.value)}
-              type="text"
-              className="form-control"
-              id="customFile"
-              name="hariTayang"
-            />
-          </div>
-          <div className="mb-3">
-            <label className="form-label" for="customFile">
-              Kondisi Product
-            </label>
-            <input
-              value={prod_condition}
-              onChange={(event) => setProd_condition(event.target.value)}
-              type="text"
-              className="form-control"
-              id="customFile"
-              name="hariTayang"
-            />
-          </div>
-          <div className="mb-3">
-            <label className="form-label" for="customFile">
-              Total Terjual
-            </label>
-            <input
-              value={prod_total_sold}
-              onChange={(event) => setProd_total_sold(event.target.value)}
-              type="text"
-              className="form-control"
-              id="customFile"
-              name="hariTayang"
-            />
-          </div>
-          <div className="mb-3">
-            <label className="form-label" for="customFile">
-              Rating
-            </label>
-            <input
-              value={prod_rating}
-              onChange={(event) => setProd_rating(event.target.value)}
-              type="text"
-              className="form-control"
-              id="customFile"
-              name="hariTayang"
-            />
-          </div>
-          <div className="mb-3">
-            <label className="form-label" for="customFile">
-              Views
-            </label>
-            <input
-              value={prod_views}
-              onChange={(event) => setProd_views(event.target.value)}
-              type="text"
-              className="form-control"
-              id="customFile"
-              name="hariTayang"
+              id="formFile"
+              accept="image/*"
+              // multiple={true}
             />
           </div>
 
           <button
-            onClick={() => addHandler()}
+            // onClick={() => addHandler()}
             type="submit"
             className="btn btn-primary"
           >
@@ -233,4 +134,4 @@ const AddProduct = () => {
   );
 };
 
-export default AddProduct;
+export default AddImage;
