@@ -1,10 +1,42 @@
-import React from 'react'
+import React, { useState } from 'react'
 import image_login from './image-login.jpg'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope, faLock } from "@fortawesome/free-solid-svg-icons";
 import "bootstrap/dist/css/bootstrap.min.css";
 import './style.css'
-function Login() {
+import axios from 'axios'
+import Swal from 'sweetalert2';
+
+function Login(props) {
+  const { loginCbHandler } = props;
+  const [datalogin, setDatalogin] = useState({
+    user_email:"",
+    user_password:""
+  })
+
+    const loginUser = async () => {
+        try {
+            let result = await axios({
+                method: 'POST',
+                url: 'http://localhost:3000/users/login',
+                data: datalogin
+            })
+            const access_token = result.data
+            localStorage.setItem('access_token', access_token)
+            loginCbHandler(true)   
+            Swal.fire(
+              'Login',
+              'user has succesffuly login',
+              'success'
+              )
+        } catch (err) {
+            console.log(err.message)
+        }
+    }
+    const submitHandler = () => {
+        loginUser()
+        
+    }
   return (
     <>
     <div className="bg-login">
@@ -23,10 +55,10 @@ function Login() {
                   <FontAwesomeIcon icon={faEnvelope}></FontAwesomeIcon>
                 </span>
                 <input
-                  type="text"
+                  type="email"
                   className="form-control"
                   placeholder="Email Address"
-                  // onChange={(e) => setDatalogin({ ...datalogin, email: e.target.value })}
+                  onChange={(e) => setDatalogin({ ...datalogin, user_email: e.target.value })}
                 />
               </div>
 
@@ -38,13 +70,13 @@ function Login() {
                   type="password"
                   className="form-control"
                   placeholder="Password"
-                  // onChange={(e) => setDatalogin({ ...datalogin, password: e.target.value })}
+                  onChange={(e) => setDatalogin({ ...datalogin, user_password: e.target.value })}
                 />
               </div>
 
               <div className=" justify-content-center input-group flex-nowrap submit-btn input-align-login">
                 <button
-                  
+                  onClick={() => submitHandler()}
                   className="btn text-add">
                   Sign in
                 </button>

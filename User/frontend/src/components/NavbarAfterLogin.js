@@ -19,7 +19,7 @@ function NavbarAfterLogin() {
         </Link>
         <ul className="navbar-nav justify-content-end">
           <li className="nav-item item-style">
-            <Link className="nav-link" to="/" style={{ color: "white" }}>
+            <Link className="nav-link" to="/profile" style={{ color: "white" }}>
               {" "}
               <span>
                 <FontAwesomeIcon icon={faUser}></FontAwesomeIcon>
@@ -29,7 +29,7 @@ function NavbarAfterLogin() {
           </li>
 
           <li className="nav-item item-style">
-            <Link className="nav-link" to="/" style={{ color: "white" }}>
+            <Link className="nav-link" to="/shopping_cart" style={{ color: "white" }}>
               {" "}
               <span>
                 <FontAwesomeIcon icon={faCartShopping}></FontAwesomeIcon>
@@ -39,7 +39,7 @@ function NavbarAfterLogin() {
           </li>
 
           <li className="nav-item item-style">
-            <Link className="nav-link" to="/" style={{ color: "white" }}>
+            <Link className="nav-link" to="/order" style={{ color: "white" }}>
               {" "}
               <span>
                 <FontAwesomeIcon icon={faChartBar}></FontAwesomeIcon>

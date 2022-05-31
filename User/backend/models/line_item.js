@@ -9,15 +9,17 @@ module.exports = (sequelize, DataTypes) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
-    static associate(models) {
-      // define association here
+     static associate(models) {
+      line_item.belongsTo(models.product);
+      line_item.belongsTo(models.shopping_cart);
+      line_item.belongsTo(models.order);
     }
   }
   line_item.init({
     line_qty: DataTypes.INTEGER,
     line_status: DataTypes.STRING,
     productId: DataTypes.INTEGER,
-    shopId: DataTypes.INTEGER,
+    shoppingCartId: DataTypes.INTEGER,
     orderId: DataTypes.INTEGER
   }, {
     sequelize,

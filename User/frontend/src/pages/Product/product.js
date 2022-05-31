@@ -40,13 +40,6 @@ function Product() {
                       </span>{" "}
                       Detail
                     </Link>
-
-                    <button className="btn btn-sm btn-outline-success">
-                      <span>
-                        <FontAwesomeIcon icon={faPlus}></FontAwesomeIcon>
-                      </span>{" "}
-                      Add
-                    </button>
                   </div>
                 </div>
               </div>
@@ -68,13 +61,6 @@ function Product() {
                       </span>{" "}
                       Detail
                     </Link>
-
-                    <button className="btn btn-sm btn-outline-success">
-                      <span>
-                        <FontAwesomeIcon icon={faPlus}></FontAwesomeIcon>
-                      </span>{" "}
-                      Add
-                    </button>
                   </div>
                 </div>
               </div>
@@ -96,13 +82,6 @@ function Product() {
                       </span>{" "}
                       Detail
                     </Link>
-
-                    <button className="btn btn-sm btn-outline-success">
-                      <span>
-                        <FontAwesomeIcon icon={faPlus}></FontAwesomeIcon>
-                      </span>{" "}
-                      Add
-                    </button>
                   </div>
                 </div>
               </div>
@@ -124,13 +103,6 @@ function Product() {
                       </span>{" "}
                       Detail
                     </Link>
-
-                    <button className="btn btn-sm btn-outline-success">
-                      <span>
-                        <FontAwesomeIcon icon={faPlus}></FontAwesomeIcon>
-                      </span>{" "}
-                      Add
-                    </button>
                   </div>
                 </div>
               </div>
