@@ -37,13 +37,6 @@ const AddImage = () => {
     });
   };
 
-  // const onChangeHandler = (e) => {
-  //   console.log(e.target.files[0]);
-  //   let uploaded = e.target.files[0];
-  //   setImage(URL.createObjectURL(uploaded));
-  //   setSaveImage(uploaded);
-  // };
-
   const addHandler = (event) => {
     // console.log("1. Mulai");
     dispatch(
@@ -62,8 +55,12 @@ const AddImage = () => {
 
   const submitPostHandler = () => {
     const data = new FormData();
-    data.append("image", image);
-    uploadImage(data);
+    data.append("image", saveImage);
+    fetch("http://localhost:3000/images/add", {
+      method: "POST",
+      data: data,
+    }).then((res) => res.json());
+
     addHandler(image.name);
   };
 

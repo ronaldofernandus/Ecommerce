@@ -15,21 +15,19 @@ class orderController {
 
   static async createOrder(req, res) {
     try {
-      const {
-        order_subtotal,
-        order_discount,
-        order_tax,
-        order_total_due,
-        order_total_qty,
-        order_city,
-        order_addres,
-        order_status,
-        //open or cancelled or paid or shipping or closed
-      } = req.body;
+      const order_subtotal = 0;
+      const order_discount = 0;
+      const order_tax = 10;
+
+      const order_total_qty = 0;
+      const order_total_due = 0;
+
+      //open or cancelled or paid or shipping or closed
 
       const userId = +req.userData.id;
       const order_created_on = new Date();
       const order_payt_trx_number = crypto.randomBytes(16).toString("hex");
+
       let createOrder = await order.create({
         order_created_on,
         order_subtotal,
