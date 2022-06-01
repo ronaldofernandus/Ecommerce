@@ -54,6 +54,7 @@ const OrderList = () => {
                 <th>Line Quantity</th>
                 <th>Line Status</th>
                 <th>Product</th>
+                <th>Harga Produk</th>
                 <th>Shop Cart</th>
                 <th>Order</th>
                 <th>Action</th>

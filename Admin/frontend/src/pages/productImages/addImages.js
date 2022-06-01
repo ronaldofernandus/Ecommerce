@@ -20,7 +20,7 @@ const AddImage = () => {
   // });
 
   // const [image, setImage] = useState("https://via.placeholder.com/150");
-  const [image, setImage] = useState({});
+  const [image, setImage] = useState([]);
   const [saveImage, setSaveImage] = useState(null);
 
   const [productId, setProductId] = useState("");
@@ -30,11 +30,12 @@ const AddImage = () => {
 
   const handleChange = (e) => {
     console.log(e.target.files);
-    // let uploaded = e.target.files;
-    // Array.from(uploaded).forEach((upload) => {
-    //   setImage(URL.createObjectURL(upload));
-    //   setSaveImage(upload);
-    // });
+    let uploaded = e.target.files;
+    Array.from(uploaded).forEach((upload) => {
+      // setImage(URL.createObjectURL(upload));
+      console.log(URL.createObjectURL(upload));
+      setSaveImage(upload);
+    });
   };
   // const onChangeHandler = (e) => {
   //   console.log(e.target.files[0]);
@@ -61,7 +62,7 @@ const AddImage = () => {
 
   const submitPostHandler = () => {
     const data = new FormData();
-    data.append("image", saveImage);
+    data.append("image", image);
     uploadImage(data);
 
     addHandler(image.name);

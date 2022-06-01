@@ -1,4 +1,4 @@
-const { order, user, line_item } = require("../models");
+const { order, user, line_item, product } = require("../models");
 const crypto = require("crypto");
 
 class orderController {
@@ -15,7 +15,7 @@ class orderController {
 
   static async createOrder(req, res) {
     try {
-      const order_subtotal = 0;
+      const order_subtotal = 0; //total harga
       const order_discount = 0;
       const order_tax = 10;
 
@@ -27,6 +27,8 @@ class orderController {
       const userId = +req.userData.id;
       const order_created_on = new Date();
       const order_payt_trx_number = crypto.randomBytes(16).toString("hex");
+
+      const price = product.prod_price;
 
       let createOrder = await order.create({
         order_created_on,
