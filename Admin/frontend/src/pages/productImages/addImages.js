@@ -4,7 +4,6 @@ import { getImage, addImage } from "../../Axios/imageAxios";
 import { getProduct } from "../../Axios/productAxios";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
-import { uploadImage } from "../../fetch/index";
 
 const AddImage = () => {
   const { addImageResult } = useSelector((state) => state.imageReducers);
@@ -12,16 +11,8 @@ const AddImage = () => {
   const { getListProductResult, getListProductLoading, getListProductError } =
     useSelector((state) => state.productReducers);
 
-  // const [image, setImage] = useState({
-  //   prim_filename: "",
-  //   prim_filesize: "",
-  //   prim_filetype: "",
-  //   prim_primary: "",
-  // });
-
-  // const [image, setImage] = useState("https://via.placeholder.com/150");
   const [image, setImage] = useState([]);
-  const [saveImage, setSaveImage] = useState(null);
+  const [saveImage, setSaveImage] = useState([]);
 
   const [productId, setProductId] = useState("");
 
@@ -31,27 +22,11 @@ const AddImage = () => {
   const handleChange = (e) => {
     console.log(e.target.files);
     let uploaded = e.target.files;
-    Array.from(uploaded).forEach((upload) => {
-      // setImage(URL.createObjectURL(upload));
-      console.log(URL.createObjectURL(upload));
-      setSaveImage(upload);
-    });
+    setSaveImage(uploaded);
   };
-  // const onChangeHandler = (e) => {
-  //   console.log(e.target.files[0]);
-  //   let uploaded = e.target.files[0];
-  //   setImage(URL.createObjectURL(uploaded));
-  //   setSaveImage(uploaded);
-  // };
 
-  const addHandler = (event) => {
-    // console.log("1. Mulai");
-    dispatch(
-      addImage({
-        image: image,
-        productId: productId,
-      })
-    );
+  const addHandler = (data) => {
+    dispatch(addImage(data));
     Swal.fire({
       icon: "success",
       title: "Add Post Success!",
@@ -62,10 +37,11 @@ const AddImage = () => {
 
   const submitPostHandler = () => {
     const data = new FormData();
-    data.append("image", image);
-    uploadImage(data);
-
-    addHandler(image.name);
+    Array.from(saveImage).forEach((dataSave) => {
+      data.append("image", dataSave);
+    });
+    data.append("productId", productId);
+    addHandler(data);
   };
 
   useEffect(() => {

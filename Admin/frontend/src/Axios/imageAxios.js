@@ -49,9 +49,8 @@ export const getImage = () => {
 };
 
 export const addImage = (data) => {
-  console.log(data);
-  console.log("2 Masuk");
-  const get_token = localStorage.getItem("get_token");
+  console.log("2.Masuk");
+  // const get_token = localStorage.getItem("get_token");
   return (dispatch) => {
     dispatch({
       type: "addImageReducer",
@@ -61,15 +60,15 @@ export const addImage = (data) => {
         errorMessage: false,
       },
     });
-    console.log("testing");
+
     axios({
       method: "POST",
       url: "http://localhost:3000/images/add",
       timeout: 120000,
       data: data,
-      headers: {
-        get_token: get_token,
-      },
+      // headers: {
+      //   get_token: get_token,
+      // },
     })
       .then((response) => {
         console.log("3.Berhasil", response);

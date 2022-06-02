@@ -17,6 +17,7 @@ class imageController {
   static async postImage(req, res) {
     try {
       const { productId } = req.body;
+      console.log(productId);
 
       req.files.forEach((image) => {
         console.log(req.files);

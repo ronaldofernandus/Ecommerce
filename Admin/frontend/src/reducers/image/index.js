@@ -35,6 +35,7 @@ const Image = (state = initialState, action) => {
         getListImageError: action.payload.errorMessage,
       };
     case addImageReducer:
+      console.log("4.Action");
       return {
         ...state,
         addImageResult: action.payload.data,
@@ -56,7 +57,6 @@ const Image = (state = initialState, action) => {
       };
 
     case updateImageReducer:
-      console.log("4.Action");
       return {
         ...state,
         updateImageResult: action.payload.data,

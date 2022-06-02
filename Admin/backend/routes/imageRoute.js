@@ -7,11 +7,9 @@ const upload = require("../middleware/multer");
 imageRoute.get("/", imageController.getImage);
 imageRoute.post(
   "/add",
-  authentication,
+
   upload.array("image"),
-  (req, res) => {
-    console.log(req.files);
-  },
+
   // upload.array("image"),
   // (req, res) => {
   //   let arrayUrl = [];

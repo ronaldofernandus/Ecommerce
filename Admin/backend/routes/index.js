@@ -1,8 +1,8 @@
 const indexRoute = require("express").Router();
 
-indexRoute.get("/", (req, res) => {
-  res.json("Home Page");
-});
+const homeController = require("../controller/homeController");
+
+indexRoute.get("/", homeController.getHome);
 
 const productRoute = require("./productRoute");
 indexRoute.use("/product", productRoute);
