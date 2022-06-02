@@ -54,6 +54,7 @@ const ListProduct = () => {
                   <th>No</th>
                   <th>Nama Produk</th>
                   <th>Image</th>
+                  <th>Action</th>
                 </tr>
               </thead>
               <tbody>
