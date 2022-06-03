@@ -141,6 +141,7 @@ class productController {
       const id = +req.params.id;
       const userId = +req.userData.id;
       let getproductById = await product.findAll({
+        include: [user, product_image],
         where: { id, userId },
       });
       res.status(200).json(getproductById);

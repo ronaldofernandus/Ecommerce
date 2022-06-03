@@ -4,6 +4,7 @@ import {
   deleteProductReducer,
   getDetailProduct,
   updateProductReducer,
+  getProductByIdReducer,
 } from "../../Axios/productAxios";
 const initialState = {
   getListProductResult: false,
@@ -23,6 +24,10 @@ const initialState = {
   updateProductResult: false,
   updateProductLoading: false,
   updateProductError: false,
+
+  getListProductByIdResult: false,
+  getListProductByIdLoading: false,
+  getListProductByIdError: false,
 };
 
 const product = (state = initialState, action) => {
@@ -61,6 +66,13 @@ const product = (state = initialState, action) => {
         updateProductResult: action.payload.data,
         updateProductLoading: action.payload.loading,
         updateProductError: action.payload.errorMessage,
+      };
+    case getProductByIdReducer:
+      return {
+        ...state,
+        getListProductByIdResult: action.payload.data,
+        getListProductByIdLoading: action.payload.loading,
+        getListProductByIdError: action.payload.errorMessage,
       };
 
     default:

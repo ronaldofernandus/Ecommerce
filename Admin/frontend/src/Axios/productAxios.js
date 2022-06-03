@@ -4,12 +4,13 @@ export const addProductReducer = "addProductReducer";
 export const deleteProductReducer = "deleteProductReducer";
 export const getDetailProduct = "getDetailProduct";
 export const updateProductReducer = "updateProductReducer";
+export const getProductByIdReducer = "getProductByIdReducer";
 
 export const getProduct = () => {
   const get_token = localStorage.getItem("get_token");
   return (dispatch) => {
     dispatch({
-      type: "getListProduct", 
+      type: "getListProduct",
       payload: {
         loading: false,
         data: false,
@@ -193,6 +194,49 @@ export const updateProduct = (data) => {
         // console.log("3. Gagal", error);
         dispatch({
           type: "updateProductReducer",
+          payload: {
+            loading: false,
+            data: false,
+            errorMessage: error.message,
+          },
+        });
+      });
+  };
+};
+
+export const getProductById = (data) => {
+  const get_token = localStorage.getItem("get_token");
+  return (dispatch) => {
+    dispatch({
+      type: "getProductByIdReducer",
+      payload: {
+        loading: false,
+        data: false,
+        errorMessage: false,
+      },
+    });
+    axios({
+      method: "GET",
+      url: "http://localhost:3000/product/" + data.id,
+      timeout: 120000,
+
+      headers: {
+        get_token: get_token,
+      },
+    })
+      .then((response) => {
+        dispatch({
+          type: "getProductByIdReducer",
+          payload: {
+            loading: false,
+            data: response.data,
+            errorMessage: false,
+          },
+        });
+      })
+      .catch((error) => {
+        dispatch({
+          type: "getProductByIdReducer",
           payload: {
             loading: false,
             data: false,
