@@ -205,6 +205,7 @@ export const updateProduct = (data) => {
 };
 
 export const getProductById = (data) => {
+  console.log("2. Masuk Action");
   const get_token = localStorage.getItem("get_token");
   return (dispatch) => {
     dispatch({
@@ -217,7 +218,7 @@ export const getProductById = (data) => {
     });
     axios({
       method: "GET",
-      url: "http://localhost:3000/product/" + data.id,
+      url: "http://localhost:3000/product" + data.id,
       timeout: 120000,
 
       headers: {
@@ -225,6 +226,7 @@ export const getProductById = (data) => {
       },
     })
       .then((response) => {
+        console.log("3.Berhasil", response);
         dispatch({
           type: "getProductByIdReducer",
           payload: {
@@ -235,6 +237,7 @@ export const getProductById = (data) => {
         });
       })
       .catch((error) => {
+        console.log("3.Gagal", error);
         dispatch({
           type: "getProductByIdReducer",
           payload: {

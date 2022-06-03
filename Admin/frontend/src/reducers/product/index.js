@@ -68,6 +68,7 @@ const product = (state = initialState, action) => {
         updateProductError: action.payload.errorMessage,
       };
     case getProductByIdReducer:
+      console.log("4.Reducer");
       return {
         ...state,
         getListProductByIdResult: action.payload.data,

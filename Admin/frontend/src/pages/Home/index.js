@@ -49,33 +49,23 @@ const Home = () => {
                         </div>
 
                         <div className="xzoom-thumbs">
-                          {getListProductByIdResult ? (
-                            getListProductByIdResult.map((product) => {
-                              return (
-                                <>
-                                  <Link
-                                    to={`http://localhost:3000/images/${product.product_images[0].prim_filename}`}
-                                  >
-                                    <img
-                                      src={`http://localhost:3000/images/${product.product_images[0].prim_filename}/id`}
-                                      alt=""
-                                      className="xzoom-gallery"
-                                      style={{ width: "128" }}
-                                      xpreview={`http://localhost:3000/images/${product.product_images[0].prim_filename}`}
-                                    />
-                                  </Link>
-                                </>
-                              );
-                            })
-                          ) : getListProductByIdLoading ? (
-                            <p>Loading...</p>
-                          ) : (
-                            <p>
-                              {getListProductByIdError
-                                ? getListProductByIdError
-                                : "Data Kosong"}
-                            </p>
-                          )}
+                          {product.product_images.map((imgResult) => {
+                            return (
+                              <>
+                                <Link
+                                  to={`http://localhost:3000/images/${imgResult.prim_filename}`}
+                                >
+                                  <img
+                                    src={`http://localhost:3000/images/${imgResult.prim_filename}`}
+                                    alt=""
+                                    className="xzoom-gallery"
+                                    style={{ width: "128" }}
+                                    xpreview={`http://localhost:3000/images/${imgResult.prim_filename}`}
+                                  />
+                                </Link>
+                              </>
+                            );
+                          })}
                         </div>
                       </div>
                       <h2>Deskripsi</h2>
