@@ -102,7 +102,7 @@ class imageController {
       const id = +req.params.id;
       const userId = +req.userData.id;
       let getImageById = await product_image.findAll({
-        where: { id, userId },
+        where: { id },
       });
       res.status(200).json(getImageById);
     } catch (error) {
