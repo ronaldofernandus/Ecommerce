@@ -10,7 +10,7 @@ const initialState = {
     getUserError: false
 };
 
-const users = (state = initialState, action) => {
+const addUser = (state = initialState, action) => {
     switch (action.type) {
         case REGISTER_USER:
             return {
@@ -31,4 +31,4 @@ const users = (state = initialState, action) => {
     }
 };
 
-export default users;
+export default addUser;

@@ -10,7 +10,7 @@ import './style.css';
 import Swal from 'sweetalert2';
 
 
-function Login(props) {
+const Login = (props) => {
   const { loginCbHandler } = props;
   const navigation = useNavigate();
 
@@ -26,7 +26,7 @@ function Login(props) {
         url: "http://localhost:3000/users/login",
         data: datalogin
       });
-      const access_token = result.data;
+      const access_token = result.data.access_token;
       localStorage.setItem('access_token', access_token)
       loginCbHandler(true)
       Swal.fire(

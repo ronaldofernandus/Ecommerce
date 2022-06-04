@@ -22,7 +22,7 @@ const getProduct = () => {
         axios({
             method: "GET",
             url: "http://localhost:3000/products",
-            timeout: 120000
+            // timeout: 120000
         })
             .then( (response) => {
                 dispatch({
@@ -59,8 +59,8 @@ const getProductUser = (access_token) => {
         })
         axios({
             method: "GET",
-            url: "http://localhost:3000/product_user",
-            timeout: 120000,
+            url: "http://localhost:3000/products/product_user",
+            // timeout: 120000,
             headers: {
                 access_token: access_token
             }
@@ -100,8 +100,8 @@ const findProduct = (access_token) => {
         })
         axios({
             method: "GET",
-            url: "http://localhost:3000/search_product",
-            timeout: 120000,
+            url: "http://localhost:3000/products/search_product",
+            // timeout: 120000,
             headers: {
                 access_token: access_token
             }
@@ -141,8 +141,8 @@ const addProduct = (access_token, data) => {
         })
         axios({
             method: "GET",
-            url: "http://localhost:3000/add_product",
-            timeout: 120000,
+            url: "http://localhost:3000/products/add_product",
+            // timeout: 120000,
             data: data,
             headers: {
                 access_token: access_token
@@ -183,8 +183,8 @@ const deleteProduct = (access_token, id) => {
         })
         axios({
             method: "GET",
-            url: `http://localhost:3000/delete_product/${id}`,
-            timeout: 120000,
+            url: `http://localhost:3000/products/delete_product/${id}`,
+            // timeout: 120000,
             headers: {
                 access_token: access_token
             }
@@ -224,8 +224,8 @@ const editProduct = (access_token, data, id) => {
         })
         axios({
             method: "GET",
-            url: `http://localhost:3000/edit_product/${id}`,
-            timeout: 120000,
+            url: `http://localhost:3000/products/edit_product/${id}`,
+            // timeout: 120000,
             data: data,
             headers: {
                 access_token: access_token
@@ -277,8 +277,8 @@ const detailProductUser = (data) => {
         })
         axios({
             method: "GET",
-            url: `http://localhost:3000/info/${data}`,
-            timeout: 120000
+            url: `http://localhost:3000/products/info/${data}`,
+            // timeout: 120000
         })
             .then((response) => {
                 dispatch({

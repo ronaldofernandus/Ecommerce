@@ -16,7 +16,6 @@ const addUser = (data) => {
         axios({
             method: "POST",
             url: "http://localhost:3000/users/register",
-            timeout: 60000,
             data: data
         })
             .then((response) => {
@@ -24,7 +23,7 @@ const addUser = (data) => {
                     type: "REGISTER_USER",
                     payload: {
                         loading: false,
-                        data: response.message,
+                        data: response.data,
                         errorMessage: false
                     }
                 })
@@ -55,7 +54,6 @@ const getUser = (access_token) => {
         axios({
             method: "GET",
             url: "http://localhost:3000/users/info",
-            timeout: 60000,
             headers: {
                 accesToken: access_token
             }
@@ -84,6 +82,6 @@ const getUser = (access_token) => {
 };
 
 export {
-    addUser, getUser,
-    REGISTER_USER, GET_USER
+    addUser, REGISTER_USER,
+    getUser, GET_USER
 }

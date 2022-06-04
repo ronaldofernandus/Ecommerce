@@ -11,13 +11,13 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 
-function NavbarAfterLogin() {
-  // const { loginCbHandler } = props;
+function NavbarAfterLogin(props) {
+  const { loginCbHandler } = props;
 
-  // const logoutHandler = () => {
-  //   localStorage.clear()
-  //   loginCbHandler(false)
-  // }
+  const logoutHandler = () => {
+    localStorage.clear()
+    loginCbHandler(false)
+  }
   
   return (
     <nav className="navbar navbar-expand-lg sticky-top bg-color-navbar">
@@ -58,7 +58,7 @@ function NavbarAfterLogin() {
 
           <li className="nav-item item-style">
             <Link className="nav-link" to="/" style={{ color: "white" }}
-            // onClick={( logoutHandler() )}
+            onClick={logoutHandler}
             >
               {" "}
               <span>

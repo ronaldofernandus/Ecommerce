@@ -1,5 +1,6 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
+
 import NavbarAfterLogin from "../components/NavbarAfterLogin";
 import Order from "./Order/Order";
 import DetailProduct from "./Product/DetailProduct";
@@ -8,12 +9,15 @@ import Profile from "./Profile/Profile";
 import ShoppingCart from "./Shopping_Cart/ShoppingCart";
 
 
-function MainPageAfterLogin() {
+const MainPageAfterLogin = (props) => {
+  const { loginStatus, loginCbHandler } = props;
+
+  
   return (
     <>
-      <NavbarAfterLogin></NavbarAfterLogin>
+      <NavbarAfterLogin loginStatus={loginStatus} loginCbHandler={loginCbHandler} ></NavbarAfterLogin>
       <Routes>
-        <Route path="">
+        <Route path="" >
           <Route path="" element={<Product></Product>}></Route>
           <Route path="detail">
             <Route path=":id" element={<DetailProduct></DetailProduct>}></Route>

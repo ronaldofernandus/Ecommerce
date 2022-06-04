@@ -21,10 +21,10 @@ function App() {
 
   return (
     <>
-      {loginStatus ? (
-        <MainPageAfterLogin loginStatus={loginStatus} loginCbHandler={loginCbHandler}></MainPageAfterLogin>
+      {!loginStatus ? (
+        <MainPage loginStatus={loginStatus} loginCbHandler={loginCbHandler}></MainPage>
         ) : (
-          <MainPage loginStatus={loginStatus} loginCbHandler={loginCbHandler}></MainPage>
+          <MainPageAfterLogin loginStatus={loginStatus} loginCbHandler={loginCbHandler}> {" "} </MainPageAfterLogin>
       )}
     </>
   );
