@@ -56,6 +56,7 @@ const addorder = (access_token, id) => {
 const getorder_user = (access_token) => {
   return (dispatch) => {
     // untuk loading
+    
     dispatch({
       type: "GET_ORDER_USER",
       payload: {
@@ -99,7 +100,7 @@ const getorder_user = (access_token) => {
 
 const updateorderuser = (access_token, data, id) => {
   console.log("2.");
-  console.log(data);
+  console.log(id);
   return (dispatch) => {
     // untuk loading
     dispatch({
@@ -148,6 +149,7 @@ const updateorderuser = (access_token, data, id) => {
 
 const deleteorderuser = (access_token, id) => {
   console.log("2.");
+  console.log(id)
   return (dispatch) => {
     // untuk loading
     dispatch({
@@ -167,6 +169,7 @@ const deleteorderuser = (access_token, id) => {
       headers: {
         Access_Token: access_token,
       },
+      
     })
       .then((response) => {
         console.log("3.", response.data);

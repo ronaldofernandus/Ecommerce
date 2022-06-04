@@ -3,10 +3,13 @@ const { product,user,product_image } = require("../models");
 class ProductController {
    static async getProductById(req, res) {
       try{
-          const id = Number(req.params.id)
-          let products = [await product.findByPk(id)]
-          res.status(200).json(products)
-
+        const id = Number(req.params.id);
+        
+        let getproductById = [await product.findOne({
+          id:id,
+          include:[product_image]
+        })];
+        res.status(200).json(getproductById);
       }
       catch(err){
           res.status(500).json(err.message)
@@ -23,17 +26,6 @@ class ProductController {
         res.status(500).json(error);
       }
     }
- static async getProduct(req, res) {
-   try {
-     let getproduct = await product.findAll({
-       include: [user, product_image],
-     });
-
-     res.status(200).json(getproduct);
-   } catch (error) {
-     res.status(500).json(error);
-   }
- }
  static async createProduct(req, res) {
   try {
     const {

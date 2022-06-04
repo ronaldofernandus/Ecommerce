@@ -6,7 +6,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import image_2 from "./img-2.jpg";
 import image_3 from "./img-3.png";
 import { Link } from "react-router-dom";
-import { getproduct } from "../../action/ProductAction";
+import { getproduct,get_product_detail } from "../../action/ProductAction";
 import { useDispatch, useSelector } from "react-redux";
 import Swal from 'sweetalert2'
 import { addorder } from "../../action/OrderAction";
@@ -52,11 +52,11 @@ function Product() {
           <br></br>
           <h1 className="product-title">All Products</h1>
           <br></br>
+          <div className="row row-cols-1 row-cols-md-3 g-4">
           {getProductResult ? (
             getProductResult.map((e) => {
               return (
                 <>
-                  <div className="row row-cols-1 row-cols-md-3 g-4">
                     <div className="col">
                       <div className="card h-100">
                         <img
@@ -70,6 +70,7 @@ function Product() {
                           <div className="edit-btn d-grid gap-2 d-md-flex justify-content-md-center">
                             <Link
                               className="btn btn-sm btn btn-outline-primary"
+                              onClick={() => dispatch(get_product_detail(e.id))}
                               to={`detail/${e.id}`}
                             >
                               <span>
@@ -94,7 +95,6 @@ function Product() {
                         </div>
                       </div>
                     </div>
-                  </div>
                 </>
               );
             })
@@ -105,6 +105,7 @@ function Product() {
           )}
           <br></br>
         </div>
+      </div>
       </div>
     </>
   );

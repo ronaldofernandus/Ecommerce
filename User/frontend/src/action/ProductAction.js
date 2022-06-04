@@ -3,10 +3,10 @@ import axios from "axios";
 const GET_DETAIL_PRODUCT = "GET_DETAIL_PRODUCT";
 const GET_PRODUCT_ALL = "GET_PRODUCT_ALL";
 
-const get_product_detail = (id) => {
+const get_product_detail = (data) => {
   return (dispatch) => {
     // untuk loading
-    // console.log(id);
+    console.log(data);
     dispatch({
       type: "GET_DETAIL_PRODUCT",
       payload: {
@@ -19,7 +19,7 @@ const get_product_detail = (id) => {
     // get API
     axios({
       method: "GET",
-      url: `http://localhost:3000/products/info_product/${id}`,
+      url: `http://localhost:3000/products/info_product/${data}`,
       timeout: 120000,
     })
       .then((response) => {

@@ -3,7 +3,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./style.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faBoxOpen,
   faListOl,
   faMapLocationDot,
   faMapPin,
@@ -11,11 +10,12 @@ import {
   faBox,
   faPencil,
   faTrashCan,
+  faMoneyBill
 } from "@fortawesome/free-solid-svg-icons";
-import { getorder_user, deleteorderuser } from "../../action/OrderAction";
+import { getorder_user, deleteorderuser, detailorder } from "../../action/OrderAction";
 import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 function Order() {
   const {
@@ -29,7 +29,7 @@ function Order() {
   useEffect(() => {
     if (deleteorderuserResult) {
       Swal.fire("Delete Successfully!", "Clicked the button!", "success");
-      dispatch(deleteorderuser(localStorage.getItem("access_token")));
+      dispatch(getorder_user(localStorage.getItem("access_token")));
     }
   });
 
@@ -51,17 +51,6 @@ function Order() {
                       <br></br>
                       <h1 className="text-center">Order</h1>
                       <hr></hr>
-                      <div className="card-body" style={{ width: "18rem" }}>
-                        <h4 className="card-title">
-                          <span>
-                            <FontAwesomeIcon icon={faBoxOpen}></FontAwesomeIcon>
-                          </span>{" "}
-                          Barang
-                        </h4>
-                        <h5 className="card-subtitle mb-8 text-muted text-align">
-                          Name
-                        </h5>
-                      </div>
 
                       <div className="card-body" style={{ width: "18rem" }}>
                         <h4 className="card-title">
@@ -100,10 +89,11 @@ function Order() {
                           {e.order_city}
                         </h5>
                       </div>
-
+                      <div className="edit-btn d-grid gap-2 d-md-flex justify-content-md-center">
                       <Link
                         className="btn btn-sm btn btn-outline-primary"
-                        to={`detail/${e.id}`}
+                        onClick={() => dispatch( detailorder(e))}
+                        to={`edit/${e.id}`}
                       >
                         <span>
                           <FontAwesomeIcon icon={faPencil}></FontAwesomeIcon>
@@ -120,6 +110,7 @@ function Order() {
                         </span>{" "}
                         Delete
                       </button>
+                      </div>
 
                       <hr></hr>
 
@@ -148,8 +139,18 @@ function Order() {
                           {e.order_status}
                         </h5>
                       </div>
-                      <button>Xheck Out</button>
-
+                      <div className="edit-btn d-grid gap-2 d-md-flex justify-content-md-center">
+                      <button
+                        className="btn btn-sm btn-outline-success"
+                        // onClick={() => dispatch(deleteorderuser(localStorage.getItem("access_token")))}
+                      >
+                        <span>
+                          <FontAwesomeIcon icon={faMoneyBill}></FontAwesomeIcon>
+                        </span>{" "}
+                        Check Out
+                      </button>
+                      </div>
+                      <br></br>
                       <br></br>
                     </div>
                   </div>

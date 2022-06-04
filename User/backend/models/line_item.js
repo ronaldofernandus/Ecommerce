@@ -26,8 +26,8 @@ module.exports = (sequelize, DataTypes) => {
       beforeCreate: function (line_item,options){
         line_item.line_status = line_item.line_status || "Open";
         line_item.line_qty = line_item.line_qty || 1;
-        line_item.shoppingCartId = 1;
-
+        line_item.shoppingCartId = line_item.shoppingCartId || 1;
+        line_item.orderId = line_item.orderId || 1;
       }
     },
     sequelize,

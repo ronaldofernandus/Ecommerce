@@ -19,6 +19,7 @@ function EditOrder() {
   const [order_addres, setAddress] = useState("");
   const [order_total_qty, setTotalqty] = useState("");
   const [id, setID] = useState("");
+  const [order_total_due, setTotaldue] = useState("");
 
   const dispatch = useDispatch();
 
@@ -54,6 +55,7 @@ function EditOrder() {
         setCity(getdetailorderuserResult.order_city);
         setAddress(getdetailorderuserResult.order_addres);
         setTotalqty(getdetailorderuserResult.order_total_qty);
+        setTotaldue(getdetailorderuserResult.order_total_due);
         setID(getdetailorderuserResult.id);
       }
     },
@@ -64,9 +66,9 @@ function EditOrder() {
   return (
     <div className="color-full-page">
       <div className="container-sm">
-        <div className="row row-bg ">
+        <div className="row ">
           <div className="col-md-6 offset-md-3 line-white"></div>
-          <div className="col-md-6 offset-md-3 col-bg justify-content-center">
+          <div className="col-md-6 offset-md-3 justify-content-center bg-color-order">
             <img
               className="img-fluid img-responsive mx-auto d-block"
               src={image_bg}
@@ -78,7 +80,7 @@ function EditOrder() {
                   <FontAwesomeIcon icon={faListOl}></FontAwesomeIcon>
                 </span>
                 <input
-                  type="number"
+                  type="text"
                   className="form-control"
                   name="order_total_qty"
                   value={order_total_qty}
@@ -115,6 +117,21 @@ function EditOrder() {
                   //
                 />
               </div>
+
+              {/* <div className="input-group flex-nowrap input-align">
+                <span className="input-group-text">
+                  <FontAwesomeIcon icon={faMapPin}></FontAwesomeIcon>
+                </span>
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder="Caption"
+                  name="order_city"
+                  value={order_total_due}
+                  onChange={(event) => setTotaldue(event.target.value)}
+                  //
+                />
+              </div> */}
 
               <div className=" justify-content-center input-group flex-nowrap submit-btn input-align">
                 <button className="btn text-add" type="submit">
