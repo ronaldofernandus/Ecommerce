@@ -46,7 +46,6 @@ function Product() {
       <div className="bg-color-product">
         <div className="container">
           <br></br>
-          <h1 className="product-title">All Products</h1>
           <br></br>
           <div className="row row-cols-1 row-cols-md-3 g-4">
             {getListProductResult ? (
@@ -66,7 +65,9 @@ function Product() {
                           <div className="edit-btn d-grid gap-2 d-md-flex justify-content-md-center">
                             <Link
                               className="btn btn-sm btn btn-outline-primary"
-                              to={`/products/detail/${product.id}`}
+                              to={`product/detail/${product.id}`}
+                              
+
                             >
                               <span>
                                 <FontAwesomeIcon

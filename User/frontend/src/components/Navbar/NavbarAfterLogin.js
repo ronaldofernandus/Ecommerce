@@ -1,6 +1,6 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import "../App.css";
+import { Link, useNavigate } from "react-router-dom";
+import "../../App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -10,15 +10,19 @@ import {
   faChartBar,
 } from "@fortawesome/free-solid-svg-icons";
 
+function NavbarAfterLogin(props) {
+  const { loginStatus, loginCbHandler } = props;
+  const navigate = useNavigate();
+  const loginButton = () => {
+    loginCbHandler(true);
+  };
 
-function NavbarAfterLogin() {
-  // const { loginCbHandler } = props;
+  const logoutButton = () => {
+    localStorage.clear();
+    loginCbHandler(false);
+    navigate("/");
+  };
 
-  // const logoutHandler = () => {
-  //   localStorage.clear()
-  //   loginCbHandler(false)
-  // }
-  
   return (
     <nav className="navbar navbar-expand-lg sticky-top bg-color-navbar">
       <div className="container-sm">
@@ -37,7 +41,11 @@ function NavbarAfterLogin() {
           </li>
 
           <li className="nav-item item-style">
-            <Link className="nav-link" to="/shopping_cart" style={{ color: "white" }}>
+            <Link
+              className="nav-link"
+              to="/shopping_cart"
+              style={{ color: "white" }}
+            >
               {" "}
               <span>
                 <FontAwesomeIcon icon={faCartShopping}></FontAwesomeIcon>
@@ -57,15 +65,23 @@ function NavbarAfterLogin() {
           </li>
 
           <li className="nav-item item-style">
-            <Link className="nav-link" to="/" style={{ color: "white" }}
-            // onClick={( logoutHandler() )}
-            >
-              {" "}
-              <span>
-                <FontAwesomeIcon icon={faDoorOpen}></FontAwesomeIcon>
-              </span>
-              Logout
-            </Link>
+            {loginStatus ? (
+              <button
+                onClick={() => logoutButton()}
+                className="btn btn-outline-success"
+                type="submit"
+              >
+                Logout
+              </button>
+            ) : (
+              <button
+                onClick={() => loginButton()}
+                className="btn btn-outline-success"
+                type="submit"
+              >
+                Login
+              </button>
+            )}
           </li>
         </ul>
       </div>

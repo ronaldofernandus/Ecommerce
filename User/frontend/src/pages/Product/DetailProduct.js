@@ -4,12 +4,25 @@ import "./styles/main.css";
 import { detail1 } from "./image";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
+import { Rating } from "react-simple-star-rating";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faWeightHanging,
+  faShirt,
+  faCalendarDays,
+  faMagnifyingGlass,
+  faShapes,
+  faWarehouse,
+  faEye,
+} from "@fortawesome/free-solid-svg-icons";
 import {
   deleteProduct,
   detailProduct,
   getProduct,
   getProductById,
 } from "../../action/ProductAction";
+import image_2 from "./img-2.jpg";
+
 const DetailProduct = () => {
   const dispatch = useDispatch();
   const {
@@ -32,88 +45,102 @@ const DetailProduct = () => {
   }, [dispatch]);
 
   return (
-    <section className="section-details-content">
-      <div className="container">
-        <div className="row">
-          <div className="col-lg-8 pl-lg-0">
-            {getListProductByIdResult ? (
-              getListProductByIdResult.map((product, index) => {
-                return (
-                  <>
-                    <div className="card card-details">
-                      <h1>{product.prod_name}</h1>
-                      <p>{product.prod_price}</p>
-                      <div className="gallery">
-                        <div className="xzoom-container">
-                          <img
-                            src={`http://localhost:3000/images/${product.product_images[0].prim_filename}`}
-                            alt=""
-                            className="xzoom"
-                            xoriginal={`http://localhost:3000/images/${product.product_images[0].prim_filename}`}
-                            style={{ height: "100%", width: "100%" }}
-                          />
-                        </div>
-
-                        <div className="xzoom-thumbs">
-                          {product.product_images.map((imgResult) => {
-                            return (
-                              <>
-                                <Link
-                                  to={`http://localhost:3000/images/${imgResult.prim_filename}`}
-                                >
-                                  <img
-                                    src={`http://localhost:3000/images/${imgResult.prim_filename}`}
-                                    alt=""
-                                    className="xzoom-gallery"
-                                    style={{ width: "128" }}
-                                    xpreview={`http://localhost:3000/images/${imgResult.prim_filename}`}
-                                  />
-                                </Link>
-                              </>
-                            );
-                          })}
-                        </div>
-                      </div>
-                      <h2>Deskripsi</h2>
-                      <p>{product.prod_desc}</p>
-                      <div className="features row">
-                        <div className="col-md-4 border-left">
-                          <div className="description">
-                            <h3>Stok Barang</h3>
-                            <p>{product.prod_stock}</p>
-                          </div>
-                        </div>
-
-                        <div className="col-md-4 border-left">
-                          <div className="description">
-                            <h3>Kategori</h3>
-                            <p>{product.prod_category}</p>
-                          </div>
-                        </div>
-                        <div className="col-md-4 border-left">
-                          <div className="description">
-                            <h3>Kondisi Barang</h3>
-                            <p>{product.prod_condition}</p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </>
-                );
-              })
-            ) : getListProductByIdLoading ? (
-              <p>Loading...</p>
-            ) : (
-              <p>
-                {getListProductByIdError
-                  ? getListProductByIdError
-                  : "Data Kosong"}
+    <div className="bg-color-product">
+      <br></br>
+      <br></br>
+      <div className="container row-bg-color">
+        <br></br>
+        <div className="row justify-content-center ">
+          <div className="col-7">
+            <img
+              src={image_2}
+              alt=""
+              align="center"
+              className="img-fluid img-responsive img-thumbnail"
+            />
+          </div>
+          <div className="col-5 ">
+            <div class="card-body">
+              <h5 class="card-title">Baju</h5>
+              <p class="card-text">Deskripsi Baju</p>
+              <p class="card-text">Harga Baju </p>
+              <p class="card-text">
+                <small class="text-muted">
+                  <span>
+                    <FontAwesomeIcon icon={faWarehouse}></FontAwesomeIcon>{" "}
+                    Jumlah Stock :{" "}
+                  </span>
+                  3{" "}
+                </small>
               </p>
-            )}
+              <p class="card-text">
+                <small class="text-muted">
+                  <span>
+                    <FontAwesomeIcon icon={faWeightHanging}></FontAwesomeIcon>{" "}
+                    Berat Barang:{" "}
+                  </span>{" "}
+                  0.5 gram
+                </small>
+              </p>
+              <p class="card-text">
+                <small class="text-muted">
+                  <span>
+                    <FontAwesomeIcon icon={faCalendarDays}></FontAwesomeIcon>{" "}
+                    Expire:{" "}
+                  </span>{" "}
+                  timestamp
+                </small>
+              </p>
+              <p class="card-text">
+                <small class="text-muted">
+                  <span>
+                    <FontAwesomeIcon icon={faShirt}></FontAwesomeIcon> Brand:{" "}
+                  </span>{" "}
+                  Barnd
+                </small>
+              </p>
+              <p class="card-text">
+                <small class="text-muted">
+                  <span>
+                    <FontAwesomeIcon icon={faShapes}></FontAwesomeIcon>{" "}
+                    Category:{" "}
+                  </span>{" "}
+                  Baju
+                </small>
+              </p>
+              <p class="card-text">
+                <small class="text-muted">
+                  <span>
+                    <FontAwesomeIcon icon={faMagnifyingGlass}></FontAwesomeIcon>{" "}
+                    Condition:{" "}
+                  </span>{" "}
+                  Baru
+                </small>
+              </p>
+              <p class="card-text">
+                <small class="text-muted">
+                  <span>
+                    <FontAwesomeIcon icon={faEye}></FontAwesomeIcon> Views:{" "}
+                  </span>{" "}
+                  3
+                </small>
+              </p>
+              <p class="card-text">
+                <small class="text-muted">
+                  {" "}
+                  <Rating initialValue={4} />
+                </small>
+              </p>
+            </div>
           </div>
         </div>
+        <br></br>
       </div>
-    </section>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+    </div>
   );
 };
 
