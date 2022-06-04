@@ -10,7 +10,14 @@ import {
   faChartBar,
 } from "@fortawesome/free-solid-svg-icons";
 
-function NavbarAfterLogin() {
+function NavbarAfterLogin(props) {
+  const { loginCbHandler } = props;
+
+  const logoutHandler = () => {
+    localStorage.clear()
+    loginCbHandler(false)
+}
+
   return (
     <nav className="navbar navbar-expand-lg sticky-top bg-color-navbar">
       <div className="container-sm">
@@ -29,16 +36,6 @@ function NavbarAfterLogin() {
           </li>
 
           <li className="nav-item item-style">
-            <Link className="nav-link" to="/shopping_cart" style={{ color: "white" }}>
-              {" "}
-              <span>
-                <FontAwesomeIcon icon={faCartShopping}></FontAwesomeIcon>
-              </span>
-              Shopping Cart
-            </Link>
-          </li>
-
-          <li className="nav-item item-style">
             <Link className="nav-link" to="/order" style={{ color: "white" }}>
               {" "}
               <span>
@@ -49,7 +46,7 @@ function NavbarAfterLogin() {
           </li>
 
           <li className="nav-item item-style">
-            <Link className="nav-link" to="/" style={{ color: "white" }}>
+            <Link className="nav-link" to="/" style={{ color: "white" }} onClick={() => logoutHandler()}>
               {" "}
               <span>
                 <FontAwesomeIcon icon={faDoorOpen}></FontAwesomeIcon>

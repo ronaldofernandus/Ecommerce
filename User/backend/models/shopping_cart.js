@@ -19,6 +19,11 @@ module.exports = (sequelize, DataTypes) => {
     shop_status: DataTypes.STRING,
     userId: DataTypes.INTEGER
   }, {
+    hooks:{
+      beforeCreate: function (shopping_cart,options){
+        shopping_cart.shop_status = shopping_cart.shop_status || "Open";
+      }
+    },
     sequelize,
     modelName: 'shopping_cart',
   });

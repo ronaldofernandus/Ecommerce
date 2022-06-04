@@ -22,6 +22,14 @@ module.exports = (sequelize, DataTypes) => {
     shoppingCartId: DataTypes.INTEGER,
     orderId: DataTypes.INTEGER
   }, {
+    hooks:{
+      beforeCreate: function (line_item,options){
+        line_item.line_status = line_item.line_status || "Open";
+        line_item.line_qty = line_item.line_qty || 1;
+        line_item.shoppingCartId = 1;
+
+      }
+    },
     sequelize,
     modelName: 'line_item',
   });

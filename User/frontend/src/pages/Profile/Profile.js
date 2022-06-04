@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faIdBadge,
@@ -9,8 +9,22 @@ import {
 import "bootstrap/dist/css/bootstrap.min.css";
 import './style.css'
 import profile from './profile-1.jpg'
+import { useDispatch, useSelector } from "react-redux";
+import { get_profile_user } from "../../action/UserAction";
 
 function Profile() {
+  const {
+    getDetailUserResult,
+    getDetailUserLoading,
+    getDetailUserError,
+  } = useSelector((state) => state.userReducer);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    console.log("1.Masuk UseEffect");
+    dispatch(get_profile_user(localStorage.getItem("access_token")));
+  }, [dispatch]);
   return (
     <div className="color-full-page">
     <div className="container-sm">
@@ -24,8 +38,12 @@ function Profile() {
             src={profile}
             alt=""
           />
+           <br></br>
           <br></br>
-          <br></br>
+          {getDetailUserResult ? (
+              getDetailUserResult.map((e) => {
+                return (
+                  <>
           <div className="card border-warning">
             <div className="card-body" style={{ width: "18rem" }}>
               <h5 className="card-title">
@@ -34,7 +52,7 @@ function Profile() {
                 </span> {" "}
                  Name
               </h5>
-              <h6 className="card-subtitle mb-2 text-muted">Name</h6>
+              <h6 className="card-subtitle mb-2 text-muted">{e.user_name}</h6>
             </div>
           </div>
           <br></br>
@@ -48,7 +66,7 @@ function Profile() {
                 </span> {" "}
                  Gender
               </h5>
-              <h6 className="card-subtitle mb-2 text-muted">Perempuan</h6>
+              <h6 className="card-subtitle mb-2 text-muted">{e.user_gender}</h6>
             </div>
           </div>
           <br></br>
@@ -61,7 +79,7 @@ function Profile() {
                 </span> {" "}
                  Birthdate
               </h5>
-              <h6 className="card-subtitle mb-2 text-muted">21-02-2010</h6>
+              <h6 className="card-subtitle mb-2 text-muted">{e.user_birthdate}</h6>
             </div>
           </div>
           <br></br>
@@ -74,9 +92,16 @@ function Profile() {
                 </span> {" "}
                  Email
               </h5>
-              <h6 className="card-subtitle mb-2 text-muted">Email</h6>
+              <h6 className="card-subtitle mb-2 text-muted">{e.user_email}</h6>
             </div>
           </div>
+            </>
+            )})
+            ) : getDetailUserLoading ? (
+              <p>Loading</p>
+            ) : (
+              <p>{getDetailUserError ? getDetailUserError : "Data Kosong"}</p>
+            )}
         </div>
       </div>
     </div>

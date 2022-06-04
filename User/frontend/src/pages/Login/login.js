@@ -6,6 +6,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import './style.css'
 import axios from 'axios'
 import Swal from 'sweetalert2';
+import {useNavigate} from 'react-router-dom'
 
 function Login(props) {
   const { loginCbHandler } = props;
@@ -14,6 +15,7 @@ function Login(props) {
     user_password:""
   })
 
+  
     const loginUser = async () => {
         try {
             let result = await axios({
@@ -21,14 +23,10 @@ function Login(props) {
                 url: 'http://localhost:3000/users/login',
                 data: datalogin
             })
-            const access_token = result.data
+            const access_token = result.data.access_token
             localStorage.setItem('access_token', access_token)
             loginCbHandler(true)   
-            Swal.fire(
-              'Login',
-              'user has succesffuly login',
-              'success'
-              )
+              
         } catch (err) {
             console.log(err.message)
         }

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { Rating } from "react-simple-star-rating";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -13,14 +13,36 @@ import {
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./style.css";
 import image_2 from "./img-2.jpg";
+import { useDispatch, useSelector } from "react-redux";
+import { get_product_detail } from "../.././action/ProductAction";
+import { useParams } from "react-router-dom";
 
 function DetailProduct() {
+  const {
+    getDetailProductResult,
+    getDetailProductLoading,
+    getDetailProductError,
+  } = useSelector((state) => state.productReducer);
+
+  const {id} = useParams()
+
+  console.log(+id)
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    console.log("1.Masuk UseEffect");
+    dispatch(get_product_detail((+id)));
+  },[ dispatch]);
   return (
     <div className="bg-color-product">
       <br></br>
       <br></br>
       <div className="container row-bg-color">
         <br></br>
+        { getDetailProductResult ? (
+             getDetailProductResult.map((e) => {
+              return (
+                <>
         <div className="row justify-content-center ">
           <div className="col-7">
             <img
@@ -31,81 +53,88 @@ function DetailProduct() {
             />
           </div>
           <div className="col-5 ">
-            <div class="card-body">
-              <h5 class="card-title">Baju</h5>
-              <p class="card-text">Deskripsi Baju</p>
-              <p class="card-text">Harga Baju </p>
-              <p class="card-text">
-                <small class="text-muted">
+            <div className="card-body">
+              <h5 className="card-title">{e.prod_name}</h5>
+              <p className="card-text">{e.prod_desc}</p>
+              <p className="card-text"><span>Rp.</span>{e.prod_price}</p>
+              <p className="card-text">
+                <small className="text-muted">
                   <span>
                     <FontAwesomeIcon icon={faWarehouse}></FontAwesomeIcon>{" "}
                     Jumlah Stock :{" "}
                   </span>
-                  3{" "}
+                  {e.prod_stock}{" "}
                 </small>
               </p>
-              <p class="card-text">
-                <small class="text-muted">
+              <p className="card-text">
+                <small className="text-muted">
                   <span>
                     <FontAwesomeIcon icon={faWeightHanging}></FontAwesomeIcon>{" "}
                     Berat Barang:{" "}
                   </span>{" "}
-                  0.5 gram
+                  {e.prod_weight}
                 </small>
               </p>
-              <p class="card-text">
-                <small class="text-muted">
+              <p className="card-text">
+                <small className="text-muted">
                   <span>
                     <FontAwesomeIcon icon={faCalendarDays}></FontAwesomeIcon>{" "}
                     Expire:{" "}
                   </span>{" "}
-                  timestamp
+                  {e.prod_expire}
                 </small>
               </p>
-              <p class="card-text">
-                <small class="text-muted">
+              <p className="card-text">
+                <small className="text-muted">
                   <span>
                     <FontAwesomeIcon icon={faShirt}></FontAwesomeIcon> Brand:{" "}
                   </span>{" "}
-                  Barnd
+                  {e.prod_brand}
                 </small>
               </p>
-              <p class="card-text">
-                <small class="text-muted">
+              <p className="card-text">
+                <small className="text-muted">
                   <span>
                     <FontAwesomeIcon icon={faShapes}></FontAwesomeIcon>{" "}
                     Category:{" "}
                   </span>{" "}
-                  Baju
+                 {e.prod_category}
                 </small>
               </p>
-              <p class="card-text">
-                <small class="text-muted">
+              <p className="card-text">
+                <small className="text-muted">
                   <span>
                     <FontAwesomeIcon icon={faMagnifyingGlass}></FontAwesomeIcon>{" "}
                     Condition:{" "}
                   </span>{" "}
-                  Baru
+                  {e.prod_condition}
                 </small>
               </p>
-              <p class="card-text">
-                <small class="text-muted">
+              <p className="card-text">
+                <small className="text-muted">
                   <span>
                     <FontAwesomeIcon icon={faEye}></FontAwesomeIcon> Views: {" "}
                   </span>{" "}
-                  3
+                  {e.prod_views}
                 </small>
               </p>
-              <p class="card-text">
-                <small class="text-muted">
+              <p className="card-text">
+                <small className="text-muted">
                   {" "}
-                  <Rating initialValue={4} />
+                  <Rating initialValue={e.prod_rating} />
                 </small>
               </p>
             </div>
           </div>
         </div>
         <br></br>
+        </>
+          )})
+          ) :  getDetailProductLoading ? (
+            <p>Loading</p>
+          ) : (
+            <p>{ getDetailProductError ?  getDetailProductError : "Data Kosong"}</p>
+          )}
       </div>
       <br></br>
       <br></br>

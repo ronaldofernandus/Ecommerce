@@ -9,7 +9,7 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       shop_created_on: {
-        type: Sequelize.DATE
+        type: Sequelize.DATEONLY
       },
       shop_status: {
         type: Sequelize.STRING

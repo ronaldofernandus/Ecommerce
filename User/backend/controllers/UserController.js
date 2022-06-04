@@ -26,7 +26,7 @@ class UserController {
                let access_token = tokenGenerator(emailFound);
                let verToken = tokenVerifier(access_token);
                res.status(201).json( {access_token} );
-               // console.log(verToken);
+               console.log(verToken);
            } else {
                res.status(403).json({
                    message: `Invalid Password`
