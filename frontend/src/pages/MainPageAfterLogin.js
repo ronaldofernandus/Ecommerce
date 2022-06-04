@@ -19,7 +19,7 @@ const MainPageAfterLogin = (props) => {
       <Routes>
         <Route path="" >
           <Route path="" element={<Product></Product>}></Route>
-          <Route path="detail">
+          <Route path="/detail">
             <Route path=":id" element={<DetailProduct></DetailProduct>}></Route>
           </Route>
         </Route>
