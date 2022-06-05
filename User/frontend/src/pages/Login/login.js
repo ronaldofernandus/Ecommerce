@@ -1,44 +1,39 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import axios from "axios";
-
 import image_login from "./image-login.jpg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope, faLock } from "@fortawesome/free-solid-svg-icons";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./style.css";
+import axios from "axios";
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 function Login(props) {
-  const navigate = useNavigate;
   const { loginCbHandler } = props;
-  const [form, setForm] = useState({
+  const [datalogin, setDatalogin] = useState({
     user_email: "",
     user_password: "",
   });
 
+  const navigate = useNavigate();
   const loginUser = async () => {
     try {
-      let login = await axios({
+      let result = await axios({
         method: "POST",
-        url: "http://localhost:3000/user/login",
-        data: form,
+        url: "http://localhost:3003/users/login",
+        data: datalogin,
       });
-      const get_token = login.data.get_token;
-      localStorage.setItem("get_token", get_token);
+      const access_token = result.data.access_token;
+      localStorage.setItem("access_token", access_token);
       loginCbHandler(true);
       navigate("/");
-      // console.log(login.data);
-    } catch (error) {
-      console.log(error);
+    } catch (err) {
+      console.log(err.message);
     }
   };
-
-  const loginButton = () => {
-    // console.log(form);
+  const submitHandler = () => {
     loginUser();
   };
-
   return (
     <>
       <div className="bg-login">
@@ -62,11 +57,11 @@ function Login(props) {
                   <FontAwesomeIcon icon={faEnvelope}></FontAwesomeIcon>
                 </span>
                 <input
-                  type="text"
+                  type="email"
                   className="form-control"
                   placeholder="Email Address"
                   onChange={(e) =>
-                    setForm({ ...form, user_email: e.target.value })
+                    setDatalogin({ ...datalogin, user_email: e.target.value })
                   }
                 />
               </div>
@@ -80,8 +75,8 @@ function Login(props) {
                   className="form-control"
                   placeholder="Password"
                   onChange={(e) =>
-                    setForm({
-                      ...form,
+                    setDatalogin({
+                      ...datalogin,
                       user_password: e.target.value,
                     })
                   }
@@ -89,7 +84,10 @@ function Login(props) {
               </div>
 
               <div className=" justify-content-center input-group flex-nowrap submit-btn input-align-login">
-                <button className="btn text-add" onClick={() => loginButton()}>
+                <button
+                  onClick={() => submitHandler()}
+                  className="btn text-add"
+                >
                   Sign in
                 </button>
               </div>

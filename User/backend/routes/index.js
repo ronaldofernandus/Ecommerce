@@ -1,25 +1,20 @@
-const indexRoute = require("express").Router();
+const route = require('express').Router();
 
-const homeController = require("../controller/homeController");
+route.get('/', (req, res) => {
+    res.json({
+        message: `homepage`
+    })
+})
 
-indexRoute.get("/", homeController.getHome);
 
-const productRoute = require("./productRoute");
-indexRoute.use("/product", productRoute);
+const ProductRoutes = require('./product');
+const OrderRoutes = require('./order');
+const UserRoutes = require('./user');
+const ShopRoutes = require('./shopping_cart');
+route.use('/products', ProductRoutes)
+route.use('/orders', OrderRoutes)
+route.use('/users', UserRoutes)
+route.use('/shoppingcarts', ShopRoutes)
 
-const userRoute = require("./userRoute");
-indexRoute.use("/user", userRoute);
 
-const imageRoute = require("./imageRoute");
-indexRoute.use("/images", imageRoute);
-
-const orderRoute = require("./orderRoute");
-indexRoute.use("/order", orderRoute);
-
-const line_itemRoute = require("./line_itemRoute");
-indexRoute.use("/line", line_itemRoute);
-
-const shopRoute = require("./shopRoute");
-indexRoute.use("/shop", shopRoute);
-
-module.exports = indexRoute;
+module.exports = route;

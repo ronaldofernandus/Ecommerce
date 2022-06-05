@@ -1,5 +1,7 @@
-"use strict";
-const { Model } = require("sequelize");
+'use strict';
+const {
+  Model
+} = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class shopping_cart extends Model {
     /**
@@ -12,16 +14,18 @@ module.exports = (sequelize, DataTypes) => {
       shopping_cart.hasMany(models.line_item);
     }
   }
-  shopping_cart.init(
-    {
-      shop_created_on: DataTypes.DATEONLY,
-      shop_status: DataTypes.STRING,
-      userId: DataTypes.INTEGER,
+  shopping_cart.init({
+    shop_created_on: DataTypes.DATE,
+    shop_status: DataTypes.STRING,
+    userId: DataTypes.INTEGER
+  }, {
+    hooks:{
+      beforeCreate: function (shopping_cart,options){
+        shopping_cart.shop_status = shopping_cart.shop_status || "Open";
+      }
     },
-    {
-      sequelize,
-      modelName: "shopping_cart",
-    }
-  );
+    sequelize,
+    modelName: 'shopping_cart',
+  });
   return shopping_cart;
 };

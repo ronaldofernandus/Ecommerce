@@ -1,10 +1,7 @@
-import React, { useState, useEffect } from "react";
-import "./App.css";
-import "bootstrap/dist/css/bootstrap.min.css";
-import Login from "./components/Login/index";
-// import Login from "./pages/Login";
+import React, { useEffect, useState } from 'react'
+import MainPage from './pages/MainPage';
+import MainPageAfterLogin from './pages/MainPageAfterLogin';
 
-import MainContent from "./components/MainContent/index";
 
 function App() {
   const [loginStatus, setLoginStatus] = useState(false);
@@ -12,25 +9,22 @@ function App() {
   const loginCbHandler = (result) => {
     setLoginStatus(result);
   };
-
   useEffect(() => {
-    if (localStorage.getItem("get_token")) {
+    if (localStorage.getItem("access_token")) {
       setLoginStatus(true);
     } else {
       setLoginStatus(false);
     }
   }, [loginStatus]);
-
   return (
-    <div className="wrapper">
-      {!loginStatus ? (
-        <Login loginCbHandler={loginCbHandler}></Login>
+    <>
+     {/* <MainPage></MainPage> Sebelum Login */}
+     { loginStatus ? (
+        <MainPageAfterLogin loginStatus={loginStatus}loginCbHandler={loginCbHandler}></MainPageAfterLogin>
       ) : (
-        <MainContent loginStatus={loginStatus} loginCbHandler={loginCbHandler}>
-          {" "}
-        </MainContent>
+        <MainPage loginStatus={loginStatus} loginCbHandler={loginCbHandler}></MainPage>
       )}
-    </div>
+    </>
   );
 }
 

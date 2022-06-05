@@ -1,9 +1,4 @@
 import React, { useState, useEffect } from "react";
-import "./libraries/bootstrap/css/bootstrap.css";
-import "./styles/main.css";
-import { detail1 } from "./image";
-import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
 import { Rating } from "react-simple-star-rating";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -15,126 +10,145 @@ import {
   faWarehouse,
   faEye,
 } from "@fortawesome/free-solid-svg-icons";
-import {
-  deleteProduct,
-  detailProduct,
-  getProduct,
-  getProductById,
-} from "../../action/ProductAction";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./style.css";
 import image_2 from "./img-2.jpg";
+import { useDispatch, useSelector } from "react-redux";
+import { get_product_detail } from "../.././action/ProductAction";
+import { useParams } from "react-router-dom";
 
-const DetailProduct = () => {
+function DetailProduct() {
+  const {
+    getDetailProductResult,
+    getDetailProductLoading,
+    getDetailProductError,
+  } = useSelector((state) => state.productReducer);
+
+  const { id } = useParams();
+
+  console.log(+id);
   const dispatch = useDispatch();
-  const {
-    getListProductResult,
-    getListProductLoading,
-    getListProductError,
-    deleteProductReducer,
-  } = useSelector((state) => state.productReducers);
-  const {
-    getListProductByIdResult,
-    getListProductByIdLoading,
-    getListProductByIdError,
-  } = useSelector((state) => state.productReducers);
-  useEffect(() => {
-    dispatch(getProduct());
-  }, [dispatch]);
 
   useEffect(() => {
-    dispatch(getProductById());
+    console.log("1.Masuk UseEffect");
+    dispatch(get_product_detail(+id));
   }, [dispatch]);
-
   return (
     <div className="bg-color-product">
       <br></br>
       <br></br>
       <div className="container row-bg-color">
         <br></br>
-        <div className="row justify-content-center ">
-          <div className="col-7">
-            <img
-              src={image_2}
-              alt=""
-              align="center"
-              className="img-fluid img-responsive img-thumbnail"
-            />
-          </div>
-          <div className="col-5 ">
-            <div class="card-body">
-              <h5 class="card-title">Baju</h5>
-              <p class="card-text">Deskripsi Baju</p>
-              <p class="card-text">Harga Baju </p>
-              <p class="card-text">
-                <small class="text-muted">
-                  <span>
-                    <FontAwesomeIcon icon={faWarehouse}></FontAwesomeIcon>{" "}
-                    Jumlah Stock :{" "}
-                  </span>
-                  3{" "}
-                </small>
-              </p>
-              <p class="card-text">
-                <small class="text-muted">
-                  <span>
-                    <FontAwesomeIcon icon={faWeightHanging}></FontAwesomeIcon>{" "}
-                    Berat Barang:{" "}
-                  </span>{" "}
-                  0.5 gram
-                </small>
-              </p>
-              <p class="card-text">
-                <small class="text-muted">
-                  <span>
-                    <FontAwesomeIcon icon={faCalendarDays}></FontAwesomeIcon>{" "}
-                    Expire:{" "}
-                  </span>{" "}
-                  timestamp
-                </small>
-              </p>
-              <p class="card-text">
-                <small class="text-muted">
-                  <span>
-                    <FontAwesomeIcon icon={faShirt}></FontAwesomeIcon> Brand:{" "}
-                  </span>{" "}
-                  Barnd
-                </small>
-              </p>
-              <p class="card-text">
-                <small class="text-muted">
-                  <span>
-                    <FontAwesomeIcon icon={faShapes}></FontAwesomeIcon>{" "}
-                    Category:{" "}
-                  </span>{" "}
-                  Baju
-                </small>
-              </p>
-              <p class="card-text">
-                <small class="text-muted">
-                  <span>
-                    <FontAwesomeIcon icon={faMagnifyingGlass}></FontAwesomeIcon>{" "}
-                    Condition:{" "}
-                  </span>{" "}
-                  Baru
-                </small>
-              </p>
-              <p class="card-text">
-                <small class="text-muted">
-                  <span>
-                    <FontAwesomeIcon icon={faEye}></FontAwesomeIcon> Views:{" "}
-                  </span>{" "}
-                  3
-                </small>
-              </p>
-              <p class="card-text">
-                <small class="text-muted">
-                  {" "}
-                  <Rating initialValue={4} />
-                </small>
-              </p>
-            </div>
-          </div>
-        </div>
-        <br></br>
+        {getDetailProductResult ? (
+          getDetailProductResult.map((e) => {
+            return (
+              <>
+                <div className="row justify-content-center ">
+                  <div className="col-7">
+                    <img
+                      src={require(`../../images/${e.product_images[0].prim_filename}`)}
+                      alt=""
+                      align="center"
+                      className="img-fluid img-responsive img-thumbnail"
+                    />
+                  </div>
+                  <div className="col-5 ">
+                    <div className="card-body">
+                      <h5 className="card-title">{e.prod_name}</h5>
+                      <p className="card-text">{e.prod_desc}</p>
+                      <p className="card-text">
+                        <span>Rp.</span>
+                        {e.prod_price}
+                      </p>
+                      <p className="card-text">
+                        <small className="text-muted">
+                          <span>
+                            <FontAwesomeIcon
+                              icon={faWarehouse}
+                            ></FontAwesomeIcon>{" "}
+                            Jumlah Stock :{" "}
+                          </span>
+                          {e.prod_stock}{" "}
+                        </small>
+                      </p>
+                      <p className="card-text">
+                        <small className="text-muted">
+                          <span>
+                            <FontAwesomeIcon
+                              icon={faWeightHanging}
+                            ></FontAwesomeIcon>{" "}
+                            Berat Barang:{" "}
+                          </span>{" "}
+                          {e.prod_weight}
+                        </small>
+                      </p>
+                      <p className="card-text">
+                        <small className="text-muted">
+                          <span>
+                            <FontAwesomeIcon
+                              icon={faCalendarDays}
+                            ></FontAwesomeIcon>{" "}
+                            Expire:{" "}
+                          </span>{" "}
+                          {e.prod_expire}
+                        </small>
+                      </p>
+                      <p className="card-text">
+                        <small className="text-muted">
+                          <span>
+                            <FontAwesomeIcon icon={faShirt}></FontAwesomeIcon>{" "}
+                            Brand:{" "}
+                          </span>{" "}
+                          {e.prod_brand}
+                        </small>
+                      </p>
+                      <p className="card-text">
+                        <small className="text-muted">
+                          <span>
+                            <FontAwesomeIcon icon={faShapes}></FontAwesomeIcon>{" "}
+                            Category:{" "}
+                          </span>{" "}
+                          {e.prod_category}
+                        </small>
+                      </p>
+                      <p className="card-text">
+                        <small className="text-muted">
+                          <span>
+                            <FontAwesomeIcon
+                              icon={faMagnifyingGlass}
+                            ></FontAwesomeIcon>{" "}
+                            Condition:{" "}
+                          </span>{" "}
+                          {e.prod_condition}
+                        </small>
+                      </p>
+                      <p className="card-text">
+                        <small className="text-muted">
+                          <span>
+                            <FontAwesomeIcon icon={faEye}></FontAwesomeIcon>{" "}
+                            Views:{" "}
+                          </span>{" "}
+                          {e.prod_views}
+                        </small>
+                      </p>
+                      <p className="card-text">
+                        <small className="text-muted">
+                          {" "}
+                          <Rating initialValue={e.prod_rating} />
+                        </small>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <br></br>
+              </>
+            );
+          })
+        ) : getDetailProductLoading ? (
+          <p>Loading</p>
+        ) : (
+          <p>{getDetailProductError ? getDetailProductError : "Data Kosong"}</p>
+        )}
       </div>
       <br></br>
       <br></br>
@@ -142,6 +156,6 @@ const DetailProduct = () => {
       <br></br>
     </div>
   );
-};
+}
 
 export default DetailProduct;

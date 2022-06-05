@@ -2,10 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "./style.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faRightToBracket,
-  faPenToSquare,
-} from "@fortawesome/free-solid-svg-icons";
+import { faRightToBracket,faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 
 function HomePagebeforelogin() {
   return (
@@ -51,7 +48,9 @@ function HomePagebeforelogin() {
                 <Link to="/register">
                   <button className="btn text-add">
                     <span>
-                      <FontAwesomeIcon icon={faPenToSquare}></FontAwesomeIcon>
+                      <FontAwesomeIcon
+                        icon={faPenToSquare}
+                      ></FontAwesomeIcon>
                     </span>{" "}
                     Register
                   </button>

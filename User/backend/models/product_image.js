@@ -1,5 +1,6 @@
-"use strict";
-const { Model } = require("sequelize");
+'use strict';
+
+const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class product_image extends Model {
     /**
@@ -11,24 +12,23 @@ module.exports = (sequelize, DataTypes) => {
       product_image.belongsTo(models.product);
     }
   }
-  product_image.init(
-    {
-      prim_filename: DataTypes.STRING,
-      prim_filesize: DataTypes.STRING,
-      prim_filetype: DataTypes.STRING,
-      prim_primary: DataTypes.BOOLEAN,
-      productId: DataTypes.INTEGER,
-    },
-    {
-      hooks: {
-        beforeCreate: function (product_image, options) {
-          product_image.user_avatar =
-            product_image.user_avatar || "https://via.placeholder.com/150";
-        },
+  product_image.init({
+    prim_filename: DataTypes.STRING,
+    prim_filesize: DataTypes.STRING,
+    prim_filetype: DataTypes.STRING,
+    prim_primary: DataTypes.BOOLEAN,
+    productId: DataTypes.INTEGER
+  }, {
+    hooks: {
+      beforeCreate: (product_image, options) => {
+        product_image.prim_filename = product_image.prim_filename || "https://via.placeholder.com/150"
       },
-      sequelize,
-      modelName: "product_image",
-    }
-  );
+      beforeUpdate: (product_image, options) => {
+        product_image.prim_filename = product_image.prim_filename || "https://via.placeholder.com/150"
+      }
+    },
+    sequelize,
+    modelName: 'product_image',
+  });
   return product_image;
 };

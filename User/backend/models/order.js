@@ -27,6 +27,18 @@ module.exports = (sequelize, DataTypes) => {
       userId: DataTypes.INTEGER,
     },
     {
+      hooks:{
+      beforeCreate: function (order,options){
+        order.order_status = order.order_status || "Open";
+        order.order_subtotal = order.order_subtotal || 1;
+        order.order_tax = 0.10;
+        order.order_discount = order.discount || 0;
+        order.order_total_due = order.order_total_due || 0;
+        order.order_total_qty = order.order_total_qty || 1;
+        order.order_city = order.order_city || "Silahkan Masukkan Kota Anda";
+        order.order_addres = order.order_addres || "Silahkan Masukkan Alamat Anda";
+      }
+    },
       sequelize,
       modelName: "order",
     }

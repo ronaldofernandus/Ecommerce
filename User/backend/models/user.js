@@ -1,6 +1,7 @@
 "use strict";
-const { encrypt } = require("../helpers/bcrypt");
+const { encryptPass } = require("../helpers/bcrypt");
 const { Model } = require("sequelize");
+
 module.exports = (sequelize, DataTypes) => {
   class user extends Model {
     /**
@@ -25,18 +26,36 @@ module.exports = (sequelize, DataTypes) => {
           },
         },
       },
-      user_password: DataTypes.STRING,
-      user_salt: DataTypes.STRING,
-      user_birthdate: DataTypes.DATE,
-      user_gender: DataTypes.STRING,
-      user_avatar: DataTypes.STRING,
-      user_type: DataTypes.STRING,
+      user_password: {
+        allowNull: false,
+        type: DataTypes.STRING
+      },
+      user_salt: {
+        allowNull: false,
+        type: DataTypes.STRING
+      },
+      user_birthdate: {
+        allowNull: true,
+        type: DataTypes.DATE
+      },
+      user_gender: {
+        allowNull: false,
+        type: DataTypes.STRING
+      },
+      user_avatar: {
+        allowNull: false,
+        type: DataTypes.STRING
+      },
+      user_type: {
+        allowNull: false,
+        type: DataTypes.STRING
+      },
     },
 
     {
       hooks: {
-        beforeCreate: function (user, options) {
-          user.user_password = encrypt(user.user_password);
+        beforeCreate: (user, options) => {
+          user.user_password = encryptPass(user.user_password);
           user.user_avatar =
             user.user_avatar || "https://via.placeholder.com/150";
         },
