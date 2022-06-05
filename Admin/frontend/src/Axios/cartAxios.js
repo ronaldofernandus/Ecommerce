@@ -18,7 +18,7 @@ export const getCart = () => {
     });
     axios({
       method: "GET",
-      url: "http://localhost:3000/shop",
+      url: "http://localhost:4000/shop",
       timeout: 120000,
 
       headers: {
@@ -62,7 +62,7 @@ export const addCart = (data) => {
     });
     axios({
       method: "POST",
-      url: "http://localhost:3000/shop/add",
+      url: "http://localhost:4000/shop/add",
       timeout: 120000,
       data: data,
 
@@ -108,7 +108,7 @@ export const deleteCart = (id) => {
     });
     axios({
       method: "DELETE",
-      url: "http://localhost:3000/shop/" + id,
+      url: "http://localhost:4000/shop/" + id,
       timeout: 120000,
 
       headers: {
@@ -168,7 +168,7 @@ export const updateCart = (data) => {
     });
     axios({
       method: "PUT",
-      url: "http://localhost:3000/shop/" + data.id,
+      url: "http://localhost:4000/shop/" + data.id,
       timeout: 120000,
       data: data,
 

@@ -18,7 +18,7 @@ export const getImage = () => {
     });
     axios({
       method: "GET",
-      url: "http://localhost:3000/images",
+      url: "http://localhost:4000/images",
       timeout: 120000,
 
       headers: {
@@ -63,7 +63,7 @@ export const addImage = (data) => {
 
     axios({
       method: "POST",
-      url: "http://localhost:3000/images/add",
+      url: "http://localhost:4000/images/add",
       timeout: 120000,
       data: data,
       // headers: {
@@ -108,7 +108,7 @@ export const deleteImage = (id) => {
     });
     axios({
       method: "DELETE",
-      url: "http://localhost:3000/images/" + id,
+      url: "http://localhost:4000/images/" + id,
       timeout: 120000,
 
       headers: {
@@ -168,7 +168,7 @@ export const updateImage = (data) => {
     });
     axios({
       method: "PUT",
-      url: "http://localhost:3000/images/" + data.id,
+      url: "http://localhost:4000/images/" + data.id,
       timeout: 120000,
       data: data,
 

@@ -19,7 +19,7 @@ export const getProduct = () => {
     });
     axios({
       method: "GET",
-      url: "http://localhost:3000/product",
+      url: "http://localhost:4000/product",
       timeout: 120000,
 
       headers: {
@@ -63,7 +63,7 @@ export const addProduct = (data) => {
     });
     axios({
       method: "POST",
-      url: "http://localhost:3000/product/add",
+      url: "http://localhost:4000/product/add",
       timeout: 120000,
       data: data,
 
@@ -110,7 +110,7 @@ export const deleteProduct = (id) => {
     });
     axios({
       method: "DELETE",
-      url: "http://localhost:3000/product/" + id,
+      url: "http://localhost:4000/product/" + id,
       timeout: 120000,
 
       headers: {
@@ -171,7 +171,7 @@ export const updateProduct = (data) => {
     });
     axios({
       method: "PUT",
-      url: "http://localhost:3000/product/" + data.id,
+      url: "http://localhost:4000/product/" + data.id,
       timeout: 120000,
       data: data,
 
@@ -218,7 +218,7 @@ export const getProductById = (data) => {
     });
     axios({
       method: "GET",
-      url: "http://localhost:3000/product" + data.id,
+      url: "http://localhost:4000/product" + data.id,
       timeout: 120000,
 
       headers: {

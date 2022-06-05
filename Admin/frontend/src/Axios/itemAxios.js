@@ -18,7 +18,7 @@ export const getItem = () => {
     });
     axios({
       method: "GET",
-      url: "http://localhost:3000/line",
+      url: "http://localhost:4000/line",
       timeout: 120000,
 
       headers: {
@@ -62,7 +62,7 @@ export const addItem = (data) => {
     });
     axios({
       method: "POST",
-      url: "http://localhost:3000/line/add",
+      url: "http://localhost:4000/line/add",
       timeout: 120000,
       data: data,
 
@@ -108,7 +108,7 @@ export const deleteItem = (id) => {
     });
     axios({
       method: "DELETE",
-      url: "http://localhost:3000/line/" + id,
+      url: "http://localhost:4000/line/" + id,
       timeout: 120000,
 
       headers: {
@@ -168,7 +168,7 @@ export const updateItem = (data) => {
     });
     axios({
       method: "PUT",
-      url: "http://localhost:3000/line/" + data.id,
+      url: "http://localhost:4000/line/" + data.id,
       timeout: 120000,
       data: data,
 

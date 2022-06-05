@@ -18,7 +18,7 @@ export const getOrder = () => {
     });
     axios({
       method: "GET",
-      url: "http://localhost:3000/order",
+      url: "http://localhost:4000/order",
       timeout: 120000,
 
       headers: {
@@ -61,7 +61,7 @@ export const addOrder = (data) => {
     });
     axios({
       method: "POST",
-      url: "http://localhost:3000/order/add",
+      url: "http://localhost:4000/order/add",
       timeout: 120000,
       data: data,
 
@@ -105,7 +105,7 @@ export const deleteOrder = (id) => {
     });
     axios({
       method: "DELETE",
-      url: "http://localhost:3000/order/" + id,
+      url: "http://localhost:4000/order/" + id,
       timeout: 120000,
 
       headers: {
@@ -165,7 +165,7 @@ export const updateOrder = (data) => {
     });
     axios({
       method: "PUT",
-      url: "http://localhost:3000/order/" + data.id,
+      url: "http://localhost:4000/order/" + data.id,
       timeout: 120000,
       data: data,
 

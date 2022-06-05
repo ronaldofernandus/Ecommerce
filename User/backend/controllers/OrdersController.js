@@ -40,7 +40,7 @@ class OrderController {
       });
       const orderId = orderId_user.id + 1;
 
-      let shoppingId_user = await order.findOne({
+      let shoppingId_user = await shopping_cart.findOne({
         order: [["createdAt", "DESC"]],
       });
       const shoppingCartId = shoppingId_user.id + 1;

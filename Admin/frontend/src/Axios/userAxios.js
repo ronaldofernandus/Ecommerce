@@ -1,5 +1,5 @@
 import axios from "axios";
-const URL = "http://localhost:3000/user";
+const URL = "http://localhost:4000/user";
 
 const getUser = async (cb) => {
   try {

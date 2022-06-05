@@ -40,10 +40,10 @@ const Home = () => {
                       <div className="gallery">
                         <div className="xzoom-container">
                           <img
-                            src={`http://localhost:3000/images/${product.product_images[0].prim_filename}`}
+                            src={`http://localhost:4000/images/${product.product_images[0].prim_filename}`}
                             alt=""
                             className="xzoom"
-                            xoriginal={`http://localhost:3000/images/${product.product_images[0].prim_filename}`}
+                            xoriginal={`http://localhost:4000/images/${product.product_images[0].prim_filename}`}
                             style={{ height: "100%", width: "100%" }}
                           />
                         </div>
@@ -53,14 +53,14 @@ const Home = () => {
                             return (
                               <>
                                 <Link
-                                  to={`http://localhost:3000/images/${imgResult.prim_filename}`}
+                                  to={`http://localhost:4000/images/${imgResult.prim_filename}`}
                                 >
                                   <img
-                                    src={`http://localhost:3000/images/${imgResult.prim_filename}`}
+                                    src={`http://localhost:4000/images/${imgResult.prim_filename}`}
                                     alt=""
                                     className="xzoom-gallery"
                                     style={{ width: "128" }}
-                                    xpreview={`http://localhost:3000/images/${imgResult.prim_filename}`}
+                                    xpreview={`http://localhost:4000/images/${imgResult.prim_filename}`}
                                   />
                                 </Link>
                               </>
