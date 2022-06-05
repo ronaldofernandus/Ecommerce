@@ -64,7 +64,7 @@ const ListProduct = () => {
                       <>
                         <tr key={image.id}>
                           <th scope="row">{index + 1}</th>
-                          <td>{image.product.prod_name}</td>
+                          {/* <td>{image.product.prod_name}</td> */}
                           {/* <td>{image.prim_filename}</td> */}
                           <td>
                             <img
