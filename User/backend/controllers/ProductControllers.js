@@ -5,11 +5,13 @@ class ProductController {
       try{
         const id = Number(req.params.id);
         
-        let getproductById = [await product.findOne({
-          id:id,
-          include:[product_image]
-        })];
-        res.status(200).json(getproductById);
+        let products = await product.findAll({
+          where: {
+            id: id,
+          },
+          include: [product_image]
+        });
+        res.status(200).json(products);
       }
       catch(err){
           res.status(500).json(err.message)
