@@ -9,9 +9,10 @@ class ProductController {
           where: {
             id: id,
           },
-          include: [product_image]
+          include: [product_image],
         });
-        res.status(200).json(products);
+        console.log(products[0])
+        res.status(200).json(products); 
       }
       catch(err){
           res.status(500).json(err.message)

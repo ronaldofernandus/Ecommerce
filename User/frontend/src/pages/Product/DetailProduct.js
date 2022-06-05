@@ -46,7 +46,7 @@ function DetailProduct() {
         <div className="row justify-content-center ">
           <div className="col-7">
             <img
-              src={require(`../../images/${e.product_images.prim_filename}`)}
+              src={require(`../../images/${e.product_images[0].prim_filename}`)}
               alt=""
               align="center"
               className="img-fluid img-responsive img-thumbnail"
