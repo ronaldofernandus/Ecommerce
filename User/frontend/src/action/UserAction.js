@@ -17,7 +17,7 @@ const get_profile_user = (access_token) => {
     // get API 
     axios({
       method: "GET",
-      url: "http://localhost:3003/users/info_user",
+      url: "http://localhost:3000/users/info_user",
       timeout: 120000,
       headers: {
         Access_Token:access_token

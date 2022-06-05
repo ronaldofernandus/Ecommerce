@@ -14,9 +14,9 @@ function NavbarAfterLogin(props) {
   const { loginCbHandler } = props;
 
   const logoutHandler = () => {
-    localStorage.clear();
-    loginCbHandler(false);
-  };
+    localStorage.clear()
+    loginCbHandler(false)
+}
 
   return (
     <nav className="navbar navbar-expand-lg sticky-top bg-color-navbar">
@@ -46,12 +46,7 @@ function NavbarAfterLogin(props) {
           </li>
 
           <li className="nav-item item-style">
-            <Link
-              className="nav-link"
-              to="/"
-              style={{ color: "white" }}
-              onClick={() => logoutHandler()}
-            >
+            <Link className="nav-link" to="/" style={{ color: "white" }} onClick={() => logoutHandler()}>
               {" "}
               <span>
                 <FontAwesomeIcon icon={faDoorOpen}></FontAwesomeIcon>

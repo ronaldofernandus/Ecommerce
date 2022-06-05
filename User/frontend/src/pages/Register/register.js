@@ -8,9 +8,10 @@ import {
   faFlag,
   faVenusMars,
   faImage,
-  faCalendarDays,
+  faCalendarDays
 } from "@fortawesome/free-solid-svg-icons";
 import "./style.css";
+
 
 function Register() {
   return (
@@ -101,7 +102,7 @@ function Register() {
               </div>
 
               <div class="input-group mb-3 flex-nowrap input-align">
-                <span className="input-group-text">
+              <span className="input-group-text">
                   <FontAwesomeIcon icon={faImage}></FontAwesomeIcon>
                 </span>
                 <input

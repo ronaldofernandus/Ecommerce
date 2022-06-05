@@ -5,12 +5,12 @@ class OrderController {
   static async getAllOrderUser(req, res) {
     try {
       let id = Number(req.userData.id);
-      
+
       let orders = await order.findAll({
         where: {
           userId: id,
         },
-        include: [user,line_item]
+        include: [user, line_item],
       });
       res.status(200).json(orders);
       // console.log(orders)
@@ -33,21 +33,17 @@ class OrderController {
       // console.log(product_file)
       let tax = 0.1;
       let product_price = Number(product_file.prod_price);
-      let harga_total = (product_price + (product_price * tax));
+      let harga_total = product_price + product_price * tax;
       const order_total_due = +harga_total;
       let orderId_user = await order.findOne({
-        order: [
-          ['createdAt', 'DESC']
-        ],
+        order: [["createdAt", "DESC"]],
       });
-      const orderId=orderId_user.id+1
+      const orderId = orderId_user.id + 1;
 
       let shoppingId_user = await order.findOne({
-        order: [
-          ['createdAt', 'DESC']
-        ],
+        order: [["createdAt", "DESC"]],
       });
-      const shoppingCartId=shoppingId_user.id+1
+      const shoppingCartId = shoppingId_user.id + 1;
 
       const shop_created_on = new Date();
       let createShoppingCart = await shopping_cart.create({
@@ -80,7 +76,7 @@ class OrderController {
   }
 
   static async updateOrder(req, res) {
-    try {   
+    try {
       const id = +req.params.id;
       const userId = +req.userData.id;
       // console.log(userId);
@@ -98,12 +94,15 @@ class OrderController {
         where: {
           orderId: id,
         },
-        include: [product]
+        include: [product],
       });
 
       let product_price = Number(product_file.product.prod_price);
       let harga_semua_product = product_price * order_total_qty;
-      let harga_total = (harga_semua_product + (harga_semua_product * tax)) - (harga_semua_product * Number(discount));
+      let harga_total =
+        harga_semua_product +
+        harga_semua_product * tax -
+        harga_semua_product * Number(discount);
       const order_total_due = +harga_total;
 
       const order_subtotal = order_total_qty;
@@ -154,7 +153,6 @@ class OrderController {
         where: {
           orderId: id,
         },
-
       });
       deleteOrder === 1
         ? res.status(200).json({

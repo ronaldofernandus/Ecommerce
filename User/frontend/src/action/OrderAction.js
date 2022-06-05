@@ -4,7 +4,7 @@ const POST_ORDER_LINE_SHOP = "POST_ORDER_LINE_SHOP";
 const GET_ORDER_USER = "GET_ORDER_USER";
 const POST_UPDATE_USER = "POST_UPDATE_USER";
 const DELETE_ORDER = "DELETE_ORDER";
-const DETAIL_ORDER ="DETAIL_ORDER";
+const DETAIL_ORDER = "DETAIL_ORDER";
 
 const addorder = (access_token, id) => {
   console.log("2.");
@@ -22,7 +22,7 @@ const addorder = (access_token, id) => {
     // get API
     axios({
       method: "POST",
-      url: `http://localhost:3003/orders/create_order/${id}`,
+      url: `http://localhost:3000/orders/create_order/${id}`,
       timeout: 120000,
       headers: {
         Access_Token: access_token,
@@ -56,7 +56,7 @@ const addorder = (access_token, id) => {
 const getorder_user = (access_token) => {
   return (dispatch) => {
     // untuk loading
-    
+
     dispatch({
       type: "GET_ORDER_USER",
       payload: {
@@ -69,7 +69,7 @@ const getorder_user = (access_token) => {
     // get API
     axios({
       method: "GET",
-      url: "http://localhost:3003/orders/order_user",
+      url: "http://localhost:3000/orders/order_user",
       timeout: 120000,
       headers: {
         Access_Token: access_token,
@@ -115,7 +115,7 @@ const updateorderuser = (access_token, data, id) => {
     // get API
     axios({
       method: "PUT",
-      url: `http://localhost:3003/orders/update_order/${id}`,
+      url: `http://localhost:3000/orders/update_order/${id}`,
       timeout: 120000,
       headers: {
         Access_Token: access_token,
@@ -149,7 +149,7 @@ const updateorderuser = (access_token, data, id) => {
 
 const deleteorderuser = (access_token, id) => {
   console.log("2.");
-  console.log(id)
+  console.log(id);
   return (dispatch) => {
     // untuk loading
     dispatch({
@@ -164,12 +164,11 @@ const deleteorderuser = (access_token, id) => {
     // get API
     axios({
       method: "DELETE",
-      url: `http://localhost:3003/orders/delete_order/${id}`,
+      url: `http://localhost:3000/orders/delete_order/${id}`,
       timeout: 120000,
       headers: {
         Access_Token: access_token,
       },
-      
     })
       .then((response) => {
         console.log("3.", response.data);
@@ -217,5 +216,5 @@ export {
   detailorder,
   deleteorderuser,
   DELETE_ORDER,
-  DETAIL_ORDER
+  DETAIL_ORDER,
 };
