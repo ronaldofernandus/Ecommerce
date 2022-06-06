@@ -153,9 +153,9 @@ function Order() {
                         </h5>
                       </div>
                       <div className="edit-btn d-grid gap-2 d-md-flex justify-content-md-center">
-                        <button
+                        <Link
                           className="btn btn-sm btn-outline-success"
-                          // onClick={() => dispatch(deleteorderuser(localStorage.getItem("access_token")))}
+                          to={"/checkout"}
                         >
                           <span>
                             <FontAwesomeIcon
@@ -163,7 +163,7 @@ function Order() {
                             ></FontAwesomeIcon>
                           </span>{" "}
                           Check Out
-                        </button>
+                        </Link>
                       </div>
                       <br></br>
                       <br></br>
