@@ -10,9 +10,13 @@ import {
   faBox,
   faPencil,
   faTrashCan,
-  faMoneyBill
+  faMoneyBill,
 } from "@fortawesome/free-solid-svg-icons";
-import { getorder_user, deleteorderuser, detailorder } from "../../action/OrderAction";
+import {
+  getorder_user,
+  deleteorderuser,
+  detailorder,
+} from "../../action/OrderAction";
 import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
 import { Link, useParams } from "react-router-dom";
@@ -90,26 +94,35 @@ function Order() {
                         </h5>
                       </div>
                       <div className="edit-btn d-grid gap-2 d-md-flex justify-content-md-center">
-                      <Link
-                        className="btn btn-sm btn btn-outline-primary"
-                        onClick={() => dispatch( detailorder(e))}
-                        to={`edit/${e.id}`}
-                      >
-                        <span>
-                          <FontAwesomeIcon icon={faPencil}></FontAwesomeIcon>
-                        </span>{" "}
-                        Edit
-                      </Link>
+                        <Link
+                          className="btn btn-sm btn btn-outline-primary"
+                          onClick={() => dispatch(detailorder(e))}
+                          to={`edit/${e.id}`}
+                        >
+                          <span>
+                            <FontAwesomeIcon icon={faPencil}></FontAwesomeIcon>
+                          </span>{" "}
+                          Edit
+                        </Link>
 
-                      <button
-                        className="btn btn-sm btn-outline-danger"
-                        onClick={() => dispatch(deleteorderuser(localStorage.getItem("access_token"),e.id))}
-                      >
-                        <span>
-                          <FontAwesomeIcon icon={faTrashCan}></FontAwesomeIcon>
-                        </span>{" "}
-                        Delete
-                      </button>
+                        <button
+                          className="btn btn-sm btn-outline-danger"
+                          onClick={() =>
+                            dispatch(
+                              deleteorderuser(
+                                localStorage.getItem("access_token"),
+                                e.id
+                              )
+                            )
+                          }
+                        >
+                          <span>
+                            <FontAwesomeIcon
+                              icon={faTrashCan}
+                            ></FontAwesomeIcon>
+                          </span>{" "}
+                          Delete
+                        </button>
                       </div>
 
                       <hr></hr>
@@ -140,15 +153,17 @@ function Order() {
                         </h5>
                       </div>
                       <div className="edit-btn d-grid gap-2 d-md-flex justify-content-md-center">
-                      <button
-                        className="btn btn-sm btn-outline-success"
-                        // onClick={() => dispatch(deleteorderuser(localStorage.getItem("access_token")))}
-                      >
-                        <span>
-                          <FontAwesomeIcon icon={faMoneyBill}></FontAwesomeIcon>
-                        </span>{" "}
-                        Check Out
-                      </button>
+                        <button
+                          className="btn btn-sm btn-outline-success"
+                          // onClick={() => dispatch(deleteorderuser(localStorage.getItem("access_token")))}
+                        >
+                          <span>
+                            <FontAwesomeIcon
+                              icon={faMoneyBill}
+                            ></FontAwesomeIcon>
+                          </span>{" "}
+                          Check Out
+                        </button>
                       </div>
                       <br></br>
                       <br></br>
