@@ -28,27 +28,27 @@ module.exports = (sequelize, DataTypes) => {
       },
       user_password: {
         allowNull: false,
-        type: DataTypes.STRING
+        type: DataTypes.STRING,
       },
       user_salt: {
         allowNull: false,
-        type: DataTypes.STRING
+        type: DataTypes.STRING,
       },
       user_birthdate: {
         allowNull: true,
-        type: DataTypes.DATE
+        type: DataTypes.DATE,
       },
       user_gender: {
         allowNull: false,
-        type: DataTypes.STRING
+        type: DataTypes.STRING,
       },
       user_avatar: {
         allowNull: false,
-        type: DataTypes.STRING
+        type: DataTypes.STRING,
       },
       user_type: {
         allowNull: false,
-        type: DataTypes.STRING
+        type: DataTypes.STRING,
       },
     },
 

@@ -1,5 +1,8 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import image_login from "../Login/image-login.jpg";
+import { useNavigate } from "react-router-dom";
+import { addUser } from "../../action/UserAction";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faEnvelope,
@@ -8,12 +11,48 @@ import {
   faFlag,
   faVenusMars,
   faImage,
-  faCalendarDays
+  faCalendarDays,
 } from "@fortawesome/free-solid-svg-icons";
 import "./style.css";
-
+import Swal from "sweetalert2";
 
 function Register() {
+  const navigation = useNavigate();
+  const dispatch = useDispatch();
+
+  const [user_name, setName] = useState("");
+  const [user_email, setEmail] = useState("");
+  const [user_password, setPassword] = useState("");
+  const [user_salt, setSalt] = useState("");
+  const [user_birthdate, setBirthdate] = useState("");
+  const [user_gender, setGender] = useState("");
+  const [user_avatar, setAvatar] = useState("");
+  const [user_type, setType] = useState("");
+
+  const { addUserResult } = useSelector((state) => state.userReducer);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(
+      addUser({
+        user_name: user_name,
+        user_email: user_email,
+        user_password: user_password,
+        user_salt: user_salt,
+        user_birthdate: user_birthdate,
+        user_gender: user_gender,
+        user_avatar: user_avatar,
+        user_type: user_type,
+      })
+    );
+  };
+
+  useEffect(() => {
+    if (addUserResult) {
+      Swal.fire("Register Successfully!", "Clicked the button!", "success");
+      navigation("/");
+    }
+  });
   return (
     <div className="bg-login">
       <br></br>
@@ -39,9 +78,9 @@ function Register() {
                   type="text"
                   className="form-control"
                   placeholder="Name"
-                  name="name"
-                  // value={name}
-                  // onChange={(event) => setName(event.target.value)}
+                  name="user_name"
+                  value={user_name}
+                  onChange={(event) => setName(event.target.value)}
                 />
               </div>
 
@@ -53,9 +92,9 @@ function Register() {
                   type="email"
                   className="form-control"
                   placeholder="Email Address"
-                  name="email"
-                  // value={email}
-                  // onChange={(event) => setEmail(event.target.value)}
+                  name="user_email"
+                  value={user_email}
+                  onChange={(event) => setEmail(event.target.value)}
                 />
               </div>
 
@@ -67,9 +106,9 @@ function Register() {
                   type="password"
                   className="form-control"
                   placeholder="Password"
-                  name="password"
-                  // value={password}
-                  // onChange={(event) => setPassword(event.target.value)}
+                  name="user_password"
+                  value={user_password}
+                  onChange={(event) => setPassword(event.target.value)}
                 />
               </div>
 
@@ -81,9 +120,23 @@ function Register() {
                   type="text"
                   className="form-control"
                   placeholder="Salt"
-                  name="salt"
-                  // value={user_salt}
-                  // onChange={(event) => setSalt(event.target.value)}
+                  name="user_salt"
+                  value={user_salt}
+                  onChange={(event) => setSalt(event.target.value)}
+                />
+              </div>
+
+              <div className="input-group flex-nowrap input-align">
+                <span className="input-group-text">
+                  <FontAwesomeIcon icon={faCalendarDays}></FontAwesomeIcon>
+                </span>
+                <input
+                  type="date"
+                  className="form-control"
+                  placeholder="Gender: Female or Male"
+                  name="user_birthdate"
+                  value={user_birthdate}
+                  onChange={(event) => setBirthdate(event.target.value)}
                 />
               </div>
 
@@ -96,38 +149,45 @@ function Register() {
                   className="form-control"
                   placeholder="Gender: Female or Male"
                   name="gender"
-                  // value={gender}
-                  // onChange={(event) => setGender(event.target.value)}
+                  value={user_gender}
+                  onChange={(event) => setGender(event.target.value)}
                 />
               </div>
 
               <div class="input-group mb-3 flex-nowrap input-align">
-              <span className="input-group-text">
+                <span className="input-group-text">
                   <FontAwesomeIcon icon={faImage}></FontAwesomeIcon>
                 </span>
                 <input
                   type="file"
                   class="form-control"
                   id="inputGroupFile01"
+                  name="user_avatar"
+                  value={user_avatar}
+                  onChange={(event) => setAvatar(event.target.value)}
                 ></input>
               </div>
 
               <div className="input-group flex-nowrap input-align">
                 <span className="input-group-text">
-                  <FontAwesomeIcon icon={faCalendarDays}></FontAwesomeIcon>
+                  <FontAwesomeIcon icon={faFlag}></FontAwesomeIcon>
                 </span>
                 <input
-                  type="date"
+                  type="text"
                   className="form-control"
-                  placeholder="Gender: Female or Male"
-                  name="gender"
-                  // value={gender}
-                  // onChange={(event) => setGender(event.target.value)}
+                  placeholder="Type: Admin or User"
+                  name="user_type"
+                  value={user_type}
+                  onChange={(event) => setType(event.target.value)}
                 />
               </div>
 
               <div className=" justify-content-center input-group flex-nowrap submit-btn input-align">
-                <button className="btn text-add" type="submit">
+                <button
+                  className="btn text-add"
+                  type="submit"
+                  onClick={handleSubmit}
+                >
                   Create Account
                 </button>
               </div>
