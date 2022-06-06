@@ -4,6 +4,7 @@ import {
   POST_UPDATE_USER,
   DELETE_ORDER,
   DETAIL_ORDER,
+  transaction,
 } from "../../action/OrderAction";
 
 const initialState = {
@@ -24,6 +25,10 @@ const initialState = {
   deleteorderuserError: false,
 
   getdetailorderuserResult: false,
+
+  getTransactionResult: false,
+  getTransactionLoading: false,
+  getTransactionError: false,
 };
 
 const orders = (state = initialState, action) => {
@@ -60,6 +65,13 @@ const orders = (state = initialState, action) => {
       return {
         ...state,
         getdetailorderuserResult: action.payload.data,
+      };
+    case transaction:
+      return {
+        ...state,
+        getTransactionResult: action.payload.data,
+        getTransactionLoading: action.payload.loading,
+        getTransactionError: action.payload.erroTransaction,
       };
     default:
       return state;

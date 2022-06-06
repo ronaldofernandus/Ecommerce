@@ -18,6 +18,7 @@ function MainPageAfterLogin() {
           <Route path="detail">
             <Route path=":id" element={<DetailProduct></DetailProduct>}></Route>
           </Route>
+
           <Route path="order">
             <Route path="" element={<Order></Order>}></Route>
             <Route path="edit">
@@ -26,8 +27,10 @@ function MainPageAfterLogin() {
             <Route path="delete">
               <Route path=":id"></Route>
             </Route>
+            <Route path="checkout">
+              <Route path=":id" element={<Succes></Succes>}></Route>
+            </Route>
           </Route>
-          <Route path="/checkout" element={<Succes></Succes>}></Route>
         </Route>
         <Route path="/profile" element={<Profile></Profile>}></Route>
       </Routes>

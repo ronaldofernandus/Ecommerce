@@ -5,9 +5,8 @@ const GET_ORDER_USER = "GET_ORDER_USER";
 const POST_UPDATE_USER = "POST_UPDATE_USER";
 const DELETE_ORDER = "DELETE_ORDER";
 const DETAIL_ORDER = "DETAIL_ORDER";
-
+const transaction = " transaction";
 const addorder = (access_token, id) => {
-  console.log("2.");
   return (dispatch) => {
     // untuk loading
     dispatch({
@@ -99,8 +98,6 @@ const getorder_user = (access_token) => {
 };
 
 const updateorderuser = (access_token, data, id) => {
-  console.log("2.");
-  console.log(id);
   return (dispatch) => {
     // untuk loading
     dispatch({
@@ -148,8 +145,6 @@ const updateorderuser = (access_token, data, id) => {
 };
 
 const deleteorderuser = (access_token, id) => {
-  console.log("2.");
-  console.log(id);
   return (dispatch) => {
     // untuk loading
     dispatch({
@@ -206,6 +201,49 @@ const detailorder = (data) => {
   };
 };
 
+const getTransaction = (data, id) => {
+  console.log(data);
+  return (dispatch) => {
+    // untuk loading
+
+    dispatch({
+      type: "transaction",
+      payload: {
+        loading: true,
+        data: false,
+        errorMessage: false,
+      },
+    });
+
+    // get API
+    axios({
+      method: "GET",
+      url: `http://localhost:3000/orders/transaction/${id}`,
+      timeout: 120000,
+    })
+      .then((response) => {
+        dispatch({
+          type: "transaction",
+          payload: {
+            loading: false,
+            data: response.data,
+            errorMessage: false,
+          },
+        });
+      })
+      .catch((error) => {
+        dispatch({
+          type: "transaction",
+          payload: {
+            loading: false,
+            data: error.message,
+            errorMessage: false,
+          },
+        });
+      });
+  };
+};
+
 export {
   POST_ORDER_LINE_SHOP,
   addorder,
@@ -217,4 +255,6 @@ export {
   deleteorderuser,
   DELETE_ORDER,
   DETAIL_ORDER,
+  transaction,
+  getTransaction,
 };

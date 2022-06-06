@@ -155,7 +155,7 @@ function Order() {
                       <div className="edit-btn d-grid gap-2 d-md-flex justify-content-md-center">
                         <Link
                           className="btn btn-sm btn-outline-success"
-                          to={"/checkout"}
+                          to={`checkout/${e.id}`}
                         >
                           <span>
                             <FontAwesomeIcon

@@ -20,6 +20,24 @@ class OrderController {
     }
   }
 
+  static async getTranscation(req, res) {
+    try {
+      let id = +req.params.id;
+
+      let transaction = await order.findOne({
+        where: {
+          id: id,
+        },
+        include: [user, line_item],
+      });
+      res.status(200).json(transaction);
+      // console.log(orders)
+      // console.log(req.userData)
+    } catch (err) {
+      res.status(500).json(err.message);
+    }
+  }
+
   static async createOrder(req, res) {
     try {
       const productId = +req.params.id;
