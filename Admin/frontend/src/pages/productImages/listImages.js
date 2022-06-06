@@ -60,15 +60,21 @@ const ListProduct = () => {
               <tbody>
                 {getListImageResult ? (
                   getListImageResult.map((image, index) => {
+                    // console.log(image);
                     return (
                       <>
                         <tr key={image.id}>
-                          <th scope="row">{index + 1}</th>
-                          {/* <td>{image.product.prod_name}</td> */}
-                          {/* <td>{image.prim_filename}</td> */}
+                          <td scope="row">{index + 1}</td>
+                          {/* <td>Nama produk nya</td> */}
+                          <td>{image.prod_name}</td>
+                          {/* <td>{image.product.prod_brand}</td> */}
+                          {/* <td>
+                            {image ? image : "https://via.placeholder.com/150"}
+                          </td> */}
+
                           <td>
                             <img
-                              src={`http://localhost:4000/images/${image.prim_filename}`}
+                              src={`http://localhost:4000/images/${image.product_images[0].prim_filename}`}
                               alt=""
                             />
                           </td>
@@ -87,8 +93,6 @@ const ListProduct = () => {
                                 Edit
                               </Link>
                             </button>
-                          </td>
-                          <td>
                             <button
                               href="/productImage"
                               onClick={() => deleteHandler(image.id)}

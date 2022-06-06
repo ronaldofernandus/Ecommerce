@@ -3,8 +3,8 @@ const { product_image, product } = require("../models");
 class imageController {
   static async getImage(req, res) {
     try {
-      let getImage = await product_image.findAll({
-        include: [product],
+      let getImage = await product.findAll({
+        include: [product_image],
       });
 
       res.status(200).json(getImage);
