@@ -58,6 +58,7 @@ const ListProduct = () => {
                 </tr>
               </thead>
               <tbody>
+                {console.log(getListImageResult)}
                 {getListImageResult ? (
                   getListImageResult.map((image, index) => {
                     // console.log(image);
